@@ -1,10 +1,15 @@
 version: '3'
 services: 
-  web:
-    image: node-dashboard
-    build: ./backend
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./backend:/usr/src/app
-      - /usr/src/app/node_modules
+    web:
+        image: node-dashboard
+        build: ./backend
+        ports:
+            - "8080:8080"
+        volumes:
+            - ./backend:/usr/src/app
+            - /usr/src/app/node_modules
+    frontend: 
+        image: anuglar
+        build: ./frontend
+        ports:  
+            - "4200:4200"
