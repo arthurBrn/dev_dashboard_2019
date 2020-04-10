@@ -1,8 +1,13 @@
-FROM node:10.13-alpine
-ENV NODE_ENV production
+FROM node:latest
+
 WORKDIR /usr/src/app
-COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
-RUN npm install --production --silent && mv node_modules ../
+
+COPY package*.json ./
+
+RUN npm install
+
 COPY . .
-EXPOSE 3000
-CMD npm start
+
+EXPOSE 8080
+
+CMD ["npm", "start"]

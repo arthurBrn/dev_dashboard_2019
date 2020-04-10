@@ -1,6 +1,10 @@
-mariadb:
-    volumes: 
-    ports: 3306
-backend:
-
-frontend:
+version: '3'
+services: 
+  web:
+    image: node-dashboard
+    build: ./backend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
