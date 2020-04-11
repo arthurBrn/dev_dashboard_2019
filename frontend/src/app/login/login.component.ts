@@ -17,15 +17,23 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onLogin() {
+    console.log('Regular login');
+    console.log('email : ' + this.email);
+    console.log('password: ' + this.password);
+
+  }
+
   onPasswordForgotten() {
     console.log('forgotten password method');
   }
 
   onFacebookConnection() {
-
+    console.log('Login through facebook');
   }
 
   onGoogleConnection() {
-
+    console.log('Login through google');
   }
+
 }
