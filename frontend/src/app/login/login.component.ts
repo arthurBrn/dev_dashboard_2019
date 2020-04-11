@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +7,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
+  @Output() validCrendentialEvent = new EventEmitter();
+  valideCredentialValue: boolean;
+  email: string;
+  password: string;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onPasswordForgotten() {
+    console.log('forgotten password method');
+  }
+
+  onFacebookConnection() {
+
+  }
+
+  onGoogleConnection() {
+
+  }
 }
