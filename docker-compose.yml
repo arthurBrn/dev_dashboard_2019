@@ -9,7 +9,9 @@ services:
             - ./backend:/usr/src/app
             - /usr/src/app/node_modules
     frontend: 
-        image: anuglar
+        # image: anuglar
         build: ./frontend
+        volumes:
+            - ./frontend/:/app
         ports:  
             - "4200:4200"
