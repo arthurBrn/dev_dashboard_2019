@@ -1,13 +1,15 @@
 version: '3'
 services: 
     web:
-        image: node-dashboard
+        # image: node-dashboard
         build: ./backend
         ports:
             - "8080:8080"
         volumes:
-            - ./backend:/usr/src/app
-            - /usr/src/app/node_modules
+            - ./backend:/usr/src/app/
+            # - /usr/src/app/node_modules
+        working_dir: /usr/src/app
+        user: "1000"
         container_name: backend
     frontend: 
         # image: anuglar
@@ -25,3 +27,6 @@ services:
             - /database/data:/var/lib/mysql:rw
         #user: "1000"
         container_name: database
+
+
+# - /usr/src/app/node_modules
