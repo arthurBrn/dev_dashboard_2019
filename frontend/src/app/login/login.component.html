@@ -49,15 +49,18 @@
 
 <ng-template #forgottenPasswordModal>
   <div class="modal-content">
-    <div class="modal-header text-center">
-      <h5 class="modal-title">Password forgotten</h5>
+    <div class="modal-header">
+      <h1 class="modal-title text-center">Password forgotten</h1>
     </div>
     <div class="modal-body">
       <input type="text" id="newChanelName" class="form-control" placeholder="Enter valid mail address"
              [(ngModel)]="mailAddressForForgottenPassword" (keydown.enter)="onForgottenPasswordChange()" />
     </div>
     <div class="modal-footer">
-      <button class="btn btn-elegant btn-block p-btn-rounded" (click)="onForgottenPasswordChange()">
+      <button class="btn btn-elegant btn-block p-btn-rounded"
+              (click)="onForgottenPasswordChange()"
+              style="border-radius:18px;"
+      >
         Validate
       </button>
     </div>
