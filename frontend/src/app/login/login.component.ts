@@ -1,5 +1,6 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, TemplateRef } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-login',
@@ -9,12 +10,16 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent implements OnInit {
 
   @Output() validCrendentialEvent = new EventEmitter();
+  modalRef: BsModalRef;
   valideCredentialValue: boolean;
+  forgottenPassword = false;
+  mailAddressForForgottenPassword: string;
   email: string;
   password: string;
 
   constructor(
-    private toastr: ToastrService,
+    private _toastr: ToastrService,
+    private _modalService: BsModalService,
   ) { }
 
   ngOnInit(): void {
@@ -26,12 +31,18 @@ export class LoginComponent implements OnInit {
       console.log('email : ' + this.email);
       console.log('password: ' + this.password);
     } else {
-      this.toastr.warning('All fields must be filled.');
+      this._toastr.warning('All fields must be filled.');
     }
   }
 
-  onPasswordForgotten() {
-    console.log('forgotten password method');
+  onForgottenPasswordClick(template: TemplateRef<any>) {
+    this.modalRef = this._modalService.show(template);
+  }
+
+  onForgottenPasswordChange() {
+    this._modalService.hide(1);
+
+    console.log(this.mailAddressForForgottenPassword);
   }
 
   onFacebookConnection() {
@@ -41,5 +52,6 @@ export class LoginComponent implements OnInit {
   onGoogleConnection() {
     console.log('Login through google');
   }
+
 
 }
