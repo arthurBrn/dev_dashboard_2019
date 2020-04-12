@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+// import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +13,22 @@ export class LoginComponent implements OnInit {
   email: string;
   password: string;
 
-  constructor() { }
+  constructor(
+    // private toastr: ToastrService,
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  onLogin() {
+    // if (this.email && this.password) {
+      console.log('Regular login');
+      console.log('email : ' + this.email);
+      console.log('password: ' + this.password);
+    // } else {
+      //this.toastr.error('All fields must be filled.');
+    //}
+
   }
 
   onPasswordForgotten() {
@@ -22,10 +36,11 @@ export class LoginComponent implements OnInit {
   }
 
   onFacebookConnection() {
-
+    console.log('Login through facebook');
   }
 
   onGoogleConnection() {
-
+    console.log('Login through google');
   }
+
 }
