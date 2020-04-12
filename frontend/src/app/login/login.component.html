@@ -1,32 +1,35 @@
-<div class="card">
-  <h1 class="card-header info-color white-text text-center py-4">
-    <strong>Sign in</strong>
-  </h1>
-  <div class="card-body px-lg-5 pt-0">
-    <form class="text-center" style="color: #757575;" action="#!">
-      <div class="md-form">
-        <input type="email" id="materialLoginFormEmail" class="form-control" [(ngModel)]="email" name="email">
-        <label for="materialLoginFormEmail">E-mail</label>
-      </div>
-      <div class="md-form">
-        <input type="password" id="materialLoginFormPassword" class="form-control" [(ngModel)]="password" name="password">
-        <label for="materialLoginFormPassword">Password</label>
-      </div>
-      <div class="d-flex justify-content-around">
-        <div>
-          <a (click)="onPasswordForgotten()">Forgot password?</a>
-        </div>
-      </div>
-      <button class="btn btn-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit" style="border-radius: 20px;" (click)="onLogin()">
-        Sign in
-      </button>
-      <a type="button" class="btn-floating btn-fb btn-sm" (click)="onFacebookConnection()">
-        <i class="fab fa-facebook-f fa-2x" style="color:blue"></i>
-      </a>
-      <a type="button" class="btn-floating btn-git btn-sm" (click)="onGoogleConnection()">
-        <i class="fab fa-google fa-2x"></i>
-      </a>
-      <!--
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4 mt-5">
+    <div class="card">
+      <h1 class="card-header elegant-color white-text text-center py-4">
+        <strong>Sign in</strong>
+      </h1>
+      <div class="card-body px-lg-5 pt-0">
+        <form class="text-center" style="color: #757575;" action="#!">
+          <div class="md-form">
+            <input type="email" id="materialLoginFormEmail" class="form-control" [(ngModel)]="email" name="email">
+            <label for="materialLoginFormEmail">E-mail</label>
+          </div>
+          <div class="md-form">
+            <input type="password" id="materialLoginFormPassword" class="form-control" [(ngModel)]="password" name="password">
+            <label for="materialLoginFormPassword">Password</label>
+          </div>
+          <div class="d-flex justify-content-around">
+            <div>
+              <a (click)="onPasswordForgotten()">Forgot password?</a>
+            </div>
+          </div>
+          <button class="btn btn-elegant btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit" style="border-radius: 20px;" (click)="onLogin()">
+            Sign in
+          </button>
+          <a type="button" class="btn-floating btn-fb btn-sm" (click)="onFacebookConnection()">
+            <i class="fab fa-facebook-f fa-2x" style="color:blue"></i>
+          </a>
+          <a type="button" class="btn-floating btn-git btn-sm" (click)="onGoogleConnection()">
+            <i class="fab fa-google fa-2x"></i>
+          </a>
+          <!--
       <a type="button" class="btn-floating btn-tw btn-sm">
         <i class="fab fa-twitter"></i>
       </a>
@@ -37,6 +40,10 @@
         <i class="fab fa-github"></i>
       </a>
       -->
-    </form>
+        </form>
+      </div>
+    </div>
   </div>
+  <div class="col-md-4"></div>
 </div>
+
