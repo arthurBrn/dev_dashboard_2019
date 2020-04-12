@@ -8,6 +8,7 @@ services:
         volumes:
             - ./backend:/usr/src/app
             - /usr/src/app/node_modules
+        container_name: backend
     frontend: 
         # image: anuglar
         build: ./frontend
@@ -15,3 +16,12 @@ services:
             - ./frontend/:/app
         ports:  
             - "4200:4200"
+        container_name: frontend
+    database:
+        build: ./database
+        ports:
+            - "3306:3306"
+        volumes:
+            - /database/data:/var/lib/mysql:rw
+        #user: "1000"
+        container_name: database
