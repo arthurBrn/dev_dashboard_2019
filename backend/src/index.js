@@ -1,10 +1,11 @@
 const express = require('express')
-// const mysql = require('mysql');
-const mariadb = require('mariadb');
 const cors = require('cors');
 const listEndpoints = require('express-list-endpoints');
 const bodyParser = require('body-parser');
+const db = require('./db');
 const app = express();
+
+const usersRoutes = require('../routes/usersController');
 
 app.use(
     bodyParser.urlencoded({
@@ -12,6 +13,8 @@ app.use(
     })
 )
 app.use(cors());
+// We define the route we're using
+app.use(usersRoutes);
 
 app.get('/', (req, res) => {
     res.send('hello world');
@@ -35,7 +38,9 @@ const connection = mariadb.createConnection({
 
 
 app.listen(8080, () => {
-    console.log('CONNECTION ESTABLISHED NO PORT 8080');
+    console.log('SERVER LISTENING ON PORT 8080');
+    console.log('DATABASE RANDOM QUERY: ');
+    console.log(db.query('SELECT * FROM users'));
     console.log('ROUTES : ');
     console.log(listEndpoints(app));
 });
