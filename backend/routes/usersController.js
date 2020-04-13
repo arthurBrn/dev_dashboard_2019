@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 router.use(bodyParser.json);
-var Users = require('./users');
+var Users = require('./usersRepository');
 
 router.post('/login', (req, res) => {
     Users.loginUser(req.body, (err, rows) => {
