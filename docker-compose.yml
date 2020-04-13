@@ -9,8 +9,18 @@ services:
             - ./backend:/usr/src/app/
             # - /usr/src/app/node_modules
         working_dir: /usr/src/app
+        environment:
+            - MARIADB_HOST=database
+            - MARIADB_PORT_NUMBER=3306
+            - MARIADB_USER=monty
+            - MARIADB_PASSWORD=monty
+            - MARIADB_DATABASE=dashboard
         user: "1000"
         container_name: backend
+        depends_on:
+            - database
+        links:
+            - database:database
     frontend: 
         # image: anuglar
         build: ./frontend
@@ -23,10 +33,15 @@ services:
         build: ./database
         ports:
             - "3306:3306"
+        expose:
+            - "3306"
         volumes:
             - /database/data:/var/lib/mysql:rw
-        #user: "1000"
+        user: "1000"
+        environment:
+            - ALLOW_EMPTY_PASSWORD=yes
+            - MARIADB_DATABASE=dashboard
+            - MARIADB_PORT=3306
+            - MARIADB_USER=monty
+            - MARIADB_PASSWORD=monty
         container_name: database
-
-
-# - /usr/src/app/node_modules
