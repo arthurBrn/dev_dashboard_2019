@@ -1,13 +1,26 @@
 version: '3'
 services: 
     web:
-        image: node-dashboard
+        # image: node-dashboard
         build: ./backend
         ports:
             - "8080:8080"
         volumes:
-            - ./backend:/usr/src/app
-            - /usr/src/app/node_modules
+            - ./backend:/usr/src/app/
+            # - /usr/src/app/node_modules
+        working_dir: /usr/src/app
+        environment:
+            - MARIADB_HOST=database
+            - MARIADB_PORT_NUMBER=3306
+            - MARIADB_USER=monty
+            - MARIADB_PASSWORD=monty
+            - MARIADB_DATABASE=dashboard
+        user: "1000"
+        container_name: backend
+        depends_on:
+            - database
+        links:
+            - database:database
     frontend: 
         # image: anuglar
         build: ./frontend
@@ -15,3 +28,20 @@ services:
             - ./frontend/:/app
         ports:  
             - "4200:4200"
+        container_name: frontend
+    database:
+        build: ./database
+        ports:
+            - "3306:3306"
+        expose:
+            - "3306"
+        volumes:
+            - /database/data:/var/lib/mysql:rw
+        user: "1000"
+        environment:
+            - ALLOW_EMPTY_PASSWORD=yes
+            - MARIADB_DATABASE=dashboard
+            - MARIADB_PORT=3306
+            - MARIADB_USER=monty
+            - MARIADB_PASSWORD=monty
+        container_name: database
