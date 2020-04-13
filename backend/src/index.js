@@ -2,8 +2,10 @@ const express = require('express')
 // const mysql = require('mysql');
 const mariadb = require('mariadb');
 const cors = require('cors');
+const listEndpoints = require('express-list-endpoints');
 const bodyParser = require('body-parser');
 const app = express();
+
 app.use(
     bodyParser.urlencoded({
         extended: true
@@ -11,16 +13,11 @@ app.use(
 )
 app.use(cors());
 
-
-
 app.get('/', (req, res) => {
     res.send('hello world');
 });
 
-
-
-
-
+/*
 const connection = mariadb.createConnection({
     // host: '127.0.0.1',
     host: 'database',
@@ -34,5 +31,11 @@ const connection = mariadb.createConnection({
 }).catch(err => {
     console.log(err);
 });
+*/
 
-app.listen(8080);
+
+app.listen(8080, () => {
+    console.log('CONNECTION ESTABLISHED NO PORT 8080');
+    console.log('ROUTES : ');
+    console.log(listEndpoints(app));
+});
