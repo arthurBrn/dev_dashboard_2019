@@ -1,4 +1,3 @@
-/*
 var db = require('../src/db');
 var UsersRoutes = {
     loginUser: (usersRepository, callback) => {
@@ -12,8 +11,8 @@ var UsersRoutes = {
     },
 }
 module.exports = UsersRoutes;
-*/
 
+/*
 const db = require('../src/db');
 class usersRepository {
     UsersRoutes = {
@@ -29,3 +28,5 @@ class usersRepository {
     }
 }
 module.exports = new usersRepository();
+
+ */

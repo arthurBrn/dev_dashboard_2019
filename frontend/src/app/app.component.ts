@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+// import { ApiServices } from './services/api.services';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend';
+
+  constructor(
+    // private _apiSerivce: ApiServices,
+  ) {
+  }
+
 }
