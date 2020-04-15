@@ -1,6 +1,6 @@
-const mariadb = require('mariadb');
+const mariadb = require('mariadb/callback');
 
-
+/*
 var pool = mariadb.createPool({
     host: 'database',
     port: '3306',
@@ -8,7 +8,7 @@ var pool = mariadb.createPool({
     password: 'monty',
     database: 'dashboard',
 })
-
+*/
     /*
     .then(conn => {
     console.log('DATABASE CONNECTION ESTABLISHED.');
@@ -18,26 +18,20 @@ var pool = mariadb.createPool({
 */
 
 
-const connection = mariadb.createConnection({
+const conn = mariadb.createConnection({
     host: 'database',
     user: 'monty',
     password: 'monty',
     database: 'dashboard',
     port: '3306',
-}).then(conn => {
-    console.log('DATABASE CONNECTION ESTABLISHED.');
-}).catch(err => {
-    console.log(err);
 });
 
-/*
-.then(conn => {
-
-    console.log('DATABASE CONNECTION ESTABLISHED.');
-}).catch(err => {
-    console.log(err);
+conn.connect(err => {
+    if (err) {
+        console.log('Database connection in db.js failed.');
+    } else {
+        console.log('Database connection established.');
+    }
 });
 
- */
-
-module.exports = pool;
+module.exports = conn;

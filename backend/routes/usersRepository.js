@@ -1,14 +1,21 @@
 var db = require('../src/db');
 var UsersRoutes = {
-    loginUser: (usersRepository, callback) => {
-        return db.query('SELECT * FROM usersRepository WHERE mail = ? and password = ?', [usersRepository.mail, usersRepository.password], callback);
+    loginUser: (user, callback) => {
+        return db.query(
+            'SELECT * FROM user WHERE mail = ? and password = ?',
+            [user.mail, user.password]);
     },
-    registerUser: (usersRepository, callback) => {
-        return db.query('INSERT INTO usersRepository (first_name, last_name, mail, password VALUES (?,?,?,?)', [usersRepository.firstName, usersRepository.lastName, usersRepository.mail, usersRepository.password], callback);
+    registerUser: (user, callback) => {
+        return db.query('INSERT INTO user (first_name, last_name, mail, password VALUES (?,?,?,?)', [user.firstName, user.lastName, user.mail, user.password], callback);
     },
-    getUserInfo: (usersRepository, callback) => {
-        return db.query('SELECT * FROM usersRepository WHERE id = ?', [usersRepository.id], callback);
+    getUserInfo: (user, callback) => {
+        return db.query('SELECT * FROM users WHERE id = ?', [user.id], callback);
     },
+    getAllUsers: (callback) => {
+        return db.query(
+            "SELECT * FROM users", [], callback
+        );
+    }
 }
 module.exports = UsersRoutes;
 
