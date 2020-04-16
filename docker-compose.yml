@@ -1,49 +1,65 @@
 version: '3'
-services: 
-    web:
-        build: ./backend/user
-        ports:
-            - "8080:8080"
-        volumes:
-            - ./backend:/usr/src/app/
-        working_dir: /usr/src/app
-        environment:
-            - MARIADB_HOST=database
-            - MARIADB_PORT_NUMBER=3306
-            - MARIADB_USER=monty
-            - MARIADB_PASSWORD=monty
-            - MARIADB_DATABASE=dashboard
-        user: "1000"
-        container_name: backend
-        depends_on:
-            - database
-        links:
-            - database:database
-    frontend: 
-        build: ./frontend
-        volumes:
-            - ./frontend/:/app
-        ports:  
-            - "4200:4200"
-        container_name: frontend
-    database:
-        build: ./database
-        ports:
-            - "3306:3306"
-        expose:
-            - "3306"
-        command: mysqld
-        volumes:
-            - ./database/data:/var/lib/mysql:rw
-            # - ./database/sqlScript:/docker-entrypoint-initdb.d:rw
-            # - ./doc/dump.sql:/var/lib/mysql/dashboard/dump.sql
-            # - ./doc/dump.sql:/docker-entrypoint-initdb.d/dump.sql
-        user: "1000"
-        environment:
-            - ALLOW_EMPTY_PASSWORD=yes
-            - MARIADB_ROOT_PASSWORD=root
-            - MARIADB_DATABASE=dashboard
-            - MARIADB_PORT=3306
-            - MARIADB_USER=monty
-            - MARIADB_PASSWORD=monty
-        container_name: database
+services:
+  weather-service:
+    build: ./backend/weather
+    ports:
+        - "${WEATHERPORT}:${WEATHERPORT}"
+    volumes:
+        - ./backend/weather:/usr/src/app/
+    working_dir: /usr/src/app
+    container_name: weatherServcie
+  crypto-service:
+    build: ./backend/cryptocurrency
+    ports:
+        - "${CRYPTOPORT}:${CRYPTOPORT}"
+    volumes:
+        - ./backend/cryptocurrency:/usr/src/app/
+    working_dir: /usr/src/app
+    container_name: cryptoServcie
+  user-service:
+    build: ./backend/user
+    ports:
+        - "${USERPORT}:${USERPORT}"
+    volumes:
+        - ./backend/user:/usr/src/app/
+    working_dir: /usr/src/app
+    environment:
+        - MARIADB_HOST=database
+        - MARIADB_PORT_NUMBER=3306
+        - MARIADB_USER=monty
+        - MARIADB_PASSWORD=monty
+        - MARIADB_DATABASE=dashboard
+    user: "1000"
+    container_name: userService
+    depends_on:
+        - database
+    links:
+        - database:database
+  frontend: 
+    build: ./frontend
+    volumes:
+        - ./frontend/:/app
+    ports:  
+        - "4200:4200"
+    container_name: frontend
+  database:
+    build: ./database
+    ports:
+        - "3306:3306"
+    expose:
+        - "3306"
+    command: mysqld
+    volumes:
+        - ./database/data:/var/lib/mysql:rw
+        # - ./database/sqlScript:/docker-entrypoint-initdb.d:rw
+        # - ./doc/dump.sql:/var/lib/mysql/dashboard/dump.sql
+        # - ./doc/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+    user: "1000"
+    environment:
+        - ALLOW_EMPTY_PASSWORD=yes
+        - MARIADB_ROOT_PASSWORD=root
+        - MARIADB_DATABASE=dashboard
+        - MARIADB_PORT=3306
+        - MARIADB_USER=monty
+        - MARIADB_PASSWORD=monty
+    container_name: database
