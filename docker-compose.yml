@@ -50,10 +50,7 @@ services:
         - "3306"
     command: mysqld
     volumes:
-        - ./database/data:/var/lib/mysql:rw
-        # - ./database/sqlScript:/docker-entrypoint-initdb.d:rw
-        # - ./doc/dump.sql:/var/lib/mysql/dashboard/dump.sql
-        # - ./doc/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+      - ./database/data:/var/lib/mysql:rw
     user: "1000"
     environment:
         - ALLOW_EMPTY_PASSWORD=yes

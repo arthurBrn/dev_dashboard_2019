@@ -6,6 +6,7 @@ require('dotenv').config({
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const userController = require('./routes/userController');
+const pool = require('./src/db');
 
 const app = express();
 app.use(cors());
@@ -18,6 +19,8 @@ app.use(
 app.use('/user', userController);
 
 app.get('/', (req, res) => {
+  console.log('here');
+  console.log(pool.host);
   res.send('Connecté au user service');
 });
 

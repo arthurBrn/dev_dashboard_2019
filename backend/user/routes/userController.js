@@ -7,15 +7,14 @@ router.use(bodyParser.json());
 
 router.get('/', (req, res) => {
   pool.getConnection().then((conn) => {
-    conn.query('Select * from hello').then((result) => {
-      console.log(result[0].id);
+    conn.query('Select * from service').then((result) => {
+      res.status(200).json(result);
     }).catch((err) => {
-      console.log(err);
+      res.status(400).json(err);
     });
   }).catch((err) => {
     console.log(err);
   });
-  res.send('Vous êtes au service user');
 });
 
 module.exports = router;
