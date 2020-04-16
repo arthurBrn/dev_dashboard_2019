@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nohup node index.js >> ./../../scripts/result.out &"
+    "start": "node index.js",
+    "startDev": "nohup node index.js >> ./../../scripts/result.out &"
   },
   "author": "",
   "license": "ISC",

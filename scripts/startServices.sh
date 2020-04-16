@@ -1,3 +1,3 @@
-npm start --prefix backend/cryptocurrency
-npm start --prefix backend/weather
-npm start --prefix backend/user
+npm startDev --prefix backend/cryptocurrency
+npm startDev --prefix backend/weather
+npm startDev --prefix backend/user
