@@ -5,35 +5,26 @@ const listEndpoints = require('express-list-endpoints');
 const bodyParser = require('body-parser');
 const db = require('./db');
 const app = express();
+const jwt = require('jsonwebtoken');
 
-const usersRoutes = require('../routes/usersController');
-
-
+app.use(express.json);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
-app.use('/user', usersRoutes);
 
 app.get('/', (req, res) => {
     res.send('hello world');
 });
-
-app.get('/myusers', (req, res) => {
-    db.query('select * from users', (err, rows) => {
-        //console.log(rows);
+app.get('/users/all', (req, res) => {
+    db.query("SELECT * FROM users;", (err, rows) => {
         res.send(rows);
         db.end;
     })
 });
 
-app.get('/loginUsers', (req, res) => {
-    db.query(
-        'SELECT * FROM users WHERE email = ' + req.param('email') + ' AND password = ' + req.param('password') + ';',
-        (err, rows) => {
-            res.send(rows);
-            db.end;
-        }
-    );
+/*
+app.post('/login', (req, res) => {
 })
+*/
 
 app.listen(8080, () => {
     console.log('SERVER LISTENING ON PORT 8080');
