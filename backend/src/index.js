@@ -8,6 +8,7 @@ const app = express();
 
 const usersRoutes = require('../routes/usersController');
 
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 app.use('/user', usersRoutes);
@@ -23,6 +24,16 @@ app.get('/myusers', (req, res) => {
         db.end;
     })
 });
+
+app.get('/loginUsers', (req, res) => {
+    db.query(
+        'SELECT * FROM users WHERE email = ' + req.param('email') + ' AND password = ' + req.param('password') + ';',
+        (err, rows) => {
+            res.send(rows);
+            db.end;
+        }
+    );
+})
 
 app.listen(8080, () => {
     console.log('SERVER LISTENING ON PORT 8080');

@@ -1,5 +1,5 @@
 var db = require('../src/db');
-var UsersRoutes = {
+var UserQueries = {
     loginUser: (user, callback) => {
         return db.query(
             'SELECT * FROM user WHERE mail = ? and password = ?',
@@ -13,11 +13,11 @@ var UsersRoutes = {
     },
     getAllUsers: (callback) => {
         return db.query(
-            "SELECT * FROM users", [], callback
+            "SELECT * FROM users", callback
         );
     }
 }
-module.exports = UsersRoutes;
+module.exports = UserQueries;
 
 /*
 const db = require('../src/db');
