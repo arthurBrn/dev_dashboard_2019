@@ -5,7 +5,7 @@ require('dotenv').config({
 });
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const userController = require('./routes/userController');
+const user = require('./routes/user');
 const pool = require('./src/db');
 
 const app = express();
@@ -16,7 +16,7 @@ app.use(
   }),
 );
 
-app.use('/user', userController);
+app.use('/user', user);
 
 app.get('/', (req, res) => {
   console.log('here');
