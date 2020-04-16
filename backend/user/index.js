@@ -3,13 +3,24 @@ const path = require('path');
 require('dotenv').config({
   path: path.resolve(__dirname, '.env'),
 });
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const userController = require('./routes/userController');
 
 const app = express();
+app.use(cors());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  }),
+);
+
+app.use('/user', userController);
 
 app.get('/', (req, res) => {
-  res.setHeader('Content-Type', 'text/plain');
-  res.send('Vous êtes au service user');
+  res.send('Connecté au user service');
 });
+
 app.listen({
   port: process.env.PORT,
 }, () => {
