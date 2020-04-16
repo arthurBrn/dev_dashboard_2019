@@ -3,7 +3,7 @@ FROM node:latest
 WORKDIR /usr/src/app
 
 # COPY package*.json ./
-COPY package*.json /usr/usr/app
+COPY package*.json ./
 
 # ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
@@ -12,7 +12,7 @@ COPY package*.json /usr/usr/app
 RUN npm install
 
 # COPY . .
-COPY . /usr/src/app
+COPY . ./
 # COPY . /usr/src/app
 
 EXPOSE 8080

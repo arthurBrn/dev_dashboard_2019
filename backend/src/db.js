@@ -1,9 +1,13 @@
 const mariadb = require('mariadb');
 
 const pool = mariadb.createPool({
-    database: 'dashboard',
-    host: '127.0.0.1',
-    port: '3306',
+    // host: '127.0.0.1',
+    host: 'database',
     user: 'monty',
-    password: 'monty'
+    password: 'monty',
+    database: 'dashboard',
+    port: '3306',
+    //socketPath: '/var/run/mysqld/mysqld.sock'
 });
+
+module.exports = pool;
