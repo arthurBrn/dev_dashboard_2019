@@ -66,6 +66,9 @@ router.post('/login', (req, res) => {
         [req.body.mail]
     ).then((result) => {
       if (result) {
+        console.log('RESULT : ' + result[0]);
+        console.log('req.body.password : ' + req.body.password);
+        console.log('req.body.mail : ' + req.body.mail);
         bcrypt.compare(req.body.password, result[0].password, (err, respwd) => {
           if (respwd) {
             const user = {

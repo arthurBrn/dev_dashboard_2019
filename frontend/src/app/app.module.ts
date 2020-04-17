@@ -9,6 +9,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { DisplayServicesComponent } from './display-services/display-services.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [

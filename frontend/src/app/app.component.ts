@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend';
-  isAuth = true;
+  isAuth = false;
   connecting: boolean = false;
 
   onChangeConnecting(event) {

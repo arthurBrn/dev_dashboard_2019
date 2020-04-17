@@ -15,9 +15,9 @@ export class LoginComponent implements OnInit {
   valideCredentialValue: boolean;
   forgottenPassword = false;
   mailAddressForForgottenPassword: string;
-  email: string;
-  password: string;
-  jwtToken: string;
+  email: string = "";
+  password: string = "";
+  jwtToken: string = "";
 
   constructor(
     private _toastr: ToastrService,
@@ -29,11 +29,13 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
+    console.log('WE\'RE LOGGED IN');
     if (this.email && this.password) {
       console.log('Regular login');
       console.log('email : ' + this.email);
       console.log('password: ' + this.password);
       this._apiService.login(this.email, this.password).subscribe((data) => {
+
         console.log('we enter here ');
         var parsedData = data as any;
         if (parsedData.code === 200) {
