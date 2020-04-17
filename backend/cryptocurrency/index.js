@@ -8,7 +8,7 @@ const app = express();
 
 app.get('/', (req, res) => {
   res.setHeader('Content-Type', 'text/plain');
-  res.send('Vous êtes à l\'accueil');
+  res.send('Vous êtes à crypto ptt');
 });
 app.listen({
   port: process.env.PORT,
