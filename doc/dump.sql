@@ -1,3 +1,5 @@
+-- CREATE DATABASE dashboard;
+
 CREATE TABLE IF NOT EXISTS users (
 	id INT AUTO_INCREMENT,
 	first_name varchar(255),
@@ -17,15 +19,16 @@ CREATE TABLE IF NOT EXISTS service(
 	id INT AUTO_INCREMENT,
 	name text,
 	api_link text,
+	picture text,
 	PRIMARY KEY(id)
 );
 
-CREATE TABLE IF NOT EXISTS user_has_widget(
+CREATE TABLE IF NOT EXISTS user_has_service(
 	users_id INT NOT NULL,
-	widget_id INT NOT NULL,
-	PRIMARY KEY(users_id, widget_id),
+	service_id INT NOT NULL,
+	PRIMARY KEY(users_id, service_id),
 	FOREIGN KEY(users_id) REFERENCES users(id),
-	FOREIGN KEY(widget_id) REFERENCES widget(id)
+	FOREIGN KEY(service_id) REFERENCES service(id)
 );
 
 CREATE TABLE service_has_widget(
@@ -47,7 +50,7 @@ INSERT INTO dashboard.service (name, api_link) VALUES
 ('service n°1', 'some link'),
 ('service n°2', 'some link'),
 ('service n°3', 'some link');
-INSERT INTO dashboard.user_has_widget (users_id, widget_id) VALUES
+INSERT INTO dashboard.user_has_service (users_id, service_id) VALUES
 (1,1),
 (2,2);
 INSERT INTO dashboard.service_has_widget (service_id, widget_id) VALUES

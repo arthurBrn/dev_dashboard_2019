@@ -1,57 +1,19 @@
-<!--Navbar -->
-<nav class="mb-1 navbar navbar-expand-lg navbar-dark elegant-color">
-  <b class="green-text">
-    <a class="navbar-brand" (click)="onLogoClick()">
-      Sebivten
-    </a>
-  </b>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
-          aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+<div class="row px-3 row justify-content-between" style="height: 10%;">
+    <b class="green-text">
+        <a class="navbar-brand" (click)="onLogoClick()">
+            Sebivten
+        </a>
+    </b>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+            aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
-    <ul class="navbar-nav mr-auto" *ngIf="true === authenticated">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Dashboard</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">Dropdown
-        </a>
-        <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-    </ul>
-    
-    <!-- RIGHT PART OF NAVBAR -->
-    <ul class="navbar-nav ml-auto nav-flex-icons">
-      <li class="nav-item dropdown" *ngIf="true === authenticated">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-user"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right dropdown-default"
-             aria-labelledby="navbarDropdownMenuLink-333">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown" *ngIf="false === authenticated">
-        <a class="nav-link" aria-haspopup="true" aria-expanded="false" (click)="onRegisterClick()">
-          Register
-        </a>
-      </li>
-      <li class="nav-item dropdown" *ngIf="false === authenticated">
-        <a class="nav-link" aria-haspopup="true" aria-expanded="false" (click)="onLoginClick()">
-          Login
-        </a>
-      </li>
-    </ul>
-  </div>
-</nav>
-<!--/.Navbar -->
+    </button>
+    <div class="d-inline-flex p-0 navbar-nav ml-auto nav-flex-icons" *ngIf="!isAuth">
+        <a class="p-1 pr-4 text-light" aria-haspopup="true" aria-expanded="false" (click)="onRegisterClick()">
+            Register
+            </a>
+            <a class="p-1 text-light" aria-haspopup="true" aria-expanded="false" (click)="onLoginClick()">
+            Login
+            </a>
+    </div>    
+</div>

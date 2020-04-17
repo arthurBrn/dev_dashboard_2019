@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   authenticated = false;
+  @Output() connecting = new EventEmitter();
+  @Input() isAuth: boolean;
 
   constructor(
     private _router: Router,
@@ -26,6 +28,7 @@ export class NavbarComponent implements OnInit {
   }
 
   onRegisterClick() {
+    this.connecting.emit(true);
     this._router.navigate(['register']);
   }
 

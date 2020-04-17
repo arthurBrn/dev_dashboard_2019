@@ -7,13 +7,16 @@ import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { HttpClientModule } from '@angular/common/http';
+import { SideBarComponent } from './side-bar/side-bar.component';
+import { DisplayServicesComponent } from './display-services/display-services.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     routingArrayOfComponent,
     NavbarComponent,
+    SideBarComponent,
+    DisplayServicesComponent,
   ],
   imports: [
     BrowserModule,
