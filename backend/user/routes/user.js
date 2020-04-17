@@ -59,7 +59,7 @@ function authenticateToken(req, res, next) {
 }
 
 
-router.post('/login/jwt', (req, res) => {
+router.post('/login', (req, res) => {
   pool.getConnection().then((conn) => {
     conn.query(
         'SELECT * FROM users WHERE mail = ? ;',

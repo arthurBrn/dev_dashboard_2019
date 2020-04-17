@@ -17,7 +17,7 @@ export class ApiService {
     const body = new HttpParams()
       .set('mail', mail)
       .set('password', password);
-    return this._httpClient.post(this.baseUrl + 'user/login/jwt',
+    return this._httpClient.post(this.baseUrl + 'user/login',
       body.toString(),
       {
         headers: new HttpHeaders()
@@ -25,19 +25,18 @@ export class ApiService {
       });
   }
 
-  /*register(user) {
+  register(user) {
     const body = new HttpParams()
-      .set('first_name', user.first_name)
-      .set('last_name', user.last_name)
-      .set('email', user.email)
+      .set('firstName', user.firstName)
+      .set('lastName', user.lastName)
+      .set('mail', user.mail)
       .set('password', user.password)
-      .set('createdAt', user.createdAt)
-    return this._httpClient.post(this.baseUrl + 'connect/register',
+    return this._httpClient.post(this.baseUrl + 'user/register',
       body.toString(),
       {
         headers: new HttpHeaders()
           .set('Content-Type', 'application/x-www-form-urlencoded')
       });
-  }*/
+  }
 }
 
