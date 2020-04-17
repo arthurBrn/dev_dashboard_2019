@@ -25,6 +25,7 @@ import { DisplayServicesComponent } from './display-services/display-services.co
     FormsModule,
     ToastrModule.forRoot(),
     ModalModule.forRoot(),
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
