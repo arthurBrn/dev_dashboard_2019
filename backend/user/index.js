@@ -11,10 +11,10 @@ const pool = require('./src/db');
 const app = express();
 app.use(cors());
 app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  }),
-);
+    bodyParser.urlencoded({
+      extended: true,
+    }),
+)
 
 app.use('/user', user);
 
