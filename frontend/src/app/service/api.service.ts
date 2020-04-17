@@ -10,7 +10,6 @@ export class ApiService {
     private _httpClient: HttpClient
   ) { }
 
-  // baseUrl: String = 'http://localhost:8081/';
   baseUrl: String = 'http://127.0.0.1:8081/';
 
   login(mail, password) {
@@ -32,6 +31,17 @@ export class ApiService {
       .set('mail', user.mail)
       .set('password', user.password)
     return this._httpClient.post(this.baseUrl + 'user/register',
+      body.toString(),
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+      });
+  }
+
+  getMail(mail) {
+    const body = new HttpParams()
+      .set('mail', mail);
+    return this._httpClient.post(this.baseUrl + 'user/mail',
       body.toString(),
       {
         headers: new HttpHeaders()

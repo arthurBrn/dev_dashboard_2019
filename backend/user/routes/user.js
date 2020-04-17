@@ -66,6 +66,9 @@ router.post('/login', (req, res) => {
         [req.body.mail]
     ).then((result) => {
       if (result) {
+        console.log('RESULT : ' + result[0]);
+        console.log('req.body.password : ' + req.body.password);
+        console.log('req.body.mail : ' + req.body.mail);
         bcrypt.compare(req.body.password, result[0].password, (err, respwd) => {
           if (respwd) {
             const user = {
@@ -109,7 +112,17 @@ router.post('/register', (req, res) => {
           'INSERT INTO users (first_name, last_name, mail, password) VALUES (?,?,?,?);',
           [req.body.firstName, req.body.lastName, req.body.mail, hash]
       ).then((result) => {
-        res.status(200).json(result);
+        if (result) {
+          res.json({
+            code: 200,
+            success: 'Registration successfull',
+          })
+        } else {
+          res.json({
+            code: 404,
+            success: 'Registration failed. Contact managment',
+          })
+        }
       }).catch((err) => {
         console.log(err);
       }).catch((err) => {
