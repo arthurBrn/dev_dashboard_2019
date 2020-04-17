@@ -59,7 +59,7 @@ function authenticateToken(req, res, next) {
 }
 
 
-router.post('/login/jwt', authenticateToken, (req, res) => {
+router.post('/login/jwt', (req, res) => {
   pool.getConnection().then((conn) => {
     conn.query(
         'SELECT * FROM users WHERE mail = ? ;',
@@ -100,59 +100,6 @@ router.post('/login/jwt', authenticateToken, (req, res) => {
   }).catch((err) => {
     console.log(err);
   })
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-router.post('/login', (req, res) => {
-  pool.getConnection().then((conn) => {
-    conn.query(
-        'SELECT * FROM users WHERE mail = ?;',
-        [req.body.mail],
-    ).then((result) => {
-      if (result) {
-        bcrypt.compare(req.body.password, result[0].password, (err, pwdResult) => {
-          if (pwdResult) {
-            res.json({
-              code:200,
-              success: 'Login success',
-              userId: result[0].id
-            })
-          } else {
-            res.json({
-              code: 404,
-              success: 'Email / password not matching'
-            })
-          }
-        })
-      } else {
-        res.status(404).send('No mail matching the one entered');
-      }
-    }).catch((err) => {
-      console.log(err);
-    });
-  }).catch((err) => {
-    console.log(err);
-  });
 });
 
 router.post('/register', (req, res) => {
