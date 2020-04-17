@@ -8,5 +8,13 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'frontend';
   isAuth = true;
+  connecting: boolean = false;
+
+  onChangeConnecting(event) {
+    this.connecting = event;
+  }
+
 }
+
+
 

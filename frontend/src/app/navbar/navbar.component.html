@@ -8,7 +8,7 @@
             aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="d-inline-flex p-0 navbar-nav ml-auto nav-flex-icons" *ngIf="false === authenticated">
+    <div class="d-inline-flex p-0 navbar-nav ml-auto nav-flex-icons" *ngIf="!isAuth">
         <a class="p-1 pr-4 text-light" aria-haspopup="true" aria-expanded="false" (click)="onRegisterClick()">
             Register
             </a>
