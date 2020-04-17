@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   email: string = "";
   password: string = "";
   jwtToken: string = "";
+  doesEmailExistInDatabase: boolean = false;
 
   constructor(
     private _toastr: ToastrService,
@@ -29,22 +30,25 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-    console.log('WE\'RE LOGGED IN');
     if (this.email && this.password) {
-      console.log('Regular login');
-      console.log('email : ' + this.email);
-      console.log('password: ' + this.password);
-      this._apiService.login(this.email, this.password).subscribe((data) => {
-
-        console.log('we enter here ');
+      this._apiService.getMail(this.email).subscribe((data) => {
         var parsedData = data as any;
-        if (parsedData.code === 200) {
-          console.log(parsedData.success);
-          console.log('ACCESS TOKEN : '  +parsedData.accessToken);
-        } else {
-          this._toastr.warning(parsedData.success);
-        }
+        this.doesEmailExistInDatabase = parsedData.code === 200 ? true : false;
       });
+      if (true === this.doesEmailExistInDatabase) {
+        this._apiService.login(this.email, this.password).subscribe((data) => {
+          console.log('we enter here ');
+          var parsedData = data as any;
+          if (parsedData.code === 200) {
+            console.log(parsedData.success);
+            console.log('ACCESS TOKEN : '  +parsedData.accessToken);
+          } else {
+            this._toastr.warning(parsedData.success);
+          }
+        });
+      } else {
+        this._toastr.warning('This email is not registered');
+      }
     } else {
       this._toastr.warning('All fields must be filled.');
     }
