@@ -103,7 +103,7 @@ router.post('/login/jwt', (req, res) => {
 });
 
 router.post('/register', (req, res) => {
-  bcrypt.hash(req.body.password, 10, (err, hash) => {
+  bcrypt.hash(req.body.password, 0, (err, hash) => {
     pool.getConnection().then((conn) => {
       conn.query(
           'INSERT INTO users (first_name, last_name, mail, password) VALUES (?,?,?,?);',

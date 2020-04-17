@@ -3,6 +3,7 @@ const path = require('path');
 require('dotenv').config({
     path: path.resolve(__dirname, '.env'),
 });
+const listEndPoints = require('express-list-endpoints');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const user = require('./routes/user');
@@ -28,6 +29,7 @@ app.listen({
     port: process.env.PORT,
 }, () => {
     console.log(`🚀 Server ready at http://localhost:${process.env.PORT}`);
+    console.log(listEndPoints(user));
 });
 
 

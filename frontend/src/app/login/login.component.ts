@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, TemplateRef } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import {ApiService} from "../service/api.service";
 
 @Component({
   selector: 'app-login',
@@ -16,10 +17,12 @@ export class LoginComponent implements OnInit {
   mailAddressForForgottenPassword: string;
   email: string;
   password: string;
+  jwtToken: string;
 
   constructor(
     private _toastr: ToastrService,
     private _modalService: BsModalService,
+    private _apiService: ApiService,
   ) { }
 
   ngOnInit(): void {
@@ -30,6 +33,16 @@ export class LoginComponent implements OnInit {
       console.log('Regular login');
       console.log('email : ' + this.email);
       console.log('password: ' + this.password);
+      this._apiService.login(this.email, this.password).subscribe((data) => {
+        console.log('we enter here ');
+        var parsedData = data as any;
+        if (parsedData.code === 200) {
+          console.log(parsedData.success);
+          console.log('ACCESS TOKEN : '  +parsedData.accessToken);
+        } else {
+          this._toastr.warning(parsedData.success);
+        }
+      });
     } else {
       this._toastr.warning('All fields must be filled.');
     }
