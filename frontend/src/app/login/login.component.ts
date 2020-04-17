@@ -40,8 +40,7 @@ export class LoginComponent implements OnInit {
           console.log('we enter here ');
           var parsedData = data as any;
           if (parsedData.code === 200) {
-            console.log(parsedData.success);
-            console.log('ACCESS TOKEN : '  +parsedData.accessToken);
+            localStorage.setItem('jwtToken', parsedData.accessToken);
           } else {
             this._toastr.warning(parsedData.success);
           }
