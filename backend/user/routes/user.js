@@ -17,4 +17,19 @@ router.get('/', (req, res) => {
   });
 });
 
+router.post('/login', (req, res) => {
+  pool.getConnection().then((conn) => {
+    conn.query(
+        'SELECT * FROM users WHERE mail = ? AND password = ? ;',
+        [req.body.mail, req.body.password],
+    ).then((result) => {
+      res.status(200).json(result);
+    }).catch((err) => {
+      console.log(err);
+    });
+  }).catch((err) => {
+    console.log(err);
+  });
+});
+
 module.exports = router;
