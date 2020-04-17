@@ -44,6 +44,7 @@ export class RegisterComponent implements OnInit {
           this._location.replaceState('/')
           this._router.navigate(['login']);
         } else {
+          console.log('GROS FAIL');
           console.log(parsedData.success);
           this._toastr.warning('Registration failed. Contact managment.');
         }
