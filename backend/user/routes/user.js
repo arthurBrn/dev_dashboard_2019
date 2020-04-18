@@ -161,6 +161,11 @@ router.post('/token', (req, res) => {
   })
 });
 
-
+router.delete('/logout', (req, res) => {
+  // On va vérifier que, dans le tableau qui contient nos refreshTokens, on a pas de refreshToken
+  //   similaire à celui passé en paramètre. Si on en trouve un, on le supprime.
+  ourRefreshTokens = ourRefreshTokens.filter(token => token !== req.body.token);
+  res.sendStatus(204).send('Refresh token deleted successfully.');
+});
 
 module.exports = router;
