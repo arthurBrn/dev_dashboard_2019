@@ -10,7 +10,6 @@ import { Location } from '@angular/common';
 export class NavbarComponent implements OnInit {
 
   authenticated = false;
-  @Output() connecting = new EventEmitter();
   @Output() logOut = new EventEmitter();
   @Input() isAuth: boolean;
 
@@ -23,7 +22,7 @@ export class NavbarComponent implements OnInit {
   }
 
   onLogoClick() {
-    console.log('logo click, redirect to home');
+    this._router.navigate(['services']);
   }
 
   onInfoClick() {
@@ -31,21 +30,17 @@ export class NavbarComponent implements OnInit {
   }
 
   onLogoutClick() {
-    alert('Logging you out ...');
     this.logOut.emit(false);
     localStorage.clear();
     this._location.replaceState('/');
-    this._router.navigate(['home']);
-    window.location.reload();
+    this._router.navigate(['services']);
   }
 
   onLoginClick() {
-    this.connecting.emit(true);
     this._router.navigate(['login']);
   }
 
   onRegisterClick() {
-    this.connecting.emit(true);
     this._router.navigate(['register']);
   }
 

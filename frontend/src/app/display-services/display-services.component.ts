@@ -19,7 +19,8 @@ export class DisplayServicesComponent {
         for (let i = 0; i < parsedData.length; i++) {
            this.services.push({
                title: parsedData[i].name,
-               image: parsedData[i].picture
+               image: parsedData[i].picture,
+               id: parsedData[i].id
            });
         }
     });

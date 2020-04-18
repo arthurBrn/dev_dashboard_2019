@@ -11,6 +11,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { DisplayServicesComponent } from './display-services/display-services.component';
 import { ServiceCardComponent } from './display-services/service-card/service-card.component';
 import { HttpClientModule } from '@angular/common/http';
+import { WidgetsComponent } from './widgets/widgets.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     SideBarComponent,
     DisplayServicesComponent,
     ServiceCardComponent,
+    WidgetsComponent,
   ],
   imports: [
     BrowserModule,
