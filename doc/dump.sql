@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS service(
 	name text,
 	api_link text,
 	picture text,
-    public bit,
+    public BOOL,
 	PRIMARY KEY(id)
 );
 
@@ -47,15 +47,29 @@ CREATE TABLE service_has_widget(
 
 INSERT INTO dashboard.users (first_name, last_name, mail, password) VALUES
 ('arthur', 'baron', 'baron@gmail.com', 'baronpwd'),
-('some', 'user', 'someuser@gmail.com', 'someuserpwd');
+('some', 'user', 'someuser@gmail.com', 'someuserpwd'),
+('Maxime','Bouchet','maxime@mail.com','$2b$10$hY9IQuYJ8v1GaGfcDLk.uOy2i6TxSVun9mD5sVNlvfLV7f12E6rjy');
 INSERT INTO dashboard.widget (name) VALUES
 ('Widget n°1'),
 ('Widget n°2'),
 ('Widget n°3');
-INSERT INTO dashboard.service (name, api_link) VALUES
-('service n°1', 'some link'),
-('service n°2', 'some link'),
-('service n°3', 'some link');
+INSERT INTO dashboard.service (name,api_link,picture,public) VALUES 
+('Cryptocurrencies','https://pro-api.coinmarketcap.com/v1/','https://placetech.net/wp-content/uploads/2018/04/cryptocurrency-3085139_1280.jpg',1)
+,('Weather','','https://wi-images.condecdn.net/image/doEYpG6Xd87/crop/2040/f/weather.jpg',1)
+,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1);
 INSERT INTO dashboard.user_has_service (users_id, service_id) VALUES
 (1,1),
 (2,2);

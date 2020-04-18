@@ -18,6 +18,10 @@ export class AppComponent {
   onChangeConnecting(event) {
     this.connecting = event;
   }
+
+  onLogOut(event) {
+    this.isAuth = event;
+  }
 }
 
 
