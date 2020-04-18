@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +10,13 @@ export class ApiService {
     private _httpClient: HttpClient
   ) { }
 
-  baseUrl: String = 'http://127.0.0.1:8081/';
+  baseUrl: String = 'http://127.0.0.1:8081/user/';
 
   login(mail, password) {
     const body = new HttpParams()
       .set('mail', mail)
       .set('password', password);
-    return this._httpClient.post(this.baseUrl + 'user/login',
+    return this._httpClient.post(this.baseUrl + 'login',
       body.toString(),
       {
         headers: new HttpHeaders()
@@ -30,7 +30,7 @@ export class ApiService {
       .set('lastName', user.lastName)
       .set('mail', user.mail)
       .set('password', user.password)
-    return this._httpClient.post(this.baseUrl + 'user/register',
+    return this._httpClient.post(this.baseUrl + 'register',
       body.toString(),
       {
         headers: new HttpHeaders()
@@ -41,12 +41,16 @@ export class ApiService {
   getMail(mail) {
     const body = new HttpParams()
       .set('mail', mail);
-    return this._httpClient.post(this.baseUrl + 'user/mail',
+    return this._httpClient.post(this.baseUrl + 'mail',
       body.toString(),
       {
         headers: new HttpHeaders()
           .set('Content-Type', 'application/x-www-form-urlencoded')
       });
+  }
+
+  getPublicServices() {
+    return this._httpClient.get(this.baseUrl + 'services');
   }
 }
 

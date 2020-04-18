@@ -21,7 +21,6 @@ app.use('/user', user);
 
 app.get('/', (req, res) => {
     console.log('here and there');
-    console.log(pool.host);
     res.send('Connecté au user service');
 });
 
