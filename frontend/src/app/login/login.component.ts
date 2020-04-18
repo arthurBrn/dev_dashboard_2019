@@ -1,6 +1,9 @@
 import { Component, EventEmitter, OnInit, Output, TemplateRef } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ApiService } from '../service/api.service';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,15 +14,19 @@ export class LoginComponent implements OnInit {
 
   @Output() validCrendentialEvent = new EventEmitter();
   modalRef: BsModalRef;
-  valideCredentialValue: boolean;
   forgottenPassword = false;
   mailAddressForForgottenPassword: string;
-  email: string;
-  password: string;
+  email: string = "";
+  password: string = "";
+  jwtToken: string = "";
+  doesEmailExistInDatabase: boolean = false;
 
   constructor(
     private _toastr: ToastrService,
     private _modalService: BsModalService,
+    private _apiService: ApiService,
+    private _location: Location,
+    private _router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -27,9 +34,18 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     if (this.email && this.password) {
-      console.log('Regular login');
-      console.log('email : ' + this.email);
-      console.log('password: ' + this.password);
+      this._apiService.login(this.email, this.password).subscribe((data) => {
+        console.log('we enter here ');
+        var parsedData = data as any;
+        if (parsedData.code === 200) {
+          localStorage.setItem('jwtToken', parsedData.accessToken);
+          console.log(localStorage.getItem('jwtToken'));
+          this._location.replaceState('/');
+          // this._router.navigate('/');
+        } else {
+          this._toastr.warning(parsedData.success);
+        }
+      });
     } else {
       this._toastr.warning('All fields must be filled.');
     }
