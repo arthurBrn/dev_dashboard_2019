@@ -16,4 +16,8 @@ export class ServiceCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onCardCLick(event) {
+      
+  }
+
 }
