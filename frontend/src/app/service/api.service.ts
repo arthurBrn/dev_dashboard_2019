@@ -49,8 +49,10 @@ export class ApiService {
       });
   }
 
-  getPublicServices() {
-    return this._httpClient.get(this.baseUrl + 'services');
+  logout(token) {
+    const body = new HttpParams()
+      .set('token', token);
+    return this._httpClient.delete(this.baseUrl + '/logout');
   }
 }
 

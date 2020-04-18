@@ -7,8 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend';
-  isAuth = localStorage.getItem('jwtToken') ? true : false;
+  isAuth = localStorage.getItem('accessToken') ? true : false;
   connecting: boolean = false;
+
+  ngOnInit() {
+    console.log('Access token : ' +localStorage.getItem('accessToken'));
+    console.log('Refresh token : ' + localStorage.getItem('refreshToken'));
+  }
 
   onChangeConnecting(event) {
     this.connecting = event;
