@@ -38,9 +38,10 @@ export class LoginComponent implements OnInit {
         console.log('we enter here ');
         var parsedData = data as any;
         if (parsedData.code === 200) {
-          localStorage.setItem('jwtToken', parsedData.accessToken);
-          console.log(localStorage.getItem('jwtToken'));
-
+          localStorage.setItem('accessToken', parsedData.accessToken);
+          localStorage.setItem('refreshToken', parsedData.refreshToken);
+          console.log(localStorage.getItem('accessToken'));
+          console.log(localStorage.getItem('refreshToken'));
           window.location.reload();
           this._location.replaceState('/');
           this._router.navigate(['home']);

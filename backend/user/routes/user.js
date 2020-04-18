@@ -6,6 +6,22 @@ const router = express.Router();
 router.use(bodyParser.json());
 const jwt = require('jsonwebtoken');
 
+// Solution provisoire
+// Token emptied out every time the server reload
+let ourRefreshTokens = [];
+
+router.get('/', (req, res) => {
+  pool.getConnection().then((conn) => {
+    conn.query('Select * from service').then((result) => {
+      res.status(200).json(result);
+    }).catch((err) => {
+      res.status(400).json(err);
+    });
+  }).catch((err) => {
+    console.log(err);
+  });
+});
+
 router.post('/mail', (req, res) => {
   pool.getConnection().then((conn) => {
     conn.query(
@@ -20,6 +36,15 @@ router.post('/mail', (req, res) => {
     console.log(err);
   })
 })
+
+function generateAccessToken(user) {
+  return jwt.sign(user, process.env.SECRET_TOKEN, {expiresIn: '24h'});
+}
+
+function generateRefreshToken(user) {
+  return jwt.sign(user, process.env.REFRESH_TOKEN);
+}
+
 
 /**
  * @param req
@@ -64,7 +89,7 @@ router.post('/login', (req, res) => {
         'SELECT * FROM users WHERE mail = ? ;',
         [req.body.mail]
     ).then((result) => {
-      if (result) {
+      if (result[0]) {
         bcrypt.compare(req.body.password, result[0].password, (err, respwd) => {
           if (respwd) {
             const user = {
@@ -74,11 +99,15 @@ router.post('/login', (req, res) => {
               mail: result[0].mail,
               password: result[0].password
             }
-            const accessToken = jwt.sign(user, process.env.SECRET_TOKEN);
+            const accessToken = generateAccessToken(user);
+            const refreshToken = generateRefreshToken(user);
+            // technically here we would add refresh token to db or smthg
+            ourRefreshTokens.push(refreshToken);
             res.json({
               code: 200,
               success: 'login successfull',
-              accessToken: accessToken
+              accessToken: accessToken,
+              refreshToken: refreshToken,
             });
           } else {
             res.json({
@@ -126,6 +155,29 @@ router.post('/register', (req, res) => {
       });
     });
   });
+});
+
+router.post('/token', (req, res) => {
+  const refreshToken = req.body.token;
+  // If we got no refresh token
+  if (null === refreshToken) return res.sendStatus(401);
+  // We received a non registered refresh token
+  if (!ourRefreshTokens.includes(refreshToken)) return res.sendStatus(403);
+  jwt.verify(refreshToken, process.env.REFRESH_TOKEN, (err, user) => {
+    if (err) return res.sendStatus(403);
+    const accessToken = generateAccessToken(user);
+    return res.json({
+      code: 200,
+      accessToken: accessToken,
+    })
+  })
+});
+
+router.delete('/logout', (req, res) => {
+  // On va vérifier que, dans le tableau qui contient nos refreshTokens, on a pas de refreshToken
+  //   similaire à celui passé en paramètre. Si on en trouve un, on le supprime.
+  ourRefreshTokens = ourRefreshTokens.filter(token => token !== req.body.token);
+  res.sendStatus(204).send('Refresh token deleted successfully.');
 });
 
 module.exports = router;

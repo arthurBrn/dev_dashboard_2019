@@ -8,13 +8,15 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'frontend';
-  isAuth = localStorage.getItem('jwtToken') ? true : false;
+  isAuth = localStorage.getItem('accessToken') ? true : false;
 
   constructor(private _router: Router) {
       
   }
 
   ngOnInit() {
+      console.log('Access token : ' +localStorage.getItem('accessToken'));
+    console.log('Refresh token : ' + localStorage.getItem('refreshToken'));
       this._router.navigate(['services']);
   }
 
