@@ -1,18 +1,32 @@
 <div class="row px-3 row justify-content-between" style="height: 10%;">
-    <b class="green-text">
-        <a class="navbar-brand" (click)="onLogoClick()">
-            Sebivten
+  <b class="green-text">
+    <a class="navbar-brand" (click)="onLogoClick()">
+      Sebivten
+    </a>
+  </b>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+          aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+  </button>
+  <div class="d-inline-flex p-0 navbar-nav ml-auto nav-flex-icons" *ngIf="!isAuth">
+    <a class="p-1 pr-4 text-light" aria-haspopup="true" aria-expanded="false" (click)="onRegisterClick()">
+      Register
+    </a>
+    <a class="p-1 text-light" aria-haspopup="true" aria-expanded="false" (click)="onLoginClick()">
+      Login
+    </a>
+  </div>
+  <div *ngIf="isAuth">
+    <div class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+         aria-haspopup="true" aria-expanded="false" style="color:white;">Account</a>
+      <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" (click)="onInfoClick()">Info</a>
+        <a class="dropdown-item" (click)="onLogoutClick()">
+          Log out
+          <i class="fas fa-sign-out-alt ml-2"></i>
         </a>
-    </b>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
-            aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
-    </button>
-    <div class="d-inline-flex p-0 navbar-nav ml-auto nav-flex-icons" *ngIf="!isAuth">
-        <a class="p-1 pr-4 text-light" aria-haspopup="true" aria-expanded="false" (click)="onRegisterClick()">
-            Register
-            </a>
-            <a class="p-1 text-light" aria-haspopup="true" aria-expanded="false" (click)="onLoginClick()">
-            Login
-            </a>
-    </div>    
+      </div>
+    </div>
+  </div>
+
 </div>
