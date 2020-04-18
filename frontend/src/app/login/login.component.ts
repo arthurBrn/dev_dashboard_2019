@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('jwtToken', parsedData.accessToken);
           console.log(localStorage.getItem('jwtToken'));
           this._location.replaceState('/');
-          // this._router.navigate('/');
+          this._router.navigate(['home']);
         } else {
           this._toastr.warning(parsedData.success);
         }
