@@ -33,6 +33,14 @@ router.post('/mail', (req, res) => {
   })
 })
 
+function generateAccessToken(user) {
+  return jwt.sign(user, process.env.SECRET_TOKEN, {expiresIn: '24h'});
+}
+
+function generateRefreshToken(user) {
+  return jwt.sign(user, process.env.REFRESH_TOKEN);
+}
+
 
 /**
  * @param req
@@ -65,7 +73,7 @@ router.post('/login', (req, res) => {
         'SELECT * FROM users WHERE mail = ? ;',
         [req.body.mail]
     ).then((result) => {
-      if (result) {
+      if (result[0]) {
         bcrypt.compare(req.body.password, result[0].password, (err, respwd) => {
           if (respwd) {
             const user = {
@@ -75,11 +83,13 @@ router.post('/login', (req, res) => {
               mail: result[0].mail,
               password: result[0].password
             }
-            const accessToken = jwt.sign(user, process.env.SECRET_TOKEN);
+            const accessToken = generateAccessToken(user);
+            const refreshToken = generateRefreshToken(user);
             res.json({
               code: 200,
               success: 'login successfull',
-              accessToken: accessToken
+              accessToken: accessToken,
+              refreshToken: refreshToken,
             });
           } else {
             res.json({
