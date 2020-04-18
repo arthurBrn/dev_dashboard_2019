@@ -24,6 +24,7 @@ export class NavbarComponent implements OnInit {
   }
 
   onLoginClick() {
+    this.connecting.emit(true);
     this._router.navigate(['login']);
   }
 
