@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-service-card',
@@ -12,17 +11,16 @@ export class ServiceCardComponent implements OnInit {
   @Input() image;
   @Input() title;
   @Input() id;
+  @Output() serviceSelectionned = new EventEmitter();
 
-  constructor(private _router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
   onCardCLick(event) {
       var target = event.target || event.srcElement || event.currentTarget;
-      var idAttr = target.id
-      console.log(idAttr)
-      this._router.navigate(['widget']);
+      this.serviceSelectionned.emit(target.id);
   }
 
 }

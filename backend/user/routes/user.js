@@ -12,10 +12,12 @@ let ourRefreshTokens = [];
 
 router.get('/', (req, res) => {
   pool.getConnection().then((conn) => {
-    conn.query('Select * from service').then((result) => {
+    conn.query('Select * from service')
+    .then((result) => {
       res.status(200).json(result);
     }).catch((err) => {
       res.status(400).json(err);
+      pool.release();
     });
   }).catch((err) => {
     console.log(err);
@@ -28,8 +30,9 @@ router.post('/mail', (req, res) => {
         'SELECT * FROM users WHERE mail = ? ;',
         [req.body.mail]
     ).then((result) => {
-      res.status(200).json(result)
+      res.status(200).json(result);
     }).catch((err) => {
+      pool.release()
       console.log(err);
     })
   }).catch((err) => {
@@ -75,6 +78,7 @@ router.get('/services', (req, res) => {
     conn.query('Select * from service').then((result) => {
       res.status(200).json(result);
     }).catch((err) => {
+      pool.release();
       res.status(400).json(err);
     });
   }).catch((err) => {
@@ -123,6 +127,7 @@ router.post('/login', (req, res) => {
         });
       }
     }).catch((err) => {
+      pool.release();
       console.log(err);
     });
   }).catch((err) => {
@@ -149,6 +154,7 @@ router.post('/register', (req, res) => {
           })
         }
       }).catch((err) => {
+        pool.release();
         console.log(err);
       }).catch((err) => {
         console.log(err);

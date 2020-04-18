@@ -54,5 +54,9 @@ export class ApiService {
       .set('token', token);
     return this._httpClient.delete(this.baseUrl + '/logout');
   }
+
+  getPublicServices() {
+    return this._httpClient.get(this.baseUrl + 'services');
+  }
 }
 

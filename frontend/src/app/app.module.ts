@@ -11,7 +11,8 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { DisplayServicesComponent } from './display-services/display-services.component';
 import { ServiceCardComponent } from './display-services/service-card/service-card.component';
 import { HttpClientModule } from '@angular/common/http';
-import { WidgetsComponent } from './widgets/widgets.component';
+import { CryptocurrenciesComponent } from './widgets/cryptocurrencies/cryptocurrencies.component';
+import { WeatherComponent } from './widgets/weather/weather.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { WidgetsComponent } from './widgets/widgets.component';
     SideBarComponent,
     DisplayServicesComponent,
     ServiceCardComponent,
-    WidgetsComponent,
+    CryptocurrenciesComponent,
+    WeatherComponent,
   ],
   imports: [
     BrowserModule,
