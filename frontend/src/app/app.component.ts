@@ -7,11 +7,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend';
-  isAuth = false;
+  isAuth = true;
   connecting: boolean = false;
 
   onChangeConnecting(event) {
     this.connecting = event;
+  }
+
+  onInit() {
+    console.log(localStorage.getItem('jwtToken'));
   }
 
 }
