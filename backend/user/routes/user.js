@@ -177,7 +177,7 @@ router.post('/token', (req, res) => {
       accessToken: accessToken,
     })
   })
-});
+});git push --set-upstream origin 47-create-crypto-viewgit push --set-upstream origin 47-create-crypto-view
 
 router.delete('/logout', (req, res) => {
   // On va vérifier que, dans le tableau qui contient nos refreshTokens, on a pas de refreshToken

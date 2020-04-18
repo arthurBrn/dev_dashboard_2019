@@ -54,22 +54,22 @@ INSERT INTO dashboard.widget (name) VALUES
 ('Widget n°2'),
 ('Widget n°3');
 INSERT INTO dashboard.service (name,api_link,picture,public) VALUES 
-('Cryptocurrencies','https://pro-api.coinmarketcap.com/v1/','https://placetech.net/wp-content/uploads/2018/04/cryptocurrency-3085139_1280.jpg',1)
-,('Weather','','https://wi-images.condecdn.net/image/doEYpG6Xd87/crop/2040/f/weather.jpg',1)
-,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
-,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
-,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
-,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
-,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
-,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
-,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
-,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
-,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
-,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
-,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
-,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
-,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
-,('Comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1);
+('cryptocurrencies','https://pro-api.coinmarketcap.com/v1/','https://placetech.net/wp-content/uploads/2018/04/cryptocurrency-3085139_1280.jpg',1)
+,('weather','','https://wi-images.condecdn.net/image/doEYpG6Xd87/crop/2040/f/weather.jpg',1)
+,('comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1);
 INSERT INTO dashboard.user_has_service (users_id, service_id) VALUES
 (1,1),
 (2,2);
