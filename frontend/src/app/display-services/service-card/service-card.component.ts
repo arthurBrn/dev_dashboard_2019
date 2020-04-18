@@ -17,7 +17,6 @@ export class ServiceCardComponent implements OnInit {
   }
 
   onCardCLick(event) {
-      
   }
 
 }
