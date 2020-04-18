@@ -11,6 +11,7 @@ export class NavbarComponent implements OnInit {
 
   authenticated = false;
   @Output() connecting = new EventEmitter();
+  @Output() logOut = new EventEmitter();
   @Input() isAuth: boolean;
 
   constructor(
@@ -31,6 +32,7 @@ export class NavbarComponent implements OnInit {
 
   onLogoutClick() {
     alert('Logging you out ...');
+    this.logOut.emit(false);
     localStorage.clear();
     this._location.replaceState('/');
     this._router.navigate(['home']);

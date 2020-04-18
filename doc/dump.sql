@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS service(
 	name text,
 	api_link text,
 	picture text,
-    public bit,
+    public BOOL,
 	PRIMARY KEY(id)
 );
 
