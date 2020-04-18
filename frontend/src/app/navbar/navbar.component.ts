@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
@@ -14,6 +15,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private _router: Router,
+    private _location: Location,
   ) { }
 
   ngOnInit(): void {
@@ -21,6 +23,18 @@ export class NavbarComponent implements OnInit {
 
   onLogoClick() {
     console.log('logo click, redirect to home');
+  }
+
+  onInfoClick() {
+    alert('Info page in construction. For more information contact the maintenance guy');
+  }
+
+  onLogoutClick() {
+    alert('Logging you out ...');
+    localStorage.clear();
+    this._location.replaceState('/');
+    this._router.navigate(['home']);
+    window.location.reload();
   }
 
   onLoginClick() {
