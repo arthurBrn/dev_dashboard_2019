@@ -10,6 +10,11 @@ export class AppComponent {
   isAuth = localStorage.getItem('jwtToken') ? true : false;
   connecting: boolean = false;
 
+  ngOnInit() {
+    console.log('Access token : ' +localStorage.getItem('accessToken'));
+    console.log('Refresh token : ' + localStorage.getItem('refreshToken'));
+  }
+
   onChangeConnecting(event) {
     this.connecting = event;
   }
