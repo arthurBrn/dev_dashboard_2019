@@ -48,5 +48,11 @@ export class ApiService {
           .set('Content-Type', 'application/x-www-form-urlencoded')
       });
   }
+
+  logout(token) {
+    const body = new HttpParams()
+      .set('token', token);
+    return this._httpClient.delete(this.baseUrl + '/logout');
+  }
 }
 
