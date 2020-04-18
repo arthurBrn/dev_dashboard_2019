@@ -6,6 +6,10 @@ const router = express.Router();
 router.use(bodyParser.json());
 const jwt = require('jsonwebtoken');
 
+// Solution provisoire
+// Token emptied out every time the server reload
+let ourRefreshTokens = [];
+
 router.get('/', (req, res) => {
   pool.getConnection().then((conn) => {
     conn.query('Select * from service').then((result) => {
@@ -85,6 +89,8 @@ router.post('/login', (req, res) => {
             }
             const accessToken = generateAccessToken(user);
             const refreshToken = generateRefreshToken(user);
+            // technically here we would add refresh token to db or smthg
+            ourRefreshTokens.push(refreshToken);
             res.json({
               code: 200,
               success: 'login successfull',
@@ -138,5 +144,23 @@ router.post('/register', (req, res) => {
     });
   });
 });
+
+router.post('/token', (req, res) => {
+  const refreshToken = req.body.token;
+  // If we got no refresh token
+  if (null === refreshToken) return res.sendStatus(401);
+  // We received a non registered refresh token
+  if (!ourRefreshTokens.includes(refreshToken)) return res.sendStatus(403);
+  jwt.verify(refreshToken, process.env.REFRESH_TOKEN, (err, user) => {
+    if (err) return res.sendStatus(403);
+    const accessToken = generateAccessToken(user);
+    return res.json({
+      code: 200,
+      accessToken: accessToken,
+    })
+  })
+});
+
+
 
 module.exports = router;
