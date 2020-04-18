@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend';
-  isAuth = localStorage.getItem('jwtToken') ? true : false;
+  isAuth = localStorage.getItem('accessToken') ? true : false;
   connecting: boolean = false;
 
   ngOnInit() {
