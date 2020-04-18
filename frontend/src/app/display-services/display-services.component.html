@@ -1,12 +1,22 @@
-<mat-grid-list cols = "3" rowHeight = "20vw">
-    <mat-grid-tile 
+<div *ngFor="let service of services" class="col-lg-3 col-md-3 mt-5" style="display:inline-flex">
+  <app-service-card
+    [image]="service.image"
+    [title]="service.title"
+  >
+  </app-service-card>
+</div>
+<!--
+ <mat-grid-list cols = "3" rowHeight = "20vw">
+  <mat-grid-tile
     [colspan] = "1"
     [rowspan] = "1"
     *ngFor="let service of services"
-    >
+  >
+
     <app-service-card class="m-2"
-        [image]="service.image"
-        [title]="service.title"
+                      [image]="service.image"
+                      [title]="service.title"
     ></app-service-card>
-    </mat-grid-tile>
- </mat-grid-list>
+  </mat-grid-tile>
+</mat-grid-list>
+-->

@@ -11,11 +11,10 @@ export class DisplayServicesComponent implements OnInit {
   image = "https://placetech.net/wp-content/uploads/2018/04/cryptocurrency-3085139_1280.jpg";
   title = "Cryptocurrencies";
 
+
+
   services = [
-    {
-      image: "https://placetech.net/wp-content/uploads/2018/04/cryptocurrency-3085139_1280.jpg",
-      title: "Cryptocurrencies"
-    },
+    { image: this.image, title: this.title },
     {
       image: "https://placetech.net/wp-content/uploads/2018/04/cryptocurrency-3085139_1280.jpg",
       title: "Cryptocurrencies"
@@ -82,5 +81,4 @@ export class DisplayServicesComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
