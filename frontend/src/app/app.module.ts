@@ -24,6 +24,7 @@ import { CryptoListComponent } from './widgets/cryptocurrencies/crypto-list/cryp
 registerLocaleData(localeFr);
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { RateExchangeComponent } from './widgets/cryptocurrencies/rate-exchange/rate-exchange.component';
+import { WeatherCardComponent } from './widgets/weather/weather-card/weather-card.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { RateExchangeComponent } from './widgets/cryptocurrencies/rate-exchange/
     ServiceCardComponent,
     CryptocurrenciesComponent,
     WeatherComponent,
+    WeatherCardComponent,
     LineChartComponent,
     HistoryChartComponent,
     CryptoListComponent,
@@ -52,7 +54,7 @@ import { RateExchangeComponent } from './widgets/cryptocurrencies/rate-exchange/
     MatCardModule,
     GoogleChartsModule,
     Ng2SearchPipeModule,
-    
+
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
   bootstrap: [AppComponent]

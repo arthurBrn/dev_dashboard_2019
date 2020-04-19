@@ -12,18 +12,19 @@ export class WeatherComponent implements OnInit {
 
   modalRef: BsModalRef;
   widgetName: string;
-  widgetCityName: string;
-  widgetTimePeriod: string;
+  widgetDescription: string;
+  optionChosen:string;
+  // Correspond to the user already existing weather widget
   weatherObject = [
-    {
-      id: '1', title: "name", description : "some description", timePeriod: "time period"
-    },
-    {
-      id: '2', title: "name", description : "some description", timePeriod: "time period",
-    },
-    {
-      id: '3', title: "name", description : "some description", timePeriod: "time period",
-    }
+    { id: '1', title: "name", description : "some description" },
+    { id: '2', title: "name", description : "some description" },
+    { id: '3', title: "name", description : "some description" }
+  ];
+  widgetPossiblity = [
+    { id: '0', name: 'current weather' },
+    { id: '1', name: '0 to 16 days forecast' },
+    { id: '2', name: 'current air quality' },
+    { id: '3', name: 'air quality forecast' },
   ];
 
 
@@ -42,11 +43,14 @@ export class WeatherComponent implements OnInit {
   }
 
   onValidateNewWidget() {
-    if (this.widgetName && this.widgetCityName && this.widgetTimePeriod) {
+    if (this.widgetName && this.optionChosen && this.widgetDescription) {
+      console.log(this.widgetName);
+      console.log(this.optionChosen + ' = ' + this.widgetPossiblity[this.optionChosen]['name']);
+      console.log(this.widgetDescription);
       // Validation process of the data entered.
+      //
+      // close the modal
       this._modalService.hide(1);
-      // Add the new widget name to the sidebar
-      // Make the request, create new servcie like weather service
     } else {
       this._toastr.warning('All fields must be filled.');
     }

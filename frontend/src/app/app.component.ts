@@ -11,13 +11,13 @@ export class AppComponent implements OnInit {
   isAuth = localStorage.getItem('accessToken') ? true : false;
 
   constructor(private _router: Router) {
-      
+
   }
 
   ngOnInit() {
       console.log('Access token : ' +localStorage.getItem('accessToken'));
     console.log('Refresh token : ' + localStorage.getItem('refreshToken'));
-      this._router.navigate(['cryptocurrencies']);
+      //this._router.navigate(['cryptocurrencies']);
   }
 
   onLogOut(event) {
