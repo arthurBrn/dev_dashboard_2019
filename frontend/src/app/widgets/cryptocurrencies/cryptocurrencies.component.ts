@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 
 
 
@@ -8,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './cryptocurrencies.component.html',
   styleUrls: ['./cryptocurrencies.component.css']
 })
-export class CryptocurrenciesComponent {
+export class CryptocurrenciesComponent implements OnInit {
 
+    constructor(private el:ElementRef) {
+        
+    }
 
+    ngOnInit() {
+      $(window).resize(function(){location.reload();});
+    }
 }

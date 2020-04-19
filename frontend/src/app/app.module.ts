@@ -20,7 +20,9 @@ import { LineChartComponent } from './widgets/cryptocurrencies/line-chart/line-c
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { HistoryChartComponent } from './widgets/cryptocurrencies/history-chart/history-chart.component';
+import { CryptoListComponent } from './widgets/cryptocurrencies/crypto-list/crypto-list.component';
 registerLocaleData(localeFr);
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ registerLocaleData(localeFr);
     CryptocurrenciesComponent,
     WeatherComponent,
     LineChartComponent,
-    HistoryChartComponent
+    HistoryChartComponent,
+    CryptoListComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,9 @@ registerLocaleData(localeFr);
     HttpClientModule,
     MatGridListModule,
     MatCardModule,
-    GoogleChartsModule
+    GoogleChartsModule,
+    Ng2SearchPipeModule,
+    
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
   bootstrap: [AppComponent]

@@ -24,6 +24,11 @@ export class CryptoService {
       return this._httpClient.get(url, {params: params});
   }
 
+  getList() {
+      const url = this.baseUrl + 'list';
+      return this._httpClient.get(url);
+  }
+
 
 
 

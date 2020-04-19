@@ -1,0 +1,11 @@
+
+<div class="form-group">
+    <input type="text" id="inputLGEx" class="form-control form-control-lg" [(ngModel)]="selectedCrypto">
+    <label for="inputLGEx">Currency</label>
+</div>
+
+<ul class="list-group list-group-flush" *ngFor="let crypto of cryptoList | filter:selectedCrypto">
+    <li class="list-group-item" id="{{ crypto.id }}" (click)="onCryptoCLick($event)" [class.active]="crypto.id === default">
+        {{ crypto.id | titlecase }} - {{ crypto.symbol }}
+    </li>
+  </ul>

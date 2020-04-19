@@ -5,3 +5,11 @@ mat-grid-tile {
  /* * {
     border: 1px solid red;
   } */
+
+  mat-grid-tile {
+    background: lightblue;
+  }
+
+#listDiv::-webkit-scrollbar {
+    display: none;
+}
