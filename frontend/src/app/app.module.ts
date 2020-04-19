@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { AppRoutingModule, routingArrayOfComponent } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,6 +13,14 @@ import { ServiceCardComponent } from './display-services/service-card/service-ca
 import { HttpClientModule } from '@angular/common/http';
 import { CryptocurrenciesComponent } from './widgets/cryptocurrencies/cryptocurrencies.component';
 import { WeatherComponent } from './widgets/weather/weather.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { GoogleChartsModule } from 'angular-google-charts';
+import { LineChartComponent } from './widgets/cryptocurrencies/line-chart/line-chart.component';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import { HistoryChartComponent } from './widgets/cryptocurrencies/history-chart/history-chart.component';
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [
@@ -24,6 +32,8 @@ import { WeatherComponent } from './widgets/weather/weather.component';
     ServiceCardComponent,
     CryptocurrenciesComponent,
     WeatherComponent,
+    LineChartComponent,
+    HistoryChartComponent
   ],
   imports: [
     BrowserModule,
@@ -33,8 +43,11 @@ import { WeatherComponent } from './widgets/weather/weather.component';
     ToastrModule.forRoot(),
     ModalModule.forRoot(),
     HttpClientModule,
+    MatGridListModule,
+    MatCardModule,
+    GoogleChartsModule
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
