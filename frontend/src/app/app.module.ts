@@ -14,7 +14,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { CryptocurrenciesComponent } from './widgets/cryptocurrencies/cryptocurrencies.component';
 import { WeatherComponent } from './widgets/weather/weather.component';
 import { WeatherCardComponent } from './widgets/weather/weather-card/weather-card.component';
-import { WeatherDetailComponent } from './widgets/weather/weather-detail/weather-detail.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +26,6 @@ import { WeatherDetailComponent } from './widgets/weather/weather-detail/weather
     CryptocurrenciesComponent,
     WeatherComponent,
     WeatherCardComponent,
-    WeatherDetailComponent,
   ],
   imports: [
     BrowserModule,
