@@ -11,7 +11,6 @@ export class WeatherCardComponent implements OnInit {
   @Input() id;
   @Input() widgetName;
   @Input() widgetDescription;
-  @Input() timePeriod;
 
   isAuth = localStorage.getItem('accessToken') ? true : false;
 

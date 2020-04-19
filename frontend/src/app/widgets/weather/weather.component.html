@@ -1,18 +1,19 @@
-<div class="row mt-5">
+<div class="row mt-5 ml-3">
+  <div class="col-md-3 col-lg-3">
+    <div class="card text-center" style="width: 18rem;" (click)="onNewWidgetClick(newWidgetModal)">
+      <div class="card-body">
+        <i class="fas fa-plus-circle fa-5x" id="weather-plus-icon"></i>
+        </div>
+      </div>
+  </div>
+</div>
+<div class="row mt-5 ml-3">
   <div class="col-md-3 col-lg-3" *ngFor="let item of weatherObject">
     <app-weather-card
       [id]="item.id"
       [widgetName]="item.title"
       [widgetDescription]="item.description"
-      [timePeriod]="item.timePeriod"
     ></app-weather-card>
-  </div>
-  <div class="col-md-3 col-lg-3">
-    <div class="card text-center" style="width: 18rem;" (click)="onNewWidgetClick(newWidgetModal)">
-      <div class="card-body">
-        <i class="fas fa-plus-circle fa-5x" id="weather-plus-icon"></i>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -23,9 +24,17 @@
       <h1 class="modal-title text-center">Your widget</h1>
     </div>
     <div class="modal-body">
-      <input type="text" id="widgetName" class="form-control" placeholder="Widget name..." [(ngModel)]="widgetName"  />
-      <input type="text" id="widgetCityName" class="form-control" placeholder="City name..." [(ngModel)]="widgetCityName"  />
-      <input type="text" id="widgetTimePeriod" class="form-control" placeholder="Time span" [(ngModel)]="widgetTimePeriod"  />
+      <input type="text" id="widgetName" class="form-control mt-3" placeholder="Widget name..." [(ngModel)]="widgetName"  />
+      <div class="form-group mt-3 md-3">
+        <label for="exampleFormControlSelect1">Chose your widget purpos</label>
+        <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="optionChosen">
+          <option *ngFor="let wp of widgetPossiblity" ngValue="{{wp.id}}">{{ wp.name }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Example textarea</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="widgetDescription"></textarea>
+      </div>
     </div>
     <div class="modal-footer">
       <button class="btn btn-elegant btn-block p-btn-rounded"
