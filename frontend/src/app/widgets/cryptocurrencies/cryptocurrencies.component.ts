@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class CryptocurrenciesComponent implements OnInit {
 
     crypto = 'bitcoin';
+    startDateTime;
+    endDateTime;
 
     constructor() {
         
@@ -19,5 +21,12 @@ export class CryptocurrenciesComponent implements OnInit {
 
     onChangeCrypto(event) {
       this.crypto = event;
+    }
+
+    onChangeStartDateTime(value) {
+        this.startDateTime=value;
+    }
+    onChangeEndDateTime(value) {
+        this.endDateTime=value;
     }
 }

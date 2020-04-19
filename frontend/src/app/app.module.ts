@@ -25,6 +25,8 @@ registerLocaleData(localeFr);
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { RateExchangeComponent } from './widgets/cryptocurrencies/rate-exchange/rate-exchange.component';
 import { WeatherCardComponent } from './widgets/weather/weather-card/weather-card.component';
+import { ConfigureGraphComponent } from './widgets/cryptocurrencies/configure-graph/configure-graph.component';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { WeatherCardComponent } from './widgets/weather/weather-card/weather-car
     HistoryChartComponent,
     CryptoListComponent,
     RateExchangeComponent,
+    ConfigureGraphComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -54,7 +58,8 @@ import { WeatherCardComponent } from './widgets/weather/weather-card/weather-car
     MatCardModule,
     GoogleChartsModule,
     Ng2SearchPipeModule,
-
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
   bootstrap: [AppComponent]
