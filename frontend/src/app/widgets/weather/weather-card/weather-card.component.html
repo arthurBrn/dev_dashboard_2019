@@ -1,0 +1,14 @@
+<div class="card mb-3" style="max-width: 18rem;">
+  <!-- <div class="card-header bg-transparent border-success">Header</div> -->
+  <div class="card-body">
+    <h5 class="card-title text-lead">
+      #{{ id }} - {{ widgetName }}
+    </h5>
+    <p class="card-text">
+      {{ widgetDescription }}
+    </p>
+  </div>
+  <div class="card-footer bg-transparent text-center" *ngIf="isAuth">
+    Edit
+  </div>
+</div>
