@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { AppRoutingModule, routingArrayOfComponent } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,7 +13,16 @@ import { ServiceCardComponent } from './display-services/service-card/service-ca
 import { HttpClientModule } from '@angular/common/http';
 import { CryptocurrenciesComponent } from './widgets/cryptocurrencies/cryptocurrencies.component';
 import { WeatherComponent } from './widgets/weather/weather.component';
-import { WeatherCardComponent } from './widgets/weather/weather-card/weather-card.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { GoogleChartsModule } from 'angular-google-charts';
+import { LineChartComponent } from './widgets/cryptocurrencies/line-chart/line-chart.component';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import { HistoryChartComponent } from './widgets/cryptocurrencies/history-chart/history-chart.component';
+import { CryptoListComponent } from './widgets/cryptocurrencies/crypto-list/crypto-list.component';
+registerLocaleData(localeFr);
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -25,7 +34,9 @@ import { WeatherCardComponent } from './widgets/weather/weather-card/weather-car
     ServiceCardComponent,
     CryptocurrenciesComponent,
     WeatherComponent,
-    WeatherCardComponent,
+    LineChartComponent,
+    HistoryChartComponent,
+    CryptoListComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,8 +46,13 @@ import { WeatherCardComponent } from './widgets/weather/weather-card/weather-car
     ToastrModule.forRoot(),
     ModalModule.forRoot(),
     HttpClientModule,
+    MatGridListModule,
+    MatCardModule,
+    GoogleChartsModule,
+    Ng2SearchPipeModule,
+    
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

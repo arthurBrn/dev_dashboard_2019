@@ -1,1 +1,13 @@
-<p>cryptocurrencies widget!</p>
+
+<div class="row">
+    <div class="col-lg-2 col-md-3 px-4 overflow-auto" id="listDiv" style="height: 96vh; border-right: solid 1px gray;">
+        <div class="md-form form-lg px -3">
+            <app-crypto-list></app-crypto-list>
+        </div>
+    </div>
+    <div class="col-lg-10 col-md-9 overflow-hidden" >
+        <div class="row" id="graphContainer" style="height: 48vh;">
+            <app-history-chart></app-history-chart>
+        </div>
+    </div>
+</div>

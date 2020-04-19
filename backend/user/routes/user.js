@@ -1,11 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const pool = require('../src/db');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const pool = require('../src/db');
+
 const router = express.Router();
 router.use(bodyParser.json());
-const jwt = require('jsonwebtoken');
-
 // Solution provisoire
 // Token emptied out every time the server reload
 let ourRefreshTokens = [];
@@ -13,12 +13,12 @@ let ourRefreshTokens = [];
 router.get('/', (req, res) => {
   pool.getConnection().then((conn) => {
     conn.query('Select * from service')
-    .then((result) => {
-      res.status(200).json(result);
-    }).catch((err) => {
-      res.status(400).json(err);
-      pool.release();
-    });
+      .then((result) => {
+        res.status(200).json(result);
+      }).catch((err) => {
+        res.status(400).json(err);
+        pool.release();
+      });
   }).catch((err) => {
     console.log(err);
   });
@@ -27,18 +27,18 @@ router.get('/', (req, res) => {
 router.post('/mail', (req, res) => {
   pool.getConnection().then((conn) => {
     conn.query(
-        'SELECT * FROM users WHERE mail = ? ;',
-        [req.body.mail]
+      'SELECT * FROM users WHERE mail = ? ;',
+      [req.body.mail],
     ).then((result) => {
       res.status(200).json(result);
     }).catch((err) => {
-      pool.release()
+      pool.release();
       console.log(err);
-    })
+    });
   }).catch((err) => {
     console.log(err);
-  })
-})
+  });
+});
 
 function generateAccessToken(user) {
   return jwt.sign(user, process.env.SECRET_TOKEN, {expiresIn: '24h'});
@@ -63,7 +63,7 @@ function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
   // Saying : If we have a authHeader then return the token, that we take from the split
   const token = authHeader && authHeader.split(' ')[1];
-  if (null === token) return res.status(401).send('You need to send a token with your request');
+  if (token === null) return res.status(401).send('You need to send a token with your request');
 
   jwt.verify(token, process.env.SECRET_TOKEN, (err, ourUser) => {
     if (err) return res.status(403).send('Token no longer valid');
@@ -90,8 +90,8 @@ router.get('/services', (req, res) => {
 router.post('/login', (req, res) => {
   pool.getConnection().then((conn) => {
     conn.query(
-        'SELECT * FROM users WHERE mail = ? ;',
-        [req.body.mail]
+      'SELECT * FROM users WHERE mail = ? ;',
+      [req.body.mail],
     ).then((result) => {
       if (result[0]) {
         bcrypt.compare(req.body.password, result[0].password, (err, respwd) => {
@@ -102,7 +102,7 @@ router.post('/login', (req, res) => {
               lastName: result[0].lastName,
               mail: result[0].mail,
               password: result[0].password
-            }
+            };
             const accessToken = generateAccessToken(user);
             const refreshToken = generateRefreshToken(user);
             // technically here we would add refresh token to db or smthg
@@ -116,14 +116,14 @@ router.post('/login', (req, res) => {
           } else {
             res.json({
               code: '404',
-              success: 'Login failed. Wrong password.'
-            })
+              success: 'Login failed. Wrong password.',
+            });
           }
         });
       } else {
         res.json({
           code: 404,
-          success: 'No address mail match this one in the database.'
+          success: 'No address mail match this one in the database.',
         });
       }
     }).catch((err) => {
@@ -132,32 +132,32 @@ router.post('/login', (req, res) => {
     });
   }).catch((err) => {
     console.log(err);
-  })
+  });
 });
 
 router.post('/register', (req, res) => {
   bcrypt.hash(req.body.password, 0, (err, hash) => {
     pool.getConnection().then((conn) => {
       conn.query(
-          'INSERT INTO users (first_name, last_name, mail, password) VALUES (?,?,?,?);',
-          [req.body.firstName, req.body.lastName, req.body.mail, hash]
+        'INSERT INTO users (first_name, last_name, mail, password) VALUES (?,?,?,?);',
+        [req.body.firstName, req.body.lastName, req.body.mail, hash],
       ).then((result) => {
         if (result) {
           res.json({
             code: 200,
             success: 'Registration successfull',
-          })
+          });
         } else {
           res.json({
             code: 404,
             success: 'Registration failed. Contact managment',
-          })
+          });
         }
-      }).catch((err) => {
+      }).catch((error) => {
         pool.release();
-        console.log(err);
-      }).catch((err) => {
-        console.log(err);
+        console.log(error);
+      }).catch((error) => {
+        console.log(error);
       });
     });
   });
@@ -166,7 +166,7 @@ router.post('/register', (req, res) => {
 router.post('/token', (req, res) => {
   const refreshToken = req.body.token;
   // If we got no refresh token
-  if (null === refreshToken) return res.sendStatus(401);
+  if (refreshToken === null) return res.sendStatus(401);
   // We received a non registered refresh token
   if (!ourRefreshTokens.includes(refreshToken)) return res.sendStatus(403);
   jwt.verify(refreshToken, process.env.REFRESH_TOKEN, (err, user) => {
@@ -175,14 +175,13 @@ router.post('/token', (req, res) => {
     return res.json({
       code: 200,
       accessToken: accessToken,
-    })
-  })
-}); 
-
+    });
+  });
+});
 router.delete('/logout', (req, res) => {
   // On va vérifier que, dans le tableau qui contient nos refreshTokens, on a pas de refreshToken
   //   similaire à celui passé en paramètre. Si on en trouve un, on le supprime.
-  ourRefreshTokens = ourRefreshTokens.filter(token => token !== req.body.token);
+  ourRefreshTokens = ourRefreshTokens.filter((token) => token !== req.body.token);
   res.sendStatus(204).send('Refresh token deleted successfully.');
 });
 

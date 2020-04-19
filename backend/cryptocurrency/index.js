@@ -11,10 +11,10 @@ const crypto = require('./routes/crypto');
 const app = express();
 app.use(cors());
 app.use(
-    bodyParser.urlencoded({
-        extended: true,
-    }),
-)
+  bodyParser.urlencoded({
+    extended: true,
+  }),
+);
 app.use('/crypto', crypto);
 
 app.get('/', (req, res) => {

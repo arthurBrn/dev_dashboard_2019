@@ -1,0 +1,15 @@
+mat-grid-tile {
+    background: lightblue;
+ }
+
+ /* * {
+    border: 1px solid red;
+  } */
+
+  mat-grid-tile {
+    background: lightblue;
+  }
+
+#listDiv::-webkit-scrollbar {
+    display: none;
+}
