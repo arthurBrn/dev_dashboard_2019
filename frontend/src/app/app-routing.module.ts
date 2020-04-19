@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { DisplayServicesComponent } from './display-services/display-services.component';
 import { CryptocurrenciesComponent } from  './widgets/cryptocurrencies/cryptocurrencies.component';
 import { WeatherComponent } from './widgets/weather/weather.component';
+import { WeatherDetailComponent } from './widgets/weather/weather-detail/weather-detail.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -14,6 +15,10 @@ const routes: Routes = [
   { path: 'services', component: DisplayServicesComponent},
   { path: 'cryptocurrencies', component: CryptocurrenciesComponent},
   { path: 'weather', component: WeatherComponent},
+  { path: 'weather/detail',
+    component: WeatherDetailComponent,
+    data: {id: 1, title: 'title'}
+  },
 ];
 
 @NgModule({
@@ -27,5 +32,6 @@ export const routingArrayOfComponent = [
   RegisterComponent,
   DisplayServicesComponent,
   CryptocurrenciesComponent,
-  WeatherComponent
+  WeatherComponent,
+  WeatherDetailComponent,
 ];
