@@ -2,12 +2,26 @@
 <div class="row">
     <div class="col-lg-2 col-md-3 px-4 overflow-auto" id="listDiv" style="height: 96vh; border-right: solid 1px gray;">
         <div class="md-form form-lg px -3">
-            <app-crypto-list></app-crypto-list>
+            <app-crypto-list
+            (cryptoSelected)="onChangeCrypto($event)"
+            ></app-crypto-list>
         </div>
     </div>
-    <div class="col-lg-10 col-md-9 overflow-hidden" >
+    <div class="col-lg-10 col-md-9 overflow-hidden">
         <div class="row" id="graphContainer" style="height: 48vh;">
-            <app-history-chart></app-history-chart>
+            <div class="col-md-6 px-4 py-3 ">
+                <app-rate-exchange
+                  [crypto]="crypto"
+                ></app-rate-exchange>
+            </div>
+            <div class="col-md-6 primary-color">
+                
+            </div>
+        </div>
+        <div class="row" id="graphContainer" style="height: 48vh;">
+            <app-history-chart
+                [crypto]="crypto"
+            ></app-history-chart>
         </div>
     </div>
 </div>

@@ -1,7 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
-
-
-
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-cryptocurrencies',
@@ -10,11 +7,17 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 })
 export class CryptocurrenciesComponent implements OnInit {
 
-    constructor(private el:ElementRef) {
+    crypto = 'bitcoin';
+
+    constructor() {
         
     }
 
     ngOnInit() {
       $(window).resize(function(){location.reload();});
+    }
+
+    onChangeCrypto(event) {
+      this.crypto = event;
     }
 }

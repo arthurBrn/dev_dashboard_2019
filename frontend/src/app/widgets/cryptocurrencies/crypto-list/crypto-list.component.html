@@ -1,7 +1,7 @@
 
 <div class="form-group">
     <input type="text" id="inputLGEx" class="form-control form-control-lg" [(ngModel)]="selectedCrypto">
-    <label for="inputLGEx">Currency</label>
+    <label for="inputLGEx">Search Currency</label>
 </div>
 
 <ul class="list-group list-group-flush" *ngFor="let crypto of cryptoList | filter:selectedCrypto">

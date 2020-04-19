@@ -1,0 +1,17 @@
+<div class="col-lg-12 p-5 mt-2 z-depth-2 " style="height: 20vh; display: flex">
+    <h1 style="margin:auto"> {{ displayRate }} </h1>
+</div>
+
+<div class="col-lg-12 mt-4 p-3 z-depth-2 center" style="height: 20vh;">
+    <!-- <h1 class="text-center">Conversion</h1> -->
+    <div class="row">
+        <div class="col-lg-12">
+            <label for="dollarId">Dollars</label>
+            <input type="text" id="dollarId" class="form-control" [ngModel]="dollarValue" (ngModelChange)="onChangeDollarValue($event)">
+        </div>
+        <div class="col-lg-12 mt-3">
+            <label for="cryptoId">{{ crypto | titlecase }}</label>
+            <input type="text" id="cryptoId" class="form-control" [ngModel]="cryptoValue" (ngModelChange)="onChangeCryptoValue($event)">
+        </div>
+    </div>
+</div>

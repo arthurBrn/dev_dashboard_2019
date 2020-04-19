@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CryptoService } from '../../../service/crypto.service';
 
 @Component({
@@ -12,7 +12,8 @@ export class CryptoListComponent implements OnInit {
 
   cryptoList = [];
   selectedCrypto;
-  default = 'bitcoin';
+  default;
+  @Output() cryptoSelected = new EventEmitter();
 
   ngOnInit(): void {
       this._cryptoService.getList().subscribe((data) => {
@@ -28,10 +29,9 @@ export class CryptoListComponent implements OnInit {
   }
   onCryptoCLick(event) {
       var target = event.target || event.srcElement || event.currentTarget;
-        
-        console.log(target.id)
       $('li').removeClass('active');
       $('#' + target.id).addClass('active');
+      this.cryptoSelected.emit(target.id);
   }
 
 }

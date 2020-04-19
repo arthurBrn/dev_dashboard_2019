@@ -23,6 +23,7 @@ import { HistoryChartComponent } from './widgets/cryptocurrencies/history-chart/
 import { CryptoListComponent } from './widgets/cryptocurrencies/crypto-list/crypto-list.component';
 registerLocaleData(localeFr);
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { RateExchangeComponent } from './widgets/cryptocurrencies/rate-exchange/rate-exchange.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     LineChartComponent,
     HistoryChartComponent,
     CryptoListComponent,
+    RateExchangeComponent,
   ],
   imports: [
     BrowserModule,

@@ -14,12 +14,12 @@ export class CryptoService {
     return ('public services');
   }
 
-  getGraph() {
+  getGraph(datas) {
       const url = this.baseUrl + 'graph';
       let params = new HttpParams();
-      params = params.append('start', '1584616092675');
-      params = params.append('end', '1587290892675');
-      params = params.append('crypto', 'bitcoin');
+      params = params.append('start', datas.start);
+      params = params.append('end', datas.end);
+      params = params.append('crypto', datas.crypto);
 
       return this._httpClient.get(url, {params: params});
   }
@@ -29,7 +29,8 @@ export class CryptoService {
       return this._httpClient.get(url);
   }
 
-
-
-
+  rate() {
+      const url = this.baseUrl + 'rate';
+      return this._httpClient.get(url);
+  }
 }
