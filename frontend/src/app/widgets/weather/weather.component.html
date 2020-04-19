@@ -1,1 +1,31 @@
-<p>weather works!</p>
+<div class="row mt-5">
+  <div class="col-md-3 col-lg-3">
+    <div class="card text-center" style="width: 18rem;" (click)="onNewWidgetClick(newWidgetModal)">
+      <div class="card-body">
+        <i class="fas fa-plus-circle fa-5x" id="weather-plus-icon"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #newWidgetModal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="modal-title text-center">Your widget</h1>
+    </div>
+    <div class="modal-body">
+      <input type="text" id="widgetName" class="form-control" placeholder="Widget name..." [(ngModel)]="widgetName"  />
+      <input type="text" id="widgetCityName" class="form-control" placeholder="City name..." [(ngModel)]="widgetCityName"  />
+      <input type="text" id="widgetTimePeriod" class="form-control" placeholder="Time span" [(ngModel)]="widgetTimePeriod"  />
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-elegant btn-block p-btn-rounded"
+              (click)="onValidateNewWidget()"
+              style="border-radius:18px;"
+      >
+        Validate
+      </button>
+    </div>
+  </div>
+</ng-template>
