@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
   res.send('Vous êtes à la météo');
 });
 app.listen({
-  port: process.env.PORT,
+  port: process.env.PORT_WEATHER_SERVICE,
 }, () => {
-  console.log(`🚀 Server ready at http://localhost:${process.env.PORT}`);
+  console.log(`🚀 Server ready at http://localhost:${process.env.PORT_WEATHER_SERVICE}`);
 });

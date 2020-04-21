@@ -22,8 +22,8 @@ app.get('/', (req, res) => {
   res.send('Vous êtes à crypto');
 });
 app.listen({
-  port: process.env.PORT,
+  port: process.env.PORT_CRYPTO_SERVICE,
 }, () => {
-  console.log(`🚀 Server ready at http://localhost:${process.env.PORT}`);
+  console.log(`🚀 Server ready at http://localhost:${process.env.PORT_CRYPTO_SERVICE}`);
   console.log(listEndPoints(crypto));
 });
