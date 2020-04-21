@@ -6,6 +6,7 @@ services:
         - "${WEATHERPORT}:${WEATHERPORT}"
     volumes:
         - ./backend/weather:/usr/src/app/
+        - ./backend/.env:/usr/src/app/.env
     working_dir: /usr/src/app
     container_name: weatherServcie
   crypto-service:
@@ -14,6 +15,7 @@ services:
         - "${CRYPTOPORT}:${CRYPTOPORT}"
     volumes:
         - ./backend/cryptocurrency:/usr/src/app/
+        - ./backend/.env:/usr/src/app/.env
     working_dir: /usr/src/app
     container_name: cryptoServcie
   user-service:
@@ -22,6 +24,7 @@ services:
         - "${USERPORT}:${USERPORT}"
     volumes:
         - ./backend/user:/usr/src/app/
+        - ./backend/.env:/usr/src/app/.env
     working_dir: /usr/src/app
     environment:
         - MARIADB_HOST=database

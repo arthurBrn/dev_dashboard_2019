@@ -25,10 +25,11 @@ app.get('/', (req, res) => {
 });
 
 app.listen({
-    port: process.env.PORT,
+    port: process.env.PORT_USER_SERVICE,
 }, () => {
-    console.log(`🚀 Server ready at http://localhost:${process.env.PORT}`);
+    console.log(`🚀 Server ready at http://localhost:${process.env.PORT_USER_SERVICE}`);
     console.log(listEndPoints(user));
+    console.log('USER PATH : ' + path.resolve(__dirname));
 });
 
 
