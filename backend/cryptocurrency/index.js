@@ -27,3 +27,5 @@ app.listen({
   console.log(`🚀 Server ready at http://localhost:${process.env.PORT_CRYPTO_SERVICE}`);
   console.log(listEndPoints(crypto));
 });
+
+
