@@ -165,5 +165,5 @@ yarn-error.log
 .notes.md
 
 # VOLUMES
-database/data_user
+<data>base/data_user
 database/data_user/*
