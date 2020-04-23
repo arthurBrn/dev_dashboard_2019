@@ -14,10 +14,11 @@ router.get('/', (req, res) => {
   pool.getConnection().then((conn) => {
     conn.query('Select * from service')
       .then((result) => {
+        conn.release();
         res.status(200).json(result);
       }).catch((err) => {
         res.status(400).json(err);
-        pool.release();
+        conn.release();
       });
   }).catch((err) => {
     console.log(err);
@@ -30,9 +31,10 @@ router.post('/mail', (req, res) => {
       'SELECT * FROM users WHERE mail = ? ;',
       [req.body.mail],
     ).then((result) => {
+      conn.release();
       res.status(200).json(result);
     }).catch((err) => {
-      pool.release();
+      conn.release();
       console.log(err);
     });
   }).catch((err) => {
@@ -76,9 +78,10 @@ function authenticateToken(req, res, next) {
 router.get('/services', (req, res) => {
   pool.getConnection().then((conn) => {
     conn.query('Select * from service').then((result) => {
+      conn.release();
       res.status(200).json(result);
     }).catch((err) => {
-      pool.release();
+      conn.release();
       res.status(400).json(err);
     });
   }).catch((err) => {
@@ -94,6 +97,7 @@ router.post('/login', (req, res) => {
       [req.body.mail],
     ).then((result) => {
       if (result[0]) {
+        //conn.release();
         bcrypt.compare(req.body.password, result[0].password, (err, respwd) => {
           if (respwd) {
             const user = {
@@ -112,8 +116,10 @@ router.post('/login', (req, res) => {
               success: 'login successfull',
               accessToken: accessToken,
               refreshToken: refreshToken,
+              userId: user.id,
             });
           } else {
+            conn.release();
             res.json({
               code: '404',
               success: 'Login failed. Wrong password.',
@@ -121,13 +127,13 @@ router.post('/login', (req, res) => {
           }
         });
       } else {
+        conn.release();
         res.json({
           code: 404,
           success: 'No address mail match this one in the database.',
         });
       }
     }).catch((err) => {
-      pool.release();
       console.log(err);
     });
   }).catch((err) => {
@@ -135,26 +141,54 @@ router.post('/login', (req, res) => {
   });
 });
 
+router.put('/store/refreshToken', (req, res) => {
+  pool.getConnection().then((conn) => {
+    conn.query(
+        'UPDATE users SET refresh_token=? WHERE id=?;',
+            [req.body.refreshToken, req.body.userId]
+    ).then((result) => {
+      if (result) {
+        res.json({
+          code:200,
+          success: 'User updated successfully.'
+        });
+        conn.release();
+      } else {
+        console.log('Encounter problem while updating data');
+        res.status(500).json(result);
+        conn.release();
+      }
+    }).catch((err) => {
+      console.log('Query error in /store/refreshToken : ' + err);
+      res.status(500).json(err);
+    });
+  }).catch((err) => {
+    console.log('Connecion issue in /store/refresshToken : ' + err);
+    res.status(500).json(err);
+  });
+});
+
 router.post('/register', (req, res) => {
   bcrypt.hash(req.body.password, 0, (err, hash) => {
     pool.getConnection().then((conn) => {
       conn.query(
-        'INSERT INTO users (first_name, last_name, mail, password) VALUES (?,?,?,?);',
-        [req.body.firstName, req.body.lastName, req.body.mail, hash],
+        'INSERT INTO users (first_name, last_name, mail, password, refresh_token) VALUES (?,?,?,?,?);',
+        [req.body.firstName, req.body.lastName, req.body.mail, hash, ""],
       ).then((result) => {
         if (result) {
+          conn.release();
           res.json({
             code: 200,
             success: 'Registration successfull',
           });
         } else {
+          conn.release();
           res.json({
             code: 404,
             success: 'Registration failed. Contact managment',
           });
         }
       }).catch((error) => {
-        pool.release();
         console.log(error);
       }).catch((error) => {
         console.log(error);
@@ -163,7 +197,7 @@ router.post('/register', (req, res) => {
   });
 });
 
-router.post('/token', (req, res) => {
+router.post('/refreshToken', (req, res) => {
   const refreshToken = req.body.token;
   // If we got no refresh token
   if (refreshToken === null) return res.sendStatus(401);

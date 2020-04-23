@@ -1,5 +1,13 @@
 # DEV_dashboard_2019
 
+# Services
+
+### User 
+To create user database from script :
+> 
+
+![MCD](MCD_USER.png)
+
 # DATABASE
 
 * To create database from script, run following command from project source : 

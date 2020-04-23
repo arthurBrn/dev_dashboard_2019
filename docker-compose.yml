@@ -26,18 +26,16 @@ services:
         - ./backend/user:/usr/src/app/
         - .env:/usr/src/app/.env
     working_dir: /usr/src/app
-    environment:
-        - MARIADB_HOST=database
-        - MARIADB_PORT_NUMBER=3306
-        - MARIADB_USER=monty
-        - MARIADB_PASSWORD=monty
-        - MARIADB_DATABASE=dashboard
+    #environment:
+    #    - MARIADB_HOST=database
+    #    - MARIADB_PORT_NUMBER=3306
+    #    - MARIADB_USER=monty
+    #    - MARIADB_PASSWORD=monty
+    #    - MARIADB_DATABASE=dashboard
     user: "1000"
     container_name: userService
-    depends_on:
-        - database
-    links:
-        - database:database
+    #depends_on:
+        #- database
   frontend: 
     build: ./frontend
     volumes:
@@ -45,21 +43,20 @@ services:
     ports:  
         - "${PORT_FRONTEND}:${PORT_FRONTEND}"
     container_name: frontend
-  database:
+  database_user:
     build: ./database
     ports:
-        - "${PORT_DATABASE}:${PORT_DATABASE}"
+        - "${PORT_USER_DATABASE}:${PORT_USER_DATABASE}"
     expose:
-        - "${PORT_DATABASE}"
-    command: mysqld
-    volumes:
-      - ./database/data:/var/lib/mysql:rw
+        - "${PORT_USER_DATABASE}"
     user: "1000"
     environment:
         - ALLOW_EMPTY_PASSWORD=yes
         - MARIADB_ROOT_PASSWORD=root
-        - MARIADB_DATABASE=dashboard
-        - MARIADB_PORT=3306
+        - MARIADB_DATABASE=userdb
+        - MARIADB_PORT=${PORT_USER_DATABASE}
         - MARIADB_USER=monty
         - MARIADB_PASSWORD=monty
-    container_name: database
+    volumes:
+      - ./database/data_user:/var/lib/mysql:rw
+    container_name: database_user
