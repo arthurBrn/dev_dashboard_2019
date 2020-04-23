@@ -29,7 +29,6 @@ app.listen({
 }, () => {
     console.log(`🚀 Server ready at http://localhost:${process.env.PORT_USER_SERVICE}`);
     console.log(listEndPoints(user));
-    console.log('USER PATH : ' + path.resolve(__dirname));
 });
 
 
