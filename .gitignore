@@ -163,3 +163,7 @@ yarn-error.log
 .bazelrc.user
 
 .notes.md
+
+# VOLUMES
+database/data_user
+database/data_user/*

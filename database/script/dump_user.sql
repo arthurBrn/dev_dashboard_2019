@@ -5,10 +5,10 @@ USE userdb;
 
 CREATE TABLE IF NOT EXISTS users (
 	id INT AUTO_INCREMENT,
-	first_name VARCHAR(255) NOT NULL,
-	last_name VARCHAR(255) NOT NULL,
-	mail TEXT NOT NULL,
-	password TEXT NOT NULL,
+	first_name VARCHAR(255),
+	last_name VARCHAR(255),
+	mail TEXT,
+	password TEXT,
 	refresh_token TEXT,
 	PRIMARY KEY(id)
 );
