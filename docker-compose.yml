@@ -3,28 +3,28 @@ services:
   weather-service:
     build: ./backend/weather
     ports:
-        - "${WEATHERPORT}:${WEATHERPORT}"
+        - "${PORT_WEATHER_SERVICE}:${PORT_WEATHER_SERVICE}"
     volumes:
         - ./backend/weather:/usr/src/app/
-        - ./backend/.env:/usr/src/app/.env
+        - .env:/usr/src/app/.env
     working_dir: /usr/src/app
     container_name: weatherServcie
   crypto-service:
     build: ./backend/cryptocurrency
     ports:
-        - "${CRYPTOPORT}:${CRYPTOPORT}"
+        - "${PORT_CRYPTO_SERVICE}:${PORT_CRYPTO_SERVICE}"
     volumes:
         - ./backend/cryptocurrency:/usr/src/app/
-        - ./backend/.env:/usr/src/app/.env
+        - .env:/usr/src/app/.env
     working_dir: /usr/src/app
     container_name: cryptoServcie
   user-service:
     build: ./backend/user
     ports:
-        - "${USERPORT}:${USERPORT}"
+        - "${PORT_USER_SERVICE}:${PORT_USER_SERVICE}"
     volumes:
         - ./backend/user:/usr/src/app/
-        - ./backend/.env:/usr/src/app/.env
+        - .env:/usr/src/app/.env
     working_dir: /usr/src/app
     environment:
         - MARIADB_HOST=database
@@ -43,14 +43,14 @@ services:
     volumes:
         - ./frontend/:/app
     ports:  
-        - "4200:4200"
+        - "${PORT_FRONTEND}:${PORT_FRONTEND}"
     container_name: frontend
   database:
     build: ./database
     ports:
-        - "3306:3306"
+        - "${PORT_DATABASE}:${PORT_DATABASE}"
     expose:
-        - "3306"
+        - "${PORT_DATABASE}"
     command: mysqld
     volumes:
       - ./database/data:/var/lib/mysql:rw
