@@ -97,7 +97,7 @@ router.post('/login', (req, res) => {
       [req.body.mail],
     ).then((result) => {
       if (result[0]) {
-        conn.release();
+        //conn.release();
         bcrypt.compare(req.body.password, result[0].password, (err, respwd) => {
           if (respwd) {
             const user = {
@@ -116,6 +116,7 @@ router.post('/login', (req, res) => {
               success: 'login successfull',
               accessToken: accessToken,
               refreshToken: refreshToken,
+              userId: user.id,
             });
           } else {
             conn.release();
@@ -137,6 +138,33 @@ router.post('/login', (req, res) => {
     });
   }).catch((err) => {
     console.log(err);
+  });
+});
+
+router.put('/store/refreshToken', (req, res) => {
+  pool.getConnection().then((conn) => {
+    conn.query(
+        'UPDATE users SET refresh_token=? WHERE id=?;',
+            [req.body.refreshToken, req.body.userId]
+    ).then((result) => {
+      if (result) {
+        res.json({
+          code:200,
+          success: 'User updated successfully.'
+        });
+        conn.release();
+      } else {
+        console.log('Encounter problem while updating data');
+        res.status(500).json(result);
+        conn.release();
+      }
+    }).catch((err) => {
+      console.log('Query error in /store/refreshToken : ' + err);
+      res.status(500).json(err);
+    });
+  }).catch((err) => {
+    console.log('Connecion issue in /store/refresshToken : ' + err);
+    res.status(500).json(err);
   });
 });
 
@@ -169,7 +197,7 @@ router.post('/register', (req, res) => {
   });
 });
 
-router.post('/token', (req, res) => {
+router.post('/refreshToken', (req, res) => {
   const refreshToken = req.body.token;
   // If we got no refresh token
   if (refreshToken === null) return res.sendStatus(401);
