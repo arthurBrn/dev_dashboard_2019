@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
       console.log('Access token : ' +localStorage.getItem('accessToken'));
     console.log('Refresh token : ' + localStorage.getItem('refreshToken'));
-    this._router.navigate(['cryptocurrencies']);
+    // this._router.navigate(['']);
   }
 
   onLogOut(event) {

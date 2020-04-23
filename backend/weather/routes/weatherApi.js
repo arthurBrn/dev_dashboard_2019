@@ -52,3 +52,5 @@ router.get('/forecast/hours', (err, res) => {
         res.json(JSON.parse(response.body));
     });
 });
+
+module.exports = router;
