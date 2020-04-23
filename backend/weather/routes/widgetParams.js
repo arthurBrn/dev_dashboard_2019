@@ -56,13 +56,11 @@ router.get('/', (req, res) => {
 
 router.post('/add', (req, res) => {
     pool.getConnection().then((conn) => {
-        console.log('BODY : ' + req.body.country);
         conn.query(
             'INSERT INTO weather_widget_params (country, city, hours, api_key) VALUES (?,?,?,?);',
             [req.body.country, req.body.city, req.body.hours, req.body.apiKey]
         ).then((result) => {
             if (result) {
-                console.log('RESULT : ' + result);
                 res.json({
                     code:201,
                     success: 'Paramas registered.',
