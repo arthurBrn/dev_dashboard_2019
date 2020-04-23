@@ -15,4 +15,15 @@ export class WeatherService {
   getAllWeatherWidget() {
     return this._httpClient.get(this._baseUrl);
   }
+
+  addNewWeatherWidget(data) {
+    const body = new HttpParams()
+      .set('name', data.name)
+      .set('description', data.description)
+      .set('timer', data.timer)
+      .set('serviceId', data.serviceId)
+      .set('paramsId', data.paramsId)
+    return this._httpClient.post(this._baseUrl + 'add', body.toString(),
+      { headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')});
+  }
 }

@@ -14,6 +14,10 @@ export class WeatherComponent implements OnInit {
   modalRef: BsModalRef;
   widgetName: string;
   widgetDescription: string;
+  widgetTimer: number;
+  weatherServiceId: number = 2;
+  paramsId: number;
+
   optionChosen:string;
   // Correspond to the user already existing weather widget
   weatherObject = [
@@ -66,9 +70,21 @@ export class WeatherComponent implements OnInit {
       console.log(this.widgetName);
       console.log(this.optionChosen + ' = ' + this.widgetPossiblity[this.optionChosen]['name']);
       console.log(this.widgetDescription);
-      // Validation process of the data entered.
-      //
-      // close the modal
+
+      this._weatherApiService.addNewWeatherWidget({
+        name: this.widgetName,
+        description: this.widgetDescription,
+        timer: this.widgetTimer,
+        serviceId: this.weatherServiceId,
+        paramsId: this.paramsId,
+      }).subscribe((data) => {
+        let parsedData = data as any;
+        if (parsedData.code === 200) {
+          console.log('Insertion done');
+        } else {
+          this._toastr.warning('OLA CA A FAIL');
+        }
+      });
       this._modalService.hide(1);
     } else {
       this._toastr.warning('All fields must be filled.');
