@@ -37,12 +37,25 @@ CREATE TABLE IF NOT EXISTS user_has_service(
 	FOREIGN KEY(service_id) REFERENCES service(id) ON DELETE CASCADE
 );
 
-CREATE TABLE service_has_widget(
-	service_id INT NOT NULL,
-	widget_id INT NOT NULL,
-	PRIMARY KEY(service_id, widget_id),
-	FOREIGN KEY(service_id) REFERENCES service(id) ON DELETE CASCADE,
-	FOREIGN KEY(widget_id) REFERENCES widget(id) ON DELETE CASCADE
+CREATE TABLE weather_widget_params(
+    id INT AUTO_INCREMENT,
+    country TEXT,
+    city TEXT,
+    hours INT,
+    api_key TEXT,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE weather_widget(
+    id INT AUTO_INCREMENT,
+    name TEXT,
+    description TEXT,
+    timer INT,
+    service_id INT NOT NULL,
+    weather_widget_params_id INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY(service_id) REFERENCES service(id),
+    FOREIGN KEY(weather_widget_params_id) REFERENCES weather_widget_params(id)
 );
 
 INSERT INTO dashboard.users (first_name, last_name, mail, password) VALUES
@@ -71,8 +84,5 @@ INSERT INTO dashboard.service (name,api_link,picture,public) VALUES
 ,('comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
 ,('comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1);
 INSERT INTO dashboard.user_has_service (users_id, service_id) VALUES
-(1,1),
-(2,2);
-INSERT INTO dashboard.service_has_widget (service_id, widget_id) VALUES
 (1,1),
 (2,2);
