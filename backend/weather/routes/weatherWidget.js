@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const jwt = require('jsonwebtoken');
 const pool = require('../src/db');
+const jwt = require('jsonwebtoken');
 
 const router = express.Router();
 router.use(bodyParser.json());
@@ -30,7 +30,7 @@ function authenticateToken(req, res, next) {
     });
 }
 
-router.get('/widgets', (req, res) => {
+router.get('/', (req, res) => {
     pool.getConnection().then((conn) => {
         conn.query('SELECT * FROM weather_widget').then((result) => {
             res.status(200).json(result);
@@ -40,15 +40,15 @@ router.get('/widgets', (req, res) => {
             conn.release();
         })
     }).catch((err) => {
-       console.log('Pool getConnection error : ' + err);
+        console.log('Pool getConnection error : ' + err);
     });
 });
 
-router.post('/widget', (req, res) => {
-   pool.getConnection().then((conn) => {
+router.post('/add', (req, res) => {
+    pool.getConnection().then((conn) => {
         conn.query(
             'INSERT INTO weather_widget (name, description, timer, service_id, weather_widget_params_id) VALUES (?,?,?,?,?)',
-            [req.body.widgetName, req.body.widgetDescription, req.body.widgetTimer, req.body.widgetServiceId, req.body.widgetParamsId]
+            [req.body.name, req.body.description, req.body.timer, req.body.serviceId, req.body.paramsId]
         ).then((result) => {
             if (result) {
                 conn.release();
@@ -67,40 +67,68 @@ router.post('/widget', (req, res) => {
             conn.release();
             res.status(500).json(err);
         });
+    }).catch((err) => {
+        res.status(500).json(err);
+    });
+});
+
+router.put('/alter', (req, res) => {
+   pool.getConnection().then((conn) => {
+       conn.query(
+           'UPDATE weather_widget SET name=?, description=?, timer=?, service_id=?, weather_widget_params_id=? WHERE id=?;',
+           [req.body.name, req.body.description, req.body.timer, req.body.serviceId, req.body.weatherWidgetParamsId, req.body.widgetId]
+           ).then((result) => {
+            if (result) {
+                conn.release();
+                res.json({
+                   code:200,
+                   success:'Widget updated.'
+                });
+            } else {
+                conn.release();
+                res.json({
+                   code:404,
+                   success:'An error happened.'
+                });
+            }
+       }).catch((err) => {
+          console.log('Error on /alter weatherWidget : ' + err);
+          res.status(500).send(err);
+       });
    }).catch((err) => {
-      res.status(500).json(err);
+       console.log('Connection issue on /alter weatherWidget : ' + err);
+       res.status(500).send(err);
    });
 });
 
-router.post('/params', (req, res) => {
-    pool.getConnection().then((conn) => {
-        console.log('BODY : ' + req.body.country);
-        conn.query(
-            'INSERT INTO weather_widget_params (country, city, hours, api_key) VALUES (?,?,?,?);',
-            [req.body.country, req.body.city, req.body.hours, req.body.apiKey]
-        ).then((result) => {
+router.delete('/delete', (req,res) => {
+   pool.getConnection().then((conn) => {
+       conn.query(
+           'DELETE FROM weather_widget WHERE id=?;',
+       [req.body.widgetId]
+       ).then((result) => {
             if (result) {
-                console.log('RESULT : ' + result);
-                res.json({
-                    code:201,
-                    success: 'Paramas registered.',
-                    paramsId: result.insertId
-                });
                 conn.release();
+                res.json({
+                   code:200,
+                   sucess:'Widget deleted.'
+                });
             } else {
                 conn.release();
-                console.log('Could not persist those parameters.');
-                res.status(500).json('Parameters can not be persisted.');
+                res.json({
+                    code:'404',
+                    success:'Something went wrong.'
+                });
             }
-        }).catch((err) => {
-           console.log('Query error while posting widget params : ' + err);
-           res.status(500).json(err);
-        });
-    }).catch((err) => {
-        console.log('Params request error pool connection : ' + err);
-        res.status(500).json(err);
-    })
+       }).catch((err) => {
+          console.log('Querry error on /delete weatherWidget : ' + err);
+          res.status(500).send(err);
+       });
+   }).catch((err) => {
+      console.log('Error on /delete weatherWidget : ' + err);
+      res.status(500).send(err);
+   });
 });
 
-module.exports = router;
 
+module.exports = router;
