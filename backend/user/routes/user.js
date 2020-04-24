@@ -213,17 +213,23 @@ router.post('/refreshToken', (req, res) => {
   });
 });
 
-// router.get('/widgetList', (req, res) => {
-//   pool.getConnection().then((conn) => {
-//     conn.query('select  from widgets, ')
-//   }).catch((err) => {
-    
-//   });
-// });
+router.get('/widgetList', (req, res) => {
+  pool.getConnection().then((conn) => {
+    conn.query('SELECT w.id, w.name, s.label, s.icon from services s, widget w where w.idService = s.id').then((result) => {
+      console.log(result);
+      res.json(result);
+      conn.release();
+    }).catch((err) => {
+      console.log(err);
+      res.json(err);
+      conn.release();
+    });
+  }).catch((err) => {
+    console.log(err);
+  });
+});
 
 router.delete('/logout', (req, res) => {
-  // On va vérifier que, dans le tableau qui contient nos refreshTokens, on a pas de refreshToken
-  //   similaire à celui passé en paramètre. Si on en trouve un, on le supprime.
   ourRefreshTokens = ourRefreshTokens.filter((token) => token !== req.body.token);
   res.sendStatus(204).send('Refresh token deleted successfully.');
 });

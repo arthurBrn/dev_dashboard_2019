@@ -30,24 +30,28 @@ INSERT INTO tokens (provider,token,idUser) VALUES
 CREATE TABLE IF NOT EXISTS services (
     id int AUTO_INCREMENT,
     label text not null,
+    icon text not null,
     PRIMARY KEY(id)
 );
 
-INSERT INTO services (label) VALUES
-('crypto'),
-('weather');
+INSERT INTO services (label, icon) VALUES
+('crypto', 'fab fa-bitcoin'),
+('weather', 'fas fa-cloud-dun'),
+('google', 'fab fa-google'),
+('facebook', 'fab fa-facebook');
 
 CREATE TABLE IF NOT EXISTS widget (
     id int AUTO_INCREMENT,
     name text not null,
+    public bool not null,
     idService int not null,
     foreign key (idService) references services(id),
     PRIMARY KEY(id)
 );
 
-INSERT INTO widget (name, idService) VALUES
-('graph', 1),
-('rate', 1);
+INSERT INTO widget (name, public, idService) VALUES
+('graph', true, 1),
+('rate', true, 1);
 
 CREATE TABLE IF NOT EXISTS user_widget (
     idWidget int not null,

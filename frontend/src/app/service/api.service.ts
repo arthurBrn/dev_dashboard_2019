@@ -58,5 +58,9 @@ export class ApiService {
   getPublicServices() {
     return this._httpClient.get(this.baseUrl + 'services');
   }
+
+  getWWidgetList() {
+    return this._httpClient.get(this.baseUrl + 'widgetList');
+  }
 }
 
