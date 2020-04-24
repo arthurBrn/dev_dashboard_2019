@@ -32,7 +32,7 @@ function authenticateToken(req, res, next) {
 
 router.get('/', (req, res) => {
     pool.getConnection().then((conn) => {
-        conn.query('SELECT * FROM weather_widget').then((result) => {
+        conn.query('SELECT * FROM widget').then((result) => {
             res.status(200).json(result);
             conn.release();
         }).catch((err) => {
@@ -47,8 +47,8 @@ router.get('/', (req, res) => {
 router.post('/add', (req, res) => {
     pool.getConnection().then((conn) => {
         conn.query(
-            'INSERT INTO weather_widget (name, description, timer, service_id, weather_widget_params_id) VALUES (?,?,?,?,?)',
-            [req.body.name, req.body.description, req.body.timer, req.body.serviceId, req.body.paramsId]
+            'INSERT INTO widget (name, timer, user_id, parameters_id) VALUES (?,?,?,?)',
+            [req.body.name, req.body.timer, req.body.userId, req.body.paramsId]
         ).then((result) => {
             if (result) {
                 conn.release();
@@ -75,8 +75,8 @@ router.post('/add', (req, res) => {
 router.put('/alter', (req, res) => {
     pool.getConnection().then((conn) => {
         conn.query(
-            'UPDATE weather_widget SET name=?, description=?, timer=?, service_id=?, weather_widget_params_id=? WHERE id=?;',
-            [req.body.name, req.body.description, req.body.timer, req.body.serviceId, req.body.weatherWidgetParamsId, req.body.widgetId]
+            'UPDATE widget SET name=?, timer=?, user_id=?, parameters_id=? WHERE id=?;',
+            [req.body.name, req.body.timer, req.body.userId, req.body.paramsId, req.body.widgetId]
         ).then((result) => {
             if (result) {
                 conn.release();
@@ -104,7 +104,7 @@ router.put('/alter', (req, res) => {
 router.delete('/delete', (req,res) => {
     pool.getConnection().then((conn) => {
         conn.query(
-            'DELETE FROM weather_widget WHERE id=?;',
+            'DELETE FROM widget WHERE id=?;',
             [req.body.widgetId]
         ).then((result) => {
             if (result) {

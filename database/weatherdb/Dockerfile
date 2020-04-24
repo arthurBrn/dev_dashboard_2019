@@ -11,6 +11,6 @@ ENV MYSQL_PASSWORD=monty
 
 USER 1000
 
-#EXPOSE 3306
+EXPOSE 3307
 
-#CMD ["mysqld"]
+CMD ["mysqld"]
