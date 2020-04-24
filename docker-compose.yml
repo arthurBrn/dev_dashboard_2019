@@ -61,7 +61,7 @@ services:
         - MARIADB_PASSWORD=monty
     volumes:
       - ./database/userdb/data_user:/var/lib/mysql:rw
-      - ./database/script/dump_user.sql:/docker-entrypoint-initdb.d/dump_user.sql
+      - ./database/userdb/dump_user.sql:/docker-entrypoint-initdb.d/dump_user.sql
     container_name: database_user
   database_weather:
     build: ./database/weatherdb
@@ -79,7 +79,7 @@ services:
       - MARIADB_PASSWORD=monty
     volumes:
       - ./database/weatherdb/data_weather:/var/lib/mysql:rw
-      - ./database/script/dump_weather.sql:/docker-entrypoint-initdb.d/dump_weather.sql
+      - ./database/weatherdb/dump_weather.sql:/docker-entrypoint-initdb.d/dump_weather.sql
     container_name: database_weather
   #database_crypto:
    # build: ./database/cryptodb
