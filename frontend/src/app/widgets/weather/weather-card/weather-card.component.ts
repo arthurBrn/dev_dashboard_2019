@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 })
 export class WeatherCardComponent implements OnInit {
 
-  @Input() id;
   @Input() widgetName;
   @Input() widgetDescription;
 

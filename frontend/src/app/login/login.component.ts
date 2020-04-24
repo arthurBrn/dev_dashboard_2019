@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
   onLogin() {
     if (this.email && this.password) {
       this._apiService.login(this.email, this.password).subscribe((data) => {
-        console.log('we enter here ');
         var parsedData = data as any;
         if (parsedData.code === 200) {
           localStorage.setItem('accessToken', parsedData.accessToken);

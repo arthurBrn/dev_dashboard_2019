@@ -73,45 +73,45 @@ router.post('/add', (req, res) => {
 });
 
 router.put('/alter', (req, res) => {
-   pool.getConnection().then((conn) => {
-       conn.query(
-           'UPDATE weather_widget SET name=?, description=?, timer=?, service_id=?, weather_widget_params_id=? WHERE id=?;',
-           [req.body.name, req.body.description, req.body.timer, req.body.serviceId, req.body.weatherWidgetParamsId, req.body.widgetId]
-           ).then((result) => {
+    pool.getConnection().then((conn) => {
+        conn.query(
+            'UPDATE weather_widget SET name=?, description=?, timer=?, service_id=?, weather_widget_params_id=? WHERE id=?;',
+            [req.body.name, req.body.description, req.body.timer, req.body.serviceId, req.body.weatherWidgetParamsId, req.body.widgetId]
+        ).then((result) => {
             if (result) {
                 conn.release();
                 res.json({
-                   code:200,
-                   success:'Widget updated.'
+                    code:200,
+                    success:'Widget updated.'
                 });
             } else {
                 conn.release();
                 res.json({
-                   code:404,
-                   success:'An error happened.'
+                    code:404,
+                    success:'An error happened.'
                 });
             }
-       }).catch((err) => {
-          console.log('Error on /alter weatherWidget : ' + err);
-          res.status(500).send(err);
-       });
-   }).catch((err) => {
-       console.log('Connection issue on /alter weatherWidget : ' + err);
-       res.status(500).send(err);
-   });
+        }).catch((err) => {
+            console.log('Error on /alter weatherWidget : ' + err);
+            res.status(500).send(err);
+        });
+    }).catch((err) => {
+        console.log('Connection issue on /alter weatherWidget : ' + err);
+        res.status(500).send(err);
+    });
 });
 
 router.delete('/delete', (req,res) => {
-   pool.getConnection().then((conn) => {
-       conn.query(
-           'DELETE FROM weather_widget WHERE id=?;',
-       [req.body.widgetId]
-       ).then((result) => {
+    pool.getConnection().then((conn) => {
+        conn.query(
+            'DELETE FROM weather_widget WHERE id=?;',
+            [req.body.widgetId]
+        ).then((result) => {
             if (result) {
                 conn.release();
                 res.json({
-                   code:200,
-                   sucess:'Widget deleted.'
+                    code:200,
+                    sucess:'Widget deleted.'
                 });
             } else {
                 conn.release();
@@ -120,14 +120,14 @@ router.delete('/delete', (req,res) => {
                     success:'Something went wrong.'
                 });
             }
-       }).catch((err) => {
-          console.log('Querry error on /delete weatherWidget : ' + err);
-          res.status(500).send(err);
-       });
-   }).catch((err) => {
-      console.log('Error on /delete weatherWidget : ' + err);
-      res.status(500).send(err);
-   });
+        }).catch((err) => {
+            console.log('Querry error on /delete weatherWidget : ' + err);
+            res.status(500).send(err);
+        });
+    }).catch((err) => {
+        console.log('Error on /delete weatherWidget : ' + err);
+        res.status(500).send(err);
+    });
 });
 
 

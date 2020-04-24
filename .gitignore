@@ -163,3 +163,14 @@ yarn-error.log
 .bazelrc.user
 
 .notes.md
+
+# VOLUMES
+database/userdb/data_user
+database/userdb/data_user/*
+
+database/cryptodb/data_crypto
+database/cryptodb/data_crypto/*
+
+database/weatherdb/data_weather
+database/weatherdb/data_weather/*
+

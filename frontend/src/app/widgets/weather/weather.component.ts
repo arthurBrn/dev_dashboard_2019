@@ -2,6 +2,7 @@
 import { Component, OnInit, TemplateRef  } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { WeatherService } from '../../service/weather.service';
 
 @Component({
   selector: 'app-weather',
@@ -13,6 +14,10 @@ export class WeatherComponent implements OnInit {
   modalRef: BsModalRef;
   widgetName: string;
   widgetDescription: string;
+  widgetTimer: number;
+  weatherServiceId: number = 2;
+  paramsId: number;
+
   optionChosen:string;
   // Correspond to the user already existing weather widget
   weatherObject = [
@@ -27,16 +32,34 @@ export class WeatherComponent implements OnInit {
     { id: '3', name: 'air quality forecast' },
   ];
 
+  widgetWeather = [];
+
 
   constructor(
     private _toastr: ToastrService,
     private _modalService: BsModalService,
+    private _weatherApiService: WeatherService,
   ) { }
 
   ngOnInit(): void {
-    console.log(localStorage.getItem('accessToken'));
-
+    this._weatherApiService.getAllWeatherWidget().subscribe((data) => {
+      var parsedData = data as any;
+      console.log(parsedData[0]);
+      let i = 0;
+      while (i != parsedData.length) {
+        this.widgetWeather.push({
+          name: parsedData[i].name,
+          description: parsedData[i].description,
+          timer: parsedData[i].timer,
+          serviceId: parsedData[i].service_id,
+          paramsId: parsedData[i].weather_widget_params_id
+        });
+        i++;
+      }
+    });
   }
+
+
 
   onNewWidgetClick(template: TemplateRef<any>) {
     this.modalRef = this._modalService.show(template);
@@ -47,9 +70,21 @@ export class WeatherComponent implements OnInit {
       console.log(this.widgetName);
       console.log(this.optionChosen + ' = ' + this.widgetPossiblity[this.optionChosen]['name']);
       console.log(this.widgetDescription);
-      // Validation process of the data entered.
-      //
-      // close the modal
+
+      this._weatherApiService.addNewWeatherWidget({
+        name: this.widgetName,
+        description: this.widgetDescription,
+        timer: this.widgetTimer,
+        serviceId: this.weatherServiceId,
+        paramsId: this.paramsId,
+      }).subscribe((data) => {
+        let parsedData = data as any;
+        if (parsedData.code === 200) {
+          console.log('Insertion done');
+        } else {
+          this._toastr.warning('OLA CA A FAIL');
+        }
+      });
       this._modalService.hide(1);
     } else {
       this._toastr.warning('All fields must be filled.');
