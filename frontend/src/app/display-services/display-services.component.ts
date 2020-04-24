@@ -17,21 +17,20 @@ export class DisplayServicesComponent {
 
   constructor(private _apiService: ApiService, private _router: Router) { }
 
-  ngOnInit(): void {
-    this._apiService.getPublicServices().subscribe((data) => {
-        
-        let parsedData = data as any;
-        for (let i = 0; i < parsedData.length; i++) {
-            if (parsedData[i].public == 1 || localStorage.getItem('accessToken')) {
-                this.widgets.set(parsedData[i].id.toString(), parsedData[i].name);
-                    this.services.push({
-                    title: parsedData[i].name,
-                    image: parsedData[i].picture,
-                    id: parsedData[i].id
-                });
-            }
-        }
-    });
+  ngOnInit(): void {     
+    // this._apiService.getPublicServices().subscribe((data) => {
+    //     let parsedData = data as any;
+    //     for (let i = 0; i < parsedData.length; i++) {
+    //         if (parsedData[i].public == 1 || localStorage.getItem('accessToken')) {
+    //             this.widgets.set(parsedData[i].id.toString(), parsedData[i].name);
+    //                 this.services.push({
+    //                 title: parsedData[i].name,
+    //                 image: parsedData[i].picture,
+    //                 id: parsedData[i].id
+    //             });
+    //         }
+    //     }
+    // });
   }
 
   onServiceSelectionned(event) {
