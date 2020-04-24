@@ -219,10 +219,11 @@ router.delete('/logout', (req, res) => {
   res.sendStatus(204).send('Refresh token deleted successfully.');
 });
 
-router.get('/widgets', (req, res) => {
+router.get('/widgets', authenticateToken, (req, res) => {
   pool.getConnection().then((conn) => {
     conn.query(
-        'SELECT * FROM user_widget'
+        'SELECT * FROM user_widget WHERE idUser=?',
+        [req.user.id]
     ).then((result) => {
       conn.release();
       if (result) {

@@ -27,35 +27,38 @@ INSERT INTO tokens (provider,token,idUser) VALUES
 ('facebook','testtokenfb',1),
 ('google','testokenfb',1);
 
-CREATE TABLE IF NOT EXISTS widget (
-    id int AUTO_INCREMENT,
-    name text not null,
-    PRIMARY KEY(id)
-);
-
-INSERT INTO widget (name) VALUES
-('graph'),
-('rate');
-
 CREATE TABLE IF NOT EXISTS services (
     id int AUTO_INCREMENT,
     label text not null,
+    icon text,
     PRIMARY KEY(id)
 );
 
-INSERT INTO services (label) VALUES
-('crypto'),
-('weather');
+INSERT INTO services (label, icon) VALUES
+('crypto', 'fab fa-bitcoin'),
+('weather', 'fas fa-sun'),
+('google', 'fas fa-google'),
+('facebook', 'fab fa-facebook');
+
+CREATE TABLE IF NOT EXISTS widget (
+    id int AUTO_INCREMENT,
+    name text not null,
+    idService int not null,
+    foreign key (idService) references services(id),
+    PRIMARY KEY(id)
+);
+
+INSERT INTO widget (name, idService) VALUES
+('graph', 1),
+('rate', 1);
 
 CREATE TABLE IF NOT EXISTS user_widget (
     idWidget int not null,
-    idServices int not null,
     idUser int not null,
     foreign key (idWidget) references widget(id),
-    foreign key (idServices) references services(id),
     foreign key (idUser) references users(id)
 );
 
-INSERT INTO user_widget (idWidget, idServices, idUser) VALUES
-(1, 1, 1),
-(2, 1, 1);
+INSERT INTO user_widget (idWidget, idUser) VALUES
+(1, 1),
+(2, 1);

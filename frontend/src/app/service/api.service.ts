@@ -60,12 +60,11 @@ export class ApiService {
   }
 
   getWidgets(userToken) {
-    const body = new HttpParams()
-      .set('token', userToken);
-    return this._httpClient.post(this.baseUrl + 'widgets', body.toString(),
+    return this._httpClient.get(this.baseUrl + 'widgets',
       {
         headers: new HttpHeaders()
           .set('Content-Type', 'application/x-www-form-urlencoded')
+          .set('Authorization', 'Bearer ' + userToken)
       });
   }
 }

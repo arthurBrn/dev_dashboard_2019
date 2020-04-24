@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiService } from './service/api.service';
+import {element} from "protractor";
 
 @Component({
   selector: 'app-root',
@@ -8,16 +10,26 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'frontend';
+  tokenValue: String;
   isAuth = localStorage.getItem('accessToken') ? true : false;
+  data = [];
 
-  constructor(private _router: Router) {
-
-  }
+  constructor(
+    private _router: Router,
+    private _apiService: ApiService,
+  ) {}
 
   ngOnInit() {
-      console.log('Access token : ' +localStorage.getItem('accessToken'));
-    console.log('Refresh token : ' + localStorage.getItem('refreshToken'));
-    this._router.navigate(['services']);
+    this.tokenValue = localStorage.getItem('accessToken');
+    this._apiService.getWidgets(this.tokenValue).subscribe((data) => {
+      var parsedData = data as any;
+      parsedData.forEach(element => {
+        console.log(element);
+        this.data.push(element);
+      });
+      console.log(this.data);
+    });
+    // this._router.navigate(['services']);
   }
 
   onLogOut(event) {
