@@ -7,10 +7,5 @@ ENV MYSQL_DATABASE=dbcrypto
 ENV MYSQL_USER=monty
 ENV MYSQL_PASSWORD=monty
 
-# COPY ./script/dump_user.sql /docker-entrypoint-initdb.d/dump_user.sql
 
 USER 1000
-
-#EXPOSE 3306
-
-#CMD ["mysqld"]

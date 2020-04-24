@@ -26,3 +26,13 @@ CREATE TABLE IF NOT EXISTS widget (
     idUser int not null,
     foreign key (idUser) references users(id)
 );
+
+INSERT INTO users (id, first_name,last_name,mail,password,refresh_token) VALUES 
+(1, 'Maxime','Bouchet','maxime@mail.com','$2b$10$DHv17.vvrCwZ/c9o9.FbRONoB1NxkvBG3ZV.D2HAY4DpEe1ZAbntO','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibWFpbCI6Im1heGltZUBtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJERIdjE3LnZ2ckN3Wi9jOW85LkZiUk9Ob0IxTnhrdkJHM1pWLkQySEFZNERwRWUxWkFibnRPIiwiaWF0IjoxNTg3NzQzMDk1fQ.FEFyfSdfNkDMQ1lB_4C6op8M9AEnwYOuB7bkFqTG_ok');
+
+INSERT INTO widget (name,service,idUser) VALUES 
+('graph','crypto',1),
+('rate','crypto',1);
+
+INSERT INTO tokens (provider,token,idUser) VALUES 
+('facebook','testtokenfb',1);
