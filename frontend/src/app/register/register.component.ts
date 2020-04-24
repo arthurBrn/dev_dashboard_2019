@@ -3,6 +3,7 @@ import { ApiService } from '../service/api.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 
 @Component({
   selector: 'app-register',
@@ -24,9 +25,11 @@ export class RegisterComponent implements OnInit {
     private _apiService: ApiService,
     private _location: Location,
     private _router: Router,
+    private _authService: AuthService,
   ) { }
 
   ngOnInit(): void {
+
   }
 
   onRegisterEvent() {
@@ -60,6 +63,17 @@ export class RegisterComponent implements OnInit {
 
   onRegisterWithGoogle() {
     console.log('register with google');
+  }
+
+  signInWithFB(): void {
+    let socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
+    this._authService.signIn(socialPlatformProvider).then(
+      (userData) => {
+            //this will return user data from facebook. What you need is a user token which you will send it to the server
+            // this.sendToRestApiMethod(userData.token);
+            console.log(userData)
+       }
+    );
   }
 
 }

@@ -27,6 +27,9 @@ import { RateExchangeComponent } from './widgets/cryptocurrencies/rate-exchange/
 import { WeatherCardComponent } from './widgets/weather/weather-card/weather-card.component';
 import { ConfigureGraphComponent } from './widgets/cryptocurrencies/configure-graph/configure-graph.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
+import { getAuthServiceConfigs } from './socialloginConfig';
+
 
 @NgModule({
   declarations: [
@@ -60,8 +63,14 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     Ng2SearchPipeModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
+    SocialLoginModule
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
+    { provide: AuthServiceConfig, useFactory: getAuthServiceConfigs },
+
+   //  { provide: AuthServiceConfig, useFactory: provideConfig }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -7,6 +7,7 @@ import { DisplayServicesComponent } from './display-services/display-services.co
 import { CryptocurrenciesComponent } from  './widgets/cryptocurrencies/cryptocurrencies.component';
 import { WeatherComponent } from './widgets/weather/weather.component';
 import { WeatherDetailComponent } from './widgets/weather/weather-detail/weather-detail.component';
+import { GmailComponent } from './widgets/gmail/gmail.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
     component: WeatherDetailComponent,
     data: {id: 1, title: 'title'}
   },
+  { path: 'gmail', component: GmailComponent}
 ];
 
 @NgModule({

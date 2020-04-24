@@ -22,12 +22,14 @@ export class DisplayServicesComponent {
         
         let parsedData = data as any;
         for (let i = 0; i < parsedData.length; i++) {
-            this.widgets.set(parsedData[i].id.toString(), parsedData[i].name);
-            this.services.push({
-               title: parsedData[i].name,
-               image: parsedData[i].picture,
-               id: parsedData[i].id
-            });
+            if (parsedData[i].public == 1 || localStorage.getItem('accessToken')) {
+                this.widgets.set(parsedData[i].id.toString(), parsedData[i].name);
+                    this.services.push({
+                    title: parsedData[i].name,
+                    image: parsedData[i].picture,
+                    id: parsedData[i].id
+                });
+            }
         }
     });
   }

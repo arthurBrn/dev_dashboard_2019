@@ -17,6 +17,15 @@ services:
         - ./backend/cryptocurrency:/usr/src/app/
         - .env:/usr/src/app/.env
     working_dir: /usr/src/app
+    environment:
+        - MARIADB_HOST=database
+        - MARIADB_PORT_NUMBER=3308
+        - MARIADB_USER=monty
+        - MARIADB_PASSWORD=monty
+        - MARIADB_DATABASE=crypto
+    user: "0"
+    depends_on:
+        - dbcrypto
     container_name: cryptoServcie
   user-service:
     build: ./backend/user
@@ -63,3 +72,21 @@ services:
         - MARIADB_USER=monty
         - MARIADB_PASSWORD=monty
     container_name: database
+  dbcrypto:
+    build: ./database/crypto
+    ports:
+        - "${PORT_DBCRYPTO}:${PORT_DBCRYPTO}"
+    expose:
+        - "${PORT_DBCRYPTO}"
+    command: mysqld
+    volumes:
+      - ./database/crypto/data:/var/lib/mysql:rw
+    user: "0"
+    environment:
+        - ALLOW_EMPTY_PASSWORD=yes
+        - MARIADB_ROOT_PASSWORD=root
+        - MARIADB_DATABASE=crypto
+        - MARIADB_PORT=3308
+        - MARIADB_USER=monty
+        - MARIADB_PASSWORD=monty
+    container_name: dbcrypto

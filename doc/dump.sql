@@ -69,7 +69,7 @@ INSERT INTO dashboard.widget (name) VALUES
 INSERT INTO dashboard.service (name,api_link,picture,public) VALUES 
 ('cryptocurrencies','https://pro-api.coinmarketcap.com/v1/','https://placetech.net/wp-content/uploads/2018/04/cryptocurrency-3085139_1280.jpg',1)
 ,('weather','','https://wi-images.condecdn.net/image/doEYpG6Xd87/crop/2040/f/weather.jpg',1)
-,('comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
+,('gmail','','https://lh3.googleusercontent.com/qTG9HMCp-s_aubJGeQWkR6M_myn-aXDJnraWn9oePcY1dGbYqXibaeLQBAeMdmxSBus',0)
 ,('comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
 ,('comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
 ,('comming soon','','https://imageog.flaticon.com/icons/png/512/61/61457.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=CDCDCDCD',1)
