@@ -10,6 +10,9 @@ export class SideBarComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    if(localStorage.getItem('refreshToken')) {
+      console.log('displlay list')
+    }
   }
 
 }
