@@ -144,12 +144,12 @@ router.post('/login', (req, res) => {
 router.put('/store/refreshToken', (req, res) => {
   pool.getConnection().then((conn) => {
     conn.query(
-        'UPDATE users SET refresh_token=? WHERE id=?;',
-            [req.body.refreshToken, req.body.userId]
+      'UPDATE users SET refresh_token=? WHERE id=?;',
+      [req.body.refreshToken, req.body.userId],
     ).then((result) => {
       if (result) {
         res.json({
-          code:200,
+          code: 200,
           success: 'User updated successfully.'
         });
         conn.release();
