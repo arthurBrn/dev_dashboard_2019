@@ -1,7 +1,9 @@
-<div class="">
-    <p>sidebar</p>
-    <p>sidebar</p>
-    <p>sidebar</p>
-    <p>sidebar</p>
-    <p>sidebar</p>
-</div>
+<div class="md-form">
+    <input type="text" id="form1" class="form-control form-control-lg m-0 px-2" [(ngModel)]="searchWidget">
+    <label class="px-2" for="form1">Search widget</label>
+  </div>
+<ul class="list-group list-group-flush" *ngFor="let widget of widgetList | filter:searchWidget">
+    <li class="list-group-item" id="{{ widget.name }}" (click)="onWidgetClick($event)">
+        <div class="md-v-line"></div><i class="{{ widget.icon }} mr-3 fa-lg"></i>{{ widget.name | titlecase }}
+    </li>
+</ul>

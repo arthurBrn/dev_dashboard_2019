@@ -6,6 +6,9 @@ import { CryptoService } from '../../../service/crypto.service';
   templateUrl: './crypto-list.component.html',
   styleUrls: ['./crypto-list.component.css']
 })
+
+
+
 export class CryptoListComponent implements OnInit {
 
   constructor(private _cryptoService: CryptoService) { }
