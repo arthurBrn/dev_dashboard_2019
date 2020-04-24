@@ -12,3 +12,10 @@ CREATE TABLE IF NOT EXISTS users (
 	refresh_token TEXT,
 	PRIMARY KEY(id)
 );
+
+CREATE TABLE IF NOT EXISTS tokens (
+    name text not null,
+    token text not null,
+    idUser int not null,
+    foreign key (idUser) references users(id)
+)

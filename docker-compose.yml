@@ -19,13 +19,7 @@ services:
       - ./backend/cryptocurrency:/usr/src/app/
       - .env:/usr/src/app/.env
     working_dir: /usr/src/app
-    environment:
-        - MARIADB_HOST=database
-        - MARIADB_PORT_NUMBER=3308
-        - MARIADB_USER=monty
-        - MARIADB_PASSWORD=monty
-        - MARIADB_DATABASE=crypto
-    user: "0"
+    user: "1000"
     depends_on:
         - database_crypto
     container_name: cryptoServcie
@@ -75,9 +69,7 @@ services:
   database_weather:
     build: ./database/weatherdb
     ports:
-      - "${PORT_WEATHER_DATABASE}:${PORT_WEATHER_DATABASE}"
-    expose:
-      - "${PORT_WEATHER_DATABASE}"
+      - "${PORT_WEATHER_DATABASE}:3306"
     user: "1000"
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
@@ -93,9 +85,7 @@ services:
   database_crypto:
     build: ./database/cryptodb
     ports:
-      - "${PORT_CRYPTO_DATABASE}:${PORT_CRYPTO_DATABASE}"
-    expose:
-      - "${PORT_CRYPTO_DATABASE}"
+      - "${PORT_CRYPTO_DATABASE}:3306"
     user: "1000"
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
