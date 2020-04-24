@@ -40,12 +40,12 @@ INSERT INTO services (label) VALUES
 CREATE TABLE IF NOT EXISTS widget (
     id int AUTO_INCREMENT,
     name text not null,
-    idServices int not null,
-    foreign key (idServices) references services(id),
+    idService int not null,
+    foreign key (idService) references services(id),
     PRIMARY KEY(id)
 );
 
-INSERT INTO widget (name, idServices) VALUES
+INSERT INTO widget (name, idService) VALUES
 ('graph', 1),
 ('rate', 1);
 
@@ -59,10 +59,3 @@ CREATE TABLE IF NOT EXISTS user_widget (
 INSERT INTO user_widget (idWidget, idUser) VALUES 
 (1, 1),
 (2, 1);
-
-
-
-
-
-
-

@@ -213,13 +213,13 @@ router.post('/refreshToken', (req, res) => {
   });
 });
 
-router.get('/widgetList', (req, res) => {
-  pool.getConnection().then((conn) => {
-    conn.query('select  from widgets, ')
-  }).catch((err) => {
+// router.get('/widgetList', (req, res) => {
+//   pool.getConnection().then((conn) => {
+//     conn.query('select  from widgets, ')
+//   }).catch((err) => {
     
-  });
-});
+//   });
+// });
 
 router.delete('/logout', (req, res) => {
   // On va vérifier que, dans le tableau qui contient nos refreshTokens, on a pas de refreshToken
