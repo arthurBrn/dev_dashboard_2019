@@ -27,7 +27,7 @@ services:
         - MARIADB_DATABASE=crypto
     user: "0"
     depends_on:
-        - dbcrypto
+        - database_crypto
     container_name: cryptoServcie
   user-service:
     build: ./backend/user
@@ -90,40 +90,21 @@ services:
       - ./database/weatherdb/data_weather:/var/lib/mysql:rw
       - ./database/weatherdb/dump_weather.sql:/docker-entrypoint-initdb.d/dump_weather.sql
     container_name: database_weather
-        container_name: database
-  dbcrypto:
-    build: ./database/crypto
+  database_crypto:
+    build: ./database/cryptodb
     ports:
-        - "${PORT_DBCRYPTO}:${PORT_DBCRYPTO}"
+      - "${PORT_CRYPTO_DATABASE}:${PORT_CRYPTO_DATABASE}"
     expose:
-        - "${PORT_DBCRYPTO}"
-    command: mysqld
-    volumes:
-      - ./database/crypto/data:/var/lib/mysql:rw
-    user: "0"
+      - "${PORT_CRYPTO_DATABASE}"
+    user: "1000"
     environment:
-        - ALLOW_EMPTY_PASSWORD=yes
-        - MARIADB_ROOT_PASSWORD=root
-        - MARIADB_DATABASE=crypto
-        - MARIADB_PORT=3308
-        - MARIADB_USER=monty
-        - MARIADB_PASSWORD=monty
-    container_name: dbcrypto
-  #database_crypto:
-   # build: ./database/cryptodb
-    #ports:
-    #  - "${PORT_CRYPTO_DATABASE}:${PORT_CRYPTO_DATABASE}"
-    #expose:
-    #  - "${PORT_CRYPTO_DATABASE}"
-    #user: "1000"
-    #environment:
-    #  - ALLOW_EMPTY_PASSWORD=yes
-     # - MARIADB_ROOT_PASSWORD=root
-      #- MARIADB_DATABASE=cryptodb
-  #    - MARIADB_PORT=${PORT_CRYPTO_DATABASE}
-   #   - MARIADB_USER=monty
-    #  - MARIADB_PASSWORD=monty
-    #volumes:
-     # - ./database/cryptodb/data_crypto:/var/lib/mysql:rw
-      #- ./database/script/dump_crypto.sql:/docker-entrypoint-initdb.d/dump_crypto.sql
-    #container_name: database_crypto
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_ROOT_PASSWORD=root
+      - MARIADB_DATABASE=dbcrypto
+      - MARIADB_PORT=${PORT_CRYPTO_DATABASE}
+      - MARIADB_USER=monty
+      - MARIADB_PASSWORD=monty
+    volumes:
+      - ./database/cryptodb/data_crypto:/var/lib/mysql:rw
+      - ./database/cryptodb/dump_crypto.sql:/docker-entrypoint-initdb.d/dump_crypto.sql
+    container_name: database_crypto
