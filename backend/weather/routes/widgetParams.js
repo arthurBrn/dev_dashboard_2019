@@ -17,42 +17,42 @@ router.use(bodyParser.json());
  * Add the user info to the request if token is valid
  */
 function authenticateToken(req, res, next) {
-    // Recover authentication token in the header
-    const authHeader = req.headers['authorization'];
-    // Saying : If we have a authHeader then return the token, that we take from the split
-    const token = authHeader && authHeader.split(' ')[1];
-    if (token === null) return res.status(401).send('You need to send a token with your request');
+  // Recover authentication token in the header
+  const authHeader = req.headers['authorization'];
+  // Saying : If we have a authHeader then return the token, that we take from the split
+  const token = authHeader && authHeader.split(' ')[1];
+  if (token === null) return res.status(401).send('You need to send a token with your request');
 
-    jwt.verify(token, process.env.SECRET_TOKEN, (err, ourUser) => {
-        if (err) return res.status(403).send('Token no longer valid');
-        // If we arrive here, our token is valid, we want to continue our operations
-        req.user = ourUser;
-        next();
-    });
+  jwt.verify(token, process.env.SECRET_TOKEN, (err, ourUser) => {
+    if (err) return res.status(403).send('Token no longer valid');
+    // If we arrive here, our token is valid, we want to continue our operations
+    req.user = ourUser;
+    next();
+});
 }
 
 router.get('/', (req, res) => {
-   pool.getConnection().then((conn) => {
-       conn.query('SELECT * FROM widget_params')
-           .then((result) => {
-               if (result) {
-                   res.status(200).json(result);
-                   conn.release();
-               } else {
-                   res.json({
-                       code: 404,
-                       success:'No params in the database.'
-                   });
-                   conn.release();
-               }
-           }).catch((err) => {
-          console.log('Query error on /GET widgetParams : ' + err);
-          res.json(500).send(err);
-       });
-   }).catch((err) => {
-      console.log('Connection error on /GET widgetParams : ' + err);
-      res.json(500).send(err);
-   });
+  pool.getConnection().then((conn) => {
+    conn.query('SELECT * FROM widget_params')
+      .then((result) => {
+        if (result) {
+          res.status(200).json(result);
+          conn.release();
+        } else {
+          res.json({
+            code: 404,
+            success:'No params in the database.'
+          });
+          conn.release();
+        }
+      }).catch((err) => {
+        console.log('Query error on /GET widgetParams : ' + err);
+        res.json(500).send(err);
+      });
+  }).catch((err) => {
+    console.log('Connection error on /GET widgetParams : ' + err);
+    res.json(500).send(err);
+  });
 });
 
 router.post('/add', (req, res) => {

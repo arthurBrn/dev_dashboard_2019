@@ -14,5 +14,4 @@ export class SideBarComponent implements OnInit {
       console.log('displlay list')
     }
   }
-
 }
