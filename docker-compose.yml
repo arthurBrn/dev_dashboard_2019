@@ -3,28 +3,30 @@ services:
   weather-service:
     build: ./backend/weather
     ports:
-        - "${PORT_WEATHER_SERVICE}:${PORT_WEATHER_SERVICE}"
+      - "${PORT_WEATHER_SERVICE}:${PORT_WEATHER_SERVICE}"
     volumes:
-        - ./backend/weather:/usr/src/app/
-        - .env:/usr/src/app/.env
+      - ./backend/weather:/usr/src/app/
+      - .env:/usr/src/app/.env
     working_dir: /usr/src/app
     container_name: weatherServcie
+    depends_on:
+      - database_weather
   crypto-service:
     build: ./backend/cryptocurrency
     ports:
-        - "${PORT_CRYPTO_SERVICE}:${PORT_CRYPTO_SERVICE}"
+      - "${PORT_CRYPTO_SERVICE}:${PORT_CRYPTO_SERVICE}"
     volumes:
-        - ./backend/cryptocurrency:/usr/src/app/
-        - .env:/usr/src/app/.env
+      - ./backend/cryptocurrency:/usr/src/app/
+      - .env:/usr/src/app/.env
     working_dir: /usr/src/app
     container_name: cryptoServcie
   user-service:
     build: ./backend/user
     ports:
-        - "${PORT_USER_SERVICE}:${PORT_USER_SERVICE}"
+      - "${PORT_USER_SERVICE}:${PORT_USER_SERVICE}"
     volumes:
-        - ./backend/user:/usr/src/app/
-        - .env:/usr/src/app/.env
+      - ./backend/user:/usr/src/app/
+      - .env:/usr/src/app/.env
     working_dir: /usr/src/app
     #environment:
     #    - MARIADB_HOST=database
@@ -34,29 +36,66 @@ services:
     #    - MARIADB_DATABASE=dashboard
     user: "1000"
     container_name: userService
-    #depends_on:
-        #- database
+    depends_on:
+      - database_user
   frontend: 
     build: ./frontend
     volumes:
-        - ./frontend/:/app
+      - ./frontend/:/app
     ports:  
-        - "${PORT_FRONTEND}:${PORT_FRONTEND}"
+      - "${PORT_FRONTEND}:${PORT_FRONTEND}"
     container_name: frontend
   database_user:
-    build: ./database
+    build: ./database/userdb
     ports:
-        - "${PORT_USER_DATABASE}:${PORT_USER_DATABASE}"
+      - "${PORT_USER_DATABASE}:${PORT_USER_DATABASE}"
     expose:
-        - "${PORT_USER_DATABASE}"
+      - "${PORT_USER_DATABASE}"
     user: "1000"
     environment:
-        - ALLOW_EMPTY_PASSWORD=yes
+      - ALLOW_EMPTY_PASSWORD=yes
         - MARIADB_ROOT_PASSWORD=root
         - MARIADB_DATABASE=userdb
         - MARIADB_PORT=${PORT_USER_DATABASE}
         - MARIADB_USER=monty
         - MARIADB_PASSWORD=monty
     volumes:
-      - ./database/data_user:/var/lib/mysql:rw
+      - ./database/userdb/data_user:/var/lib/mysql:rw
+      - ./database/script/dump_user.sql:/docker-entrypoint-initdb.d/dump_user.sql
     container_name: database_user
+  database_weather:
+    build: ./database/weatherdb
+    ports:
+      - "${PORT_WEATHER_DATABASE}:${PORT_WEATHER_DATABASE}"
+    expose:
+      - "${PORT_WEATHER_DATABASE}"
+    user: "1000"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_ROOT_PASSWORD=root
+      - MARIADB_DATABASE=weatherdb
+      - MARIADB_PORT=${PORT_WEATHER_DATABASE}
+      - MARIADB_USER=monty
+      - MARIADB_PASSWORD=monty
+    volumes:
+      - ./database/weatherdb/data_weather:/var/lib/mysql:rw
+      - ./database/script/dump_weather.sql:/docker-entrypoint-initdb.d/dump_weather.sql
+    container_name: database_weather
+  #database_crypto:
+   # build: ./database/cryptodb
+    #ports:
+    #  - "${PORT_CRYPTO_DATABASE}:${PORT_CRYPTO_DATABASE}"
+    #expose:
+    #  - "${PORT_CRYPTO_DATABASE}"
+    #user: "1000"
+    #environment:
+    #  - ALLOW_EMPTY_PASSWORD=yes
+     # - MARIADB_ROOT_PASSWORD=root
+      #- MARIADB_DATABASE=cryptodb
+  #    - MARIADB_PORT=${PORT_CRYPTO_DATABASE}
+   #   - MARIADB_USER=monty
+    #  - MARIADB_PASSWORD=monty
+    #volumes:
+     # - ./database/cryptodb/data_crypto:/var/lib/mysql:rw
+      #- ./database/script/dump_crypto.sql:/docker-entrypoint-initdb.d/dump_crypto.sql
+    #container_name: database_crypto
