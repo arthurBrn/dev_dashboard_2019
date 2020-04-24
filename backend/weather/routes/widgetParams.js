@@ -33,7 +33,7 @@ function authenticateToken(req, res, next) {
 
 router.get('/', (req, res) => {
    pool.getConnection().then((conn) => {
-       conn.query('SELECT * FROM weather_widget_params')
+       conn.query('SELECT * FROM widget_params')
            .then((result) => {
                if (result) {
                    res.status(200).json(result);
@@ -58,8 +58,8 @@ router.get('/', (req, res) => {
 router.post('/add', (req, res) => {
     pool.getConnection().then((conn) => {
         conn.query(
-            'INSERT INTO weather_widget_params (country, city, hours, api_key) VALUES (?,?,?,?);',
-            [req.body.country, req.body.city, req.body.hours, req.body.apiKey]
+            'INSERT INTO widget_params (country, city, api_key, hours) VALUES (?,?,?,?);',
+            [req.body.country, req.body.city, req.body.apiKey, req.body.hours]
         ).then((result) => {
             if (result) {
                 res.json({
@@ -86,8 +86,8 @@ router.post('/add', (req, res) => {
 router.put('/alter', (req, res) => {
     pool.getConnection().then((conn) => {
         conn.query(
-            'UPDATE weather_widget_params SET country = ?, city=?, hours=?, api_key=? WHERE id=? ;',
-            [req.body.country, req.body.city, req.body.hours, req.body.apiKey, req.body.widgetId]
+            'UPDATE widget_params SET country = ?, city=?, api_key=?, hours=? WHERE id=? ;',
+            [req.body.country, req.body.city, req.body.apiKey, req.body.hours, req.body.paramsId]
         ).then((result) => {
             if (result) {
                 conn.release();
@@ -114,7 +114,7 @@ router.delete('/delete', (req, res) => {
    pool.getConnection().then((conn) => {
        pool.getConnection().then((conn) => {
            conn.query(
-               'DELETE FROM weather_widget_params WHERE id =? ; ',
+               'DELETE FROM widget_params WHERE id =? ; ',
                [req.body.paramsId]
                ).then((result) => {
                if (result) {
