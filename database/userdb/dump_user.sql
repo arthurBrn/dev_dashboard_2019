@@ -14,8 +14,15 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE TABLE IF NOT EXISTS tokens (
-    name text not null,
+    provider text not null,
     token text not null,
     idUser int not null,
     foreign key (idUser) references users(id)
-)
+);
+
+CREATE TABLE IF NOT EXISTS widget (
+    name text not null,
+    service text not null,
+    idUser int not null,
+    foreign key (idUser) references users(id)
+);
