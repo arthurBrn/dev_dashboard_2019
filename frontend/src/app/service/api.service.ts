@@ -58,5 +58,15 @@ export class ApiService {
   getPublicServices() {
     return this._httpClient.get(this.baseUrl + 'services');
   }
+
+  getWidgets(userToken) {
+    const body = new HttpParams()
+      .set('token', userToken);
+    return this._httpClient.post(this.baseUrl + 'widgets', body.toString(),
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+      });
+  }
 }
 
