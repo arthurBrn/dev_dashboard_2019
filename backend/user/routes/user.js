@@ -215,8 +215,7 @@ router.post('/refreshToken', (req, res) => {
 
 router.get('/widgetList', (req, res) => {
   pool.getConnection().then((conn) => {
-    conn.query('SELECT w.id, w.name, s.label, s.icon from services s, widget w where w.idService = s.id').then((result) => {
-      console.log(result);
+    conn.query('SELECT w.id, w.name, s.label, s.icon, w.public from services s, widget w where w.idService = s.id').then((result) => {
       res.json(result);
       conn.release();
     }).catch((err) => {

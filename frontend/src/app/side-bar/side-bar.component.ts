@@ -21,20 +21,20 @@ export class SideBarComponent implements OnInit {
   
 
   ngOnInit(): void {
-    if(localStorage.getItem('refreshToken')) {
-      this._apiService.getWWidgetList().subscribe((data) => {
-        console.log(data);
-        let datas = data as any;
-        datas.forEach(element => {
-          this.widgetList.push({
-            id: element.id,
-            name: element.name,
-            service: element.label,
-            icon: element.icon
-          })
-        });
+    this._apiService.getWWidgetList().subscribe((data) => {
+      console.log(data);
+      let datas = data as any;
+      datas.forEach(element => {
+          if (element.public || localStorage.getItem('accessToken')) {
+            this.widgetList.push({
+              id: element.id,
+              name: element.name,
+              service: element.label,
+              icon: element.icon
+            });
+          }
       });
-    }
+    });
   }
 
   onWidgetClick(event) {
