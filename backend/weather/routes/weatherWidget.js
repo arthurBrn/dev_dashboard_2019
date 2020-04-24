@@ -75,8 +75,8 @@ router.post('/add', (req, res) => {
 router.put('/alter', (req, res) => {
     pool.getConnection().then((conn) => {
         conn.query(
-            'UPDATE weather_widget SET name=?, description=?, timer=?, service_id=?, weather_widget_params_id=? WHERE id=?;',
-            [req.body.name, req.body.description, req.body.timer, req.body.serviceId, req.body.weatherWidgetParamsId, req.body.widgetId]
+            'UPDATE widget SET name=?, timer=?, user_id=?, parameters_id=? WHERE id=?;',
+            [req.body.name, req.body.timer, req.body.userId, req.body.paramsId, req.body.widgetId]
         ).then((result) => {
             if (result) {
                 conn.release();
@@ -104,7 +104,7 @@ router.put('/alter', (req, res) => {
 router.delete('/delete', (req,res) => {
     pool.getConnection().then((conn) => {
         conn.query(
-            'DELETE FROM weather_widget WHERE id=?;',
+            'DELETE FROM widget WHERE id=?;',
             [req.body.widgetId]
         ).then((result) => {
             if (result) {
