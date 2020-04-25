@@ -29,7 +29,8 @@ import { ConfigureGraphComponent } from './widgets/cryptocurrencies/configure-gr
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
 import { getAuthServiceConfigs } from './socialloginConfig';
-
+import { ConfGraphComponent } from './configure/crypto/conf-graph/conf-graph.component';
+import { ConfRateComponent } from './configure/crypto/conf-rate/conf-rate.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,8 @@ import { getAuthServiceConfigs } from './socialloginConfig';
     CryptoListComponent,
     RateExchangeComponent,
     ConfigureGraphComponent,
+    ConfGraphComponent,
+    ConfRateComponent,
 
   ],
   imports: [

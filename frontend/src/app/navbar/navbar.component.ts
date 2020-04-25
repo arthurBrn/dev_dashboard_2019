@@ -24,6 +24,7 @@ export class NavbarComponent implements OnInit {
   }
 
   onLogoClick() {
+    $('li').removeClass('active');
     this._router.navigate(['services']);
   }
 

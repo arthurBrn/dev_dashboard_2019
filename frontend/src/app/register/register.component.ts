@@ -65,9 +65,7 @@ export class RegisterComponent implements OnInit {
     let socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
     this._authService.signIn(socialPlatformProvider).then(
       (userData) => {
-          let token =             // this._apiService.updateOauthToken()
-            // this._apiService.updateOauthToken()
-;
+          let token = userData.authToken;
           let user = {
             firstName: userData.firstName,
             lastName: userData.lastName,
