@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   tokenValue: String;
   isAuth = localStorage.getItem('accessToken') ? true : false;
 
+
   constructor(
     private _router: Router,
     private _apiService: ApiService,
@@ -23,37 +24,11 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    tokenValue: String;
     this.tokenValue = localStorage.getItem('accessToken');
 
-    this.loadUserWidgets(this.tokenValue);
-  }
-
-  loadUserWidgets(userToken){
-    if (localStorage.getItem('accessToken')) {
-      this._apiService.getUserWidgetsKeys(userToken).subscribe((data) => {
-      let parsed = data as any;
-      parsed.forEach(element => {
-        switch (element.label) {
-          case 'crypto':
-            this._cryptoService.getCryptoWidgets(this.tokenValue, element.name).subscribe((cryptoData) => {
-              let parsedCrypto = cryptoData as any;
-              parsedCrypto.forEach(cryptoElement => {
-                console.log(cryptoElement);
-              });
-            });
-            break;
-          case 'weather':
-            this._weatherService.getWeatherWidgets(this.tokenValue, element.name).subscribe((weatherData) => {
-              let parsedWeather = weatherData as any;
-              parsedWeather.forEach(weatherElement => {
-                console.log(weatherElement);
-              });
-            })
-            break;
-        }
-      });
-      });
-    }
+    this._router.navigate(['/services']);
+    // this.loadUserWidgets(this.tokenValue);
   }
 
   onLogOut(event) {
