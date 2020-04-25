@@ -57,9 +57,29 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  onRegisterWithGoogle() {
-    console.log('register with google');
-  }
+//   onRegisterWithGoogle() {
+    // let socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+    // this._authService.signIn(socialPlatformProvider).then(
+    //   (userData) => {
+    //       let token = userData.authToken;
+    //       let user = {
+    //         firstName: userData.firstName,
+    //         lastName: userData.lastName,
+    //         mail: userData.email,
+    //         password: userData.id
+    //       }
+    //       this._apiService.register(user).subscribe((data) => {
+    //           let parseData = data as any;
+    //           let nb = parseData.insertedId as number
+    //           this._apiService.insertToken({
+    //             provider: 'google',
+    //             token: token,
+    //             idUser: nb // on enverra le token
+    //           }).subscribe((datas) => this._router.navigate(['login']));
+    //       });
+    //    }
+    // );
+//   }
 
   signInWithFB(): void {
     let socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;

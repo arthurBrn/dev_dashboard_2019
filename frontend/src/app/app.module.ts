@@ -27,7 +27,7 @@ import { RateExchangeComponent } from './widgets/cryptocurrencies/rate-exchange/
 import { WeatherCardComponent } from './widgets/weather/weather-card/weather-card.component';
 import { ConfigureGraphComponent } from './widgets/cryptocurrencies/configure-graph/configure-graph.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
-import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
+import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 import { getAuthServiceConfigs } from './socialloginConfig';
 import { WidgetsService } from './service/widgets.service';
 import { ConfGraphComponent } from './configure/crypto/conf-graph/conf-graph.component';

@@ -89,10 +89,4 @@ export class LoginComponent implements OnInit {
        }
     );
   }
-
-  onGoogleConnection() {
-    console.log('Login through google');
-  }
-
-
 }
