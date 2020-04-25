@@ -91,4 +91,39 @@ router.get('/all/graph', authenticateToken, (req, res) => {
   });
 });
 
+router.get('/all/rate', authenticateToken, (req, res) => {
+  pool.getConnection().then((conn) =>  {
+    conn.query(
+        'SELECT * FROM rate WHERE idUser = ?',
+        [req.user.id]
+    ).then((result) => {
+      if (result) {
+        conn.release();
+        res.status(200).json(result);
+      } else {
+        conn.release();
+        res.status(404).json(result);
+      }
+    }).catch((err) => {
+      conn.release();
+      res.status(500).json(err);
+    });
+  }).catch((err) => {
+    res.status(500).send(err);
+  });
+});
+
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
