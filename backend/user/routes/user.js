@@ -222,7 +222,9 @@ router.delete('/logout', (req, res) => {
 router.get('/widgets', authenticateToken, (req, res) => {
   pool.getConnection().then((conn) => {
     conn.query(
-        'SELECT * FROM user_widget WHERE idUser=?',
+        'SELECT * FROM user_widget, widget, services ' +
+        'WHERE user_widget.idWidget = widget.id' +
+        'AND idUser=?',
         [req.user.id]
     ).then((result) => {
       conn.release();

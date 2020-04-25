@@ -29,6 +29,7 @@ import { ConfigureGraphComponent } from './widgets/cryptocurrencies/configure-gr
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
 import { getAuthServiceConfigs } from './socialloginConfig';
+import { WidgetsService } from './service/widgets.service';
 
 
 @NgModule({
@@ -68,7 +69,7 @@ import { getAuthServiceConfigs } from './socialloginConfig';
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },
     { provide: AuthServiceConfig, useFactory: getAuthServiceConfigs },
-
+    WidgetsService,
    //  { provide: AuthServiceConfig, useFactory: provideConfig }
   ],
   bootstrap: [AppComponent]

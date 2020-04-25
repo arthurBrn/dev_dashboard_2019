@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import {isDeclaration} from "@angular/compiler-cli/src/ngtsc/util/src/typescript";
 
 @Injectable({
   providedIn: 'root'
@@ -59,13 +60,19 @@ export class ApiService {
     return this._httpClient.get(this.baseUrl + 'services');
   }
 
-  getWidgets(userToken) {
+  getUserWidgetsKeys(userToken) {
     return this._httpClient.get(this.baseUrl + 'widgets',
       {
         headers: new HttpHeaders()
           .set('Content-Type', 'application/x-www-form-urlencoded')
           .set('Authorization', 'Bearer ' + userToken)
       });
+  }
+
+  getAllWidgets(userToken){
+    console.log('FROM GET ALL WIDGETS');
+    let data = this.getUserWidgetsKeys(userToken);
+    return data;
   }
 }
 
