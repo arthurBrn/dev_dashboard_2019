@@ -1,1 +1,22 @@
-<p>airqualitycurrent works!</p>
+<div class="row">
+  <div class="col-md-3 col-lg-3"></div>
+  <div class="col-md-6 col-lg-6">
+    <div class="jumbotron mt-5">
+      <h1 class="text-center">
+        Current air quality in your city
+      </h1>
+      <hr>
+      <div class="md-form mt-5">
+        <input type="text" id="start" class="form-control" [(ngModel)]="city">
+        <label for="start">Your city</label>
+      </div>
+      <div class="md-form my-5">
+        <input type="text" id="end" class="form-control" [(ngModel)]="country">
+        <label for="end">It's country</label>
+      </div>
+      <button type="button" class="btn text-light elegant-color-dark btn-lg btn-block mt-5 mb-2" style="border-radius:25px;" (click)="onValidateNewWidget()" >
+        Done !
+      </button>
+    </div>
+  </div>
+</div>

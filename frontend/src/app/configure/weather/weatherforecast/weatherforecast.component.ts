@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WeatherforecastComponent implements OnInit {
 
+  city: string;
+  country: string;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onNewWeatherForecastWidget() {
+
   }
 
 }
