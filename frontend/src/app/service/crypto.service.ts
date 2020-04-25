@@ -47,11 +47,10 @@ export class CryptoService {
       });
   }
 
-  insertConfRate(currency) {
+  getCryptoWidgets(userToken, tableName) {
     const body = new HttpParams()
-      .set('start', start)
-    return this._httpClient.post(this.baseUrl + 'insertRate',
-      body.toString(),
+      .set('tableName', tableName);
+    return this._httpClient.post(this.baseUrl + 'widgets', body.toString(),
       {
         headers: new HttpHeaders()
           .set('Content-Type', 'application/x-www-form-urlencoded')

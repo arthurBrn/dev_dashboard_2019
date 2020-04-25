@@ -8,7 +8,6 @@ require('dotenv').config({
 });
 
 const weatherWidgetRoutes = require('./routes/weatherWidget');
-const widgetParamsRoutes = require('./routes/widgetParams');
 const weatherApiRoutes = require('./routes/weatherApi');
 const app = express();
 
@@ -19,7 +18,6 @@ app.use(
     }),
 );
 app.use('/weather', weatherWidgetRoutes);
-app.use('/weather/params', widgetParamsRoutes);
 app.use('/weather/api', weatherApiRoutes);
 
 app.get('/', (req, res) => {
@@ -31,7 +29,6 @@ app.listen({
 }, () => {
   console.log(`🚀 Server ready at http://localhost:${process.env.PORT_WEATHER_SERVICE}`);
   console.log(endpoints(weatherWidgetRoutes));
-  console.log(endpoints(widgetParamsRoutes));
   console.log(endpoints(weatherApiRoutes));
 });
 

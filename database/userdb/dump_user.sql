@@ -23,15 +23,15 @@ CREATE TABLE IF NOT EXISTS tokens (
     foreign key (idUser) references users(id) ON DELETE CASCADE
 );
 
-INSERT INTO tokens (provider,token,idUser) VALUES 
+INSERT INTO tokens (provider,token,idUser) VALUES
 ('facebook','testtokenfb',1),
 ('google','testokenfb',1);
 
 CREATE TABLE IF NOT EXISTS services (
-    id int AUTO_INCREMENT,
+    serviceId int AUTO_INCREMENT,
     label text not null,
     icon text not null,
-    PRIMARY KEY(id)
+    PRIMARY KEY(serviceId)
 );
 
 INSERT INTO services (label, icon) VALUES
@@ -41,25 +41,28 @@ INSERT INTO services (label, icon) VALUES
 ('facebook', 'fab fa-facebook');
 
 CREATE TABLE IF NOT EXISTS widget (
-    id int AUTO_INCREMENT,
+    widgetId int AUTO_INCREMENT,
     name text not null,
     public bool not null,
     idService int not null,
-    foreign key (idService) references services(id) ON DELETE CASCADE,
-    PRIMARY KEY(id)
+    foreign key (idService) references services(serviceId) ON DELETE CASCADE,
+    PRIMARY KEY(widgetId)
 );
 
 INSERT INTO widget (name, public, idService) VALUES
 ('graph', true, 1),
-('rate', true, 1);
+('rate', true, 1),
+('airqualitycurrent', true, 1),
+('weatherforecast', false, 1)
+;
 
 CREATE TABLE IF NOT EXISTS user_widget (
     idWidget int not null,
     idUser int not null,
-    foreign key (idWidget) references widget(id) ON DELETE CASCADE,
+    foreign key (idWidget) references widget(widgetId) ON DELETE CASCADE,
     foreign key (idUser) references users(id) ON DELETE CASCADE
 );
 
-INSERT INTO user_widget (idWidget, idUser) VALUES 
+INSERT INTO user_widget (idWidget, idUser) VALUES
 (1, 1),
 (2, 1);

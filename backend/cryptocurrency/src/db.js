@@ -1,11 +1,11 @@
 const mariadb = require('mariadb');
 
 const pool = mariadb.createPool({
-  host: 'database',
+  host: 'database_crypto',
   user: 'monty',
   password: 'monty',
-  database: 'dashboard',
-  port: '3306',
+  database: 'dbcrypto',
+  // port: '3306',
 });
 
 module.exports = pool;
