@@ -271,4 +271,25 @@ router.delete('/logout', (req, res) => {
   res.sendStatus(204).send('Refresh token deleted successfully.');
 });
 
+router.get('/widgets', authenticateToken, (req, res) => {
+  pool.getConnection().then((conn) => {
+    conn.query(
+        'select * from user_widget, widget, services WHERE user_widget.idWidget = widget.widgetId AND widget.idService = services.serviceId AND user_widget.idUser = ?;',
+        [req.user.id]
+    ).then((result) => {
+      if (result) {
+        res.status(200).json(result);
+      } else {
+        res.status(200).json(result);
+      }
+    }).catch((err) => {
+      console.log('Query error in /widgets : ' + err);
+      res.status(500).send(err);
+    });
+  }).catch((err) => {
+    console.log('Connection error /widgets : ' + err);
+    res.status(500).send(err);
+  });
+});
+
 module.exports = router;

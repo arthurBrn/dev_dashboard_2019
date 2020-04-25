@@ -41,23 +41,7 @@ export class WeatherComponent implements OnInit {
     private _weatherApiService: WeatherService,
   ) { }
 
-  ngOnInit(): void {
-    this._weatherApiService.getAllWeatherWidget().subscribe((data) => {
-      var parsedData = data as any;
-      console.log(parsedData[0]);
-      let i = 0;
-      while (i != parsedData.length) {
-        this.widgetWeather.push({
-          name: parsedData[i].name,
-          description: parsedData[i].description,
-          timer: parsedData[i].timer,
-          serviceId: parsedData[i].service_id,
-          paramsId: parsedData[i].weather_widget_params_id
-        });
-        i++;
-      }
-    });
-  }
+  ngOnInit(): void {}
 
 
 

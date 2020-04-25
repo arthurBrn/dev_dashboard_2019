@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
+const jwt = require('jsonwebtoken');
+const pool = require('../src/db');
 
 const router = express.Router();
 router.use(bodyParser.json());
@@ -65,4 +67,40 @@ router.get('/rate', (req, res) => {
   });
 });
 
+router.post('/widgets', authenticateToken, (req, res) => {
+  pool.getConnection().then((conn) => {
+    let table = req.body.tableName;
+    conn.query(
+        `SELECT * FROM ${req.body.tableName} WHERE idUser = ${req.user.id} ;`,
+    ).then((result) => {
+      if (result) {
+        conn.release();
+        res.status(200).json(result);
+      } else {
+        conn.release();
+        res.status(404).json(result);
+      }
+    }).catch((err) => {
+      console.log('Query error in /crypto/widgets : ' + err);
+      res.status(500).json(err);
+    });
+  }).catch((err) => {
+    console.log('connection error in /crypto/widgets: ' + err);
+    res.status(500).json(err);
+  });
+});
+
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+

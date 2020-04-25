@@ -30,17 +30,28 @@ function authenticateToken(req, res, next) {
     });
 }
 
-router.get('/', (req, res) => {
+
+router.post('/widgets', authenticateToken, (req,res) => {
     pool.getConnection().then((conn) => {
-        conn.query('SELECT * FROM widget').then((result) => {
-            res.status(200).json(result);
-            conn.release();
+        conn.query(
+            `SELECT * FROM ${req.body.tableName} WHERE idUser = ?`,
+            [req.user.id]
+        ).then((result) => {
+            if (result) {
+                conn.release();
+                res.status(200).json(result);
+            } else {
+                conn.release();
+                res.status(404).json(err);
+            }
         }).catch((err) => {
-            res.status(500).json(err);
             conn.release();
+            console.log('Query error in /widgets : ' + err);
+            res.status(500).json(err);
         })
     }).catch((err) => {
-        console.log('Pool getConnection error : ' + err);
+        console.log('Connection error in /widgets : ' + err);
+        res.status(500).json(err);
     });
 });
 

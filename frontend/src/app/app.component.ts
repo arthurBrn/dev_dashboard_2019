@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiService } from './service/api.service';
+import { CryptoService } from './service/crypto.service';
+import { WeatherService } from './service/weather.service';
+
 
 @Component({
   selector: 'app-root',
@@ -8,22 +12,53 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'frontend';
+  tokenValue: String;
   isAuth = localStorage.getItem('accessToken') ? true : false;
 
-  constructor(private _router: Router) {
-
-  }
+  constructor(
+    private _router: Router,
+    private _apiService: ApiService,
+    private _cryptoService: CryptoService,
+    private _weatherService: WeatherService,
+  ) {}
 
   ngOnInit() {
-      console.log('Access token : ' +localStorage.getItem('accessToken'));
-    console.log('Refresh token : ' + localStorage.getItem('refreshToken'));
-    this._router.navigate(['services']);
+    this.tokenValue = localStorage.getItem('accessToken');
+
+    this.loadUserWidgets(this.tokenValue);
+  }
+
+  loadUserWidgets(userToken){
+    this._apiService.getUserWidgetsKeys(userToken).subscribe((data) => {
+      let parsed = data as any;
+      parsed.forEach(element => {
+        switch (element.label) {
+          case 'crypto':
+            this._cryptoService.getCryptoWidgets(this.tokenValue, element.name).subscribe((cryptoData) => {
+              let parsedCrypto = cryptoData as any;
+              parsedCrypto.forEach(cryptoElement => {
+                console.log(cryptoElement);
+              });
+            });
+            break;
+          case 'weather':
+            this._weatherService.getWeatherWidgets(this.tokenValue, element.name).subscribe((weatherData) => {
+              let parsedWeather = weatherData as any;
+              parsedWeather.forEach(weatherElement => {
+                console.log(weatherElement);
+              });
+            })
+            break;
+        }
+      });
+    });
   }
 
   onLogOut(event) {
     this.isAuth = event;
   }
 }
+
 
 
 

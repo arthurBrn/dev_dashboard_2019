@@ -33,4 +33,15 @@ export class CryptoService {
       const url = this.baseUrl + 'rate';
       return this._httpClient.get(url);
   }
+
+  getCryptoWidgets(userToken, tableName) {
+    const body = new HttpParams()
+      .set('tableName', tableName);
+    return this._httpClient.post(this.baseUrl + 'widgets', body.toString(),
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+          .set('Authorization', 'Bearer ' + userToken)
+      });
+  }
 }
