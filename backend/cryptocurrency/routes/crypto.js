@@ -67,35 +67,11 @@ router.get('/rate', (req, res) => {
   });
 });
 
-router.get('/all/graph', authenticateToken, (req, res) => {
+router.post('/widgets', authenticateToken, (req, res) => {
   pool.getConnection().then((conn) => {
+    let table = req.body.tableName;
     conn.query(
-        'SELECT * FROM graph WHERE idUser = ?',
-    [req.user.id]
-    ).then((result) => {
-      if (result) {
-        res.status(200).json(result);
-        conn.release();
-      } else {
-        res.status(404).json(result);
-        conn.release();
-      }
-    }).catch((err) => {
-      console.log('Error querying /all/graph : ' + err);
-      conn.release();
-      res.status(500).send(err);
-    });
-  }).catch((err) => {
-    console.log('Connection error in /all/graph : ' + err);
-    res.status(500).send(err);
-  });
-});
-
-router.get('/all/rate', authenticateToken, (req, res) => {
-  pool.getConnection().then((conn) =>  {
-    conn.query(
-        'SELECT * FROM rate WHERE idUser = ?',
-        [req.user.id]
+        `SELECT * FROM ${req.body.tableName} WHERE idUser = ${req.user.id} ;`,
     ).then((result) => {
       if (result) {
         conn.release();
@@ -105,11 +81,12 @@ router.get('/all/rate', authenticateToken, (req, res) => {
         res.status(404).json(result);
       }
     }).catch((err) => {
-      conn.release();
+      console.log('Query error in /crypto/widgets : ' + err);
       res.status(500).json(err);
     });
   }).catch((err) => {
-    res.status(500).send(err);
+    console.log('connection error in /crypto/widgets: ' + err);
+    res.status(500).json(err);
   });
 });
 

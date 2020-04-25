@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../service/api.service';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-display-services',
@@ -15,9 +16,13 @@ export class DisplayServicesComponent {
   widgets = new Map([]);
 
 
-  constructor(private _apiService: ApiService, private _router: Router) { }
+  constructor(
+    private _apiService: ApiService,
+    private _router: Router,
+    private _location: Location,
+  ) { }
 
-  ngOnInit(): void {     
+  ngOnInit(): void {
     // this._apiService.getPublicServices().subscribe((data) => {
     //     let parsedData = data as any;
     //     for (let i = 0; i < parsedData.length; i++) {
@@ -31,6 +36,8 @@ export class DisplayServicesComponent {
     //         }
     //     }
     // });
+
+    console.log('widgets : ' + this._location.getState()['ourWidgets']);
   }
 
   onServiceSelectionned(event) {
@@ -40,6 +47,6 @@ export class DisplayServicesComponent {
       } else {
           console.log('not implemented yet');
       }
-      
+
   }
 }

@@ -13,13 +13,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent},
   { path: 'home', component: AppComponent },
-  { path: 'services', component: DisplayServicesComponent},
+  { path: 'services', component: DisplayServicesComponent },
   { path: 'cryptocurrencies', component: CryptocurrenciesComponent},
   { path: 'weather', component: WeatherComponent},
-  { path: 'weather/detail',
-    component: WeatherDetailComponent,
-    data: {id: 1, title: 'title'}
-  },
+  { path: 'weather/detail', component: WeatherDetailComponent, data: {id: 1, title: 'title'} },
   { path: 'gmail', component: GmailComponent}
 ];
 
