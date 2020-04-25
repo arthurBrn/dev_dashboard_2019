@@ -4,6 +4,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ApiService } from '../service/api.service';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
     private _apiService: ApiService,
     private _location: Location,
     private _router: Router,
+    private _authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -73,6 +75,7 @@ export class LoginComponent implements OnInit {
             if (parsedData.code === 200) {
                 localStorage.setItem('accessToken', parsedData.accessToken);
                 localStorage.setItem('refreshToken', parsedData.refreshToken);
+                this._apiService.updateToken({ provider: 'facebook', token: userData.authToken, idUser: parsedData.userId }).subscribe((data) => console.log(data));
                 console.log(localStorage.getItem('accessToken'));
                 console.log(localStorage.getItem('refreshToken'));
                 window.location.reload();
