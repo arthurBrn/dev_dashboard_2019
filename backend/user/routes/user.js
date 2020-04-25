@@ -169,6 +169,7 @@ router.put('/store/refreshToken', (req, res) => {
 });
 
 router.post('/register', (req, res) => {
+  console.log(req.body)
   bcrypt.hash(req.body.password, 0, (err, hash) => {
     pool.getConnection().then((conn) => {
       conn.query(
@@ -180,6 +181,7 @@ router.post('/register', (req, res) => {
           res.json({
             code: 200,
             success: 'Registration successfull',
+            insertedId: result.insertId
           });
         } else {
           conn.release();
@@ -216,6 +218,43 @@ router.post('/refreshToken', (req, res) => {
 router.get('/widgetList', (req, res) => {
   pool.getConnection().then((conn) => {
     conn.query('SELECT w.id, w.name, s.label, s.icon, w.public from services s, widget w where w.idService = s.id').then((result) => {
+      res.status(200).json(result);
+      conn.release();
+    }).catch((err) => {
+      console.log(err);
+      res.status(400).json(err);
+      conn.release();
+    });
+  }).catch((err) => {
+    console.log(err);
+  });
+});
+
+
+
+router.post('/insertToken', (req, res) => {
+  pool.getConnection().then((conn) => {
+    conn.query('INSERT INTO userdb.tokens (provider, token, idUser) VALUES(?, ?, ?)', 
+    [req.body.provider, req.body.token, req.body.idUser],
+    ).then((result) => {
+      res.json(result);
+      conn.release();
+    }).catch((err) => {
+      console.log(err);
+      res.json(err);
+      conn.release();
+    });
+  }).catch((err) => {
+    console.log(err);
+  });
+});
+
+router.put('/updateToken', authenticateToken, (req, res) => {
+  console.log(req.user.id)
+  pool.getConnection().then((conn) => {
+    conn.query('UPDATE tokens SET token = ? where idUser = ? and provider = ?', 
+    [req.body.token, req.user.id, req.body.provider],
+    ).then((result) => {
       res.json(result);
       conn.release();
     }).catch((err) => {

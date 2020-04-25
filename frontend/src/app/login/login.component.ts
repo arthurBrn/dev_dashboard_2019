@@ -65,7 +65,27 @@ export class LoginComponent implements OnInit {
   }
 
   onFacebookConnection() {
-    console.log('Login through facebook');
+    let socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
+    this._authService.signIn(socialPlatformProvider).then(
+      (userData) => {
+          this._apiService.login(userData.email, userData.id).subscribe((data) => {
+            var parsedData = data as any;
+            if (parsedData.code === 200) {
+                localStorage.setItem('accessToken', parsedData.accessToken);
+                localStorage.setItem('refreshToken', parsedData.refreshToken);
+                console.log(localStorage.getItem('accessToken'));
+                console.log(localStorage.getItem('refreshToken'));
+                window.location.reload();
+                this._location.replaceState('/');
+                this._router.navigate(['home']);
+                window.location.reload();
+            } else {
+              this._toastr.warning(parsedData.success);
+            }
+            // this._apiService.updateOauthToken()
+        });
+       }
+    );
   }
 
   onGoogleConnection() {

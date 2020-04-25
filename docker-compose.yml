@@ -31,12 +31,6 @@ services:
       - ./backend/user:/usr/src/app/
       - .env:/usr/src/app/.env
     working_dir: /usr/src/app
-    #environment:
-    #    - MARIADB_HOST=database
-    #    - MARIADB_PORT_NUMBER=3306
-    #    - MARIADB_USER=monty
-    #    - MARIADB_PASSWORD=monty
-    #    - MARIADB_DATABASE=dashboard
     user: "1000"
     container_name: userService
     depends_on:

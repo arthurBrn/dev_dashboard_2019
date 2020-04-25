@@ -62,5 +62,19 @@ export class ApiService {
   getWWidgetList() {
     return this._httpClient.get(this.baseUrl + 'widgetList');
   }
+
+  insertToken(datas) {
+      console.log(datas)
+      const body = new HttpParams()
+      .set('provider', datas.provider)
+      .set('token', datas.token)
+      .set('idUser', datas.idUser)
+    return this._httpClient.post(this.baseUrl + 'insertToken',
+      body.toString(),
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+      });
+  }
 }
 
