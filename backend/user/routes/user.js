@@ -254,12 +254,12 @@ router.put('/updateToken', (req, res) => {
     conn.query('UPDATE tokens SET token = ? where idUser = ? and provider = ?', 
     [req.body.token, req.body.idUser, req.body.provider],
     ).then((result) => {
-      res.json(result);
       conn.release();
+      res.json(result);
     }).catch((err) => {
       console.log(err);
-      res.json(err);
       conn.release();
+      res.json(err);
     });
   }).catch((err) => {
     console.log(err);
@@ -278,17 +278,79 @@ router.get('/widgets', authenticateToken, (req, res) => {
         [req.user.id]
     ).then((result) => {
       if (result) {
+        conn.release();
         res.status(200).json(result);
       } else {
+        conn.release();
         res.status(200).json(result);
       }
     }).catch((err) => {
+      conn.release();
       console.log('Query error in /widgets : ' + err);
       res.status(500).send(err);
     });
   }).catch((err) => {
     console.log('Connection error /widgets : ' + err);
     res.status(500).send(err);
+  });
+});
+
+router.post('/add/widgets', authenticateToken, (req, res) => {
+  pool.getConnection().then((conn) => {
+    conn.query(
+        'INSERT INTO user_widget (idWidget, idUser) VALUES (?,?);',
+        [req.body.widgetId, req.user.id]
+    ).then((result) => {
+      if (result) {
+        conn.release();
+        res.json({
+          code:200,
+          success: 'User widget added'
+        });
+      } else {
+        conn.release();
+        res.json({
+          code: 404,
+          success: 'Something went wrong.'
+        });
+      }
+    }).catch((err) => {
+      conn.release();
+      console.log('Query error in /add/widgets : ' + err);
+      res.status(500).json(err);
+    });
+  }).catch((err) => {
+    res.status(500).json(err);
+    console.log('Connection error in /add/widget : ' + err);
+  });
+});
+
+router.post('/widget/from/name', (req, res) => {
+  pool.getConnection().then((conn) => {
+    conn.query(
+        'SELECT widgetId FROM widget WHERE name = ? ;',
+        [req.body.widgetName]
+    )
+        .then((result) => {
+      if (result) {
+        conn.release();
+        console.log(result[0].widgetId);
+        res.json({
+          code:200,
+          widgetId: result[0].widgetId
+        });
+      } else {
+        conn.release();
+        res.status(404).json(result);
+      }
+    }).catch((err) => {
+      conn.release();
+      console.log('Query error in /widget/from/name : ' + err);
+      res.status(500).json(err);
+    });
+  }).catch((err) => {
+    console.log('Connexion error in /widget/from/name : ' + err);
+    res.status(500).json(err);
   });
 });
 

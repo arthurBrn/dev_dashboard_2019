@@ -12,6 +12,8 @@ import { ConfGraphComponent } from './configure/crypto/conf-graph/conf-graph.com
 import { ConfRateComponent } from './configure/crypto/conf-rate/conf-rate.component';
 import { AirqualitycurrentComponent } from './configure/weather/airqualitycurrent/airqualitycurrent.component';
 import { WeatherforecastComponent } from './configure/weather/weatherforecast/weatherforecast.component';
+import { AirqualityforecastComponent } from './configure/weather/airqualityforecast/airqualityforecast.component';
+import { WeathercurrentComponent } from './configure/weather/weathercurrent/weathercurrent.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -28,7 +30,9 @@ const routes: Routes = [
   { path: 'configure-graph', component: ConfGraphComponent},
   { path: 'configure-rate', component: ConfRateComponent},
   { path: 'configure-airqualitycurrent', component: AirqualitycurrentComponent},
-  { path: 'configure-weatherforecast', component: WeatherforecastComponent}
+  { path: 'configure-airqualityforecast', component: AirqualityforecastComponent},
+  { path: 'configure-weathercurrent', component: WeathercurrentComponent},
+  { path: 'configure-weatherforecast', component: WeatherforecastComponent},
 ];
 
 @NgModule({
