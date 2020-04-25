@@ -2,3 +2,8 @@
 li {
     cursor: pointer;
 }
+
+li:hover {
+    background-color: #4B515D;
+    color: white;
+}

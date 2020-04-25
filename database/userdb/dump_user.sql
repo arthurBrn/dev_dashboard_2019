@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS services (
 
 INSERT INTO services (label, icon) VALUES
 ('crypto', 'fab fa-bitcoin'),
-('weather', 'fas fa-cloud-dun'),
+('weather', 'fas fa-cloud-sun'),
 ('google', 'fab fa-google'),
 ('facebook', 'fab fa-facebook');
 
@@ -52,8 +52,8 @@ CREATE TABLE IF NOT EXISTS widget (
 INSERT INTO widget (name, public, idService) VALUES
 ('graph', true, 1),
 ('rate', true, 1),
-('airqualitycurrent', true, 1),
-('weatherforecast', false, 1)
+('airqualitycurrent', true, 2),
+('weatherforecast', false, 2)
 ;
 
 CREATE TABLE IF NOT EXISTS user_widget (

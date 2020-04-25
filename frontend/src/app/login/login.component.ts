@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit {
                 console.log(localStorage.getItem('refreshToken'));
                 window.location.reload();
                 this._location.replaceState('/');
-                this._router.navigate(['home']);
+                this._router.navigate(['services']);
                 window.location.reload();
             } else {
               this._toastr.warning(parsedData.success);

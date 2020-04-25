@@ -10,6 +10,8 @@ import { WeatherDetailComponent } from './widgets/weather/weather-detail/weather
 import { GmailComponent } from './widgets/gmail/gmail.component';
 import { ConfGraphComponent } from './configure/crypto/conf-graph/conf-graph.component';
 import { ConfRateComponent } from './configure/crypto/conf-rate/conf-rate.component';
+import { AirqualitycurrentComponent } from './configure/weather/airqualitycurrent/airqualitycurrent.component';
+import { WeatherforecastComponent } from './configure/weather/weatherforecast/weatherforecast.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -24,7 +26,9 @@ const routes: Routes = [
   },
   { path: 'gmail', component: GmailComponent},
   { path: 'configure-graph', component: ConfGraphComponent},
-  { path: 'configure-rate', component: ConfRateComponent}
+  { path: 'configure-rate', component: ConfRateComponent},
+  { path: 'configure-airqualitycurrent', component: AirqualitycurrentComponent},
+  { path: 'configure-weatherforecast', component: WeatherforecastComponent}
 ];
 
 @NgModule({

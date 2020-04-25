@@ -32,6 +32,8 @@ import { getAuthServiceConfigs } from './socialloginConfig';
 import { WidgetsService } from './service/widgets.service';
 import { ConfGraphComponent } from './configure/crypto/conf-graph/conf-graph.component';
 import { ConfRateComponent } from './configure/crypto/conf-rate/conf-rate.component';
+import { AirqualitycurrentComponent } from './configure/weather/airqualitycurrent/airqualitycurrent.component';
+import { WeatherforecastComponent } from './configure/weather/weatherforecast/weatherforecast.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import { ConfRateComponent } from './configure/crypto/conf-rate/conf-rate.compon
     ConfigureGraphComponent,
     ConfGraphComponent,
     ConfRateComponent,
+    AirqualitycurrentComponent,
+    WeatherforecastComponent,
 
   ],
   imports: [

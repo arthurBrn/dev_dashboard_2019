@@ -25,7 +25,6 @@ export class SideBarComponent implements OnInit {
       datas.forEach(element => {
           if (element.public || localStorage.getItem('accessToken')) {
             this.widgetList.push({
-              id: element.id,
               name: element.name,
               service: element.label,
               icon: element.icon

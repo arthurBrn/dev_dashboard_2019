@@ -29,7 +29,8 @@ export class AppComponent implements OnInit {
   }
 
   loadUserWidgets(userToken){
-    this._apiService.getUserWidgetsKeys(userToken).subscribe((data) => {
+    if (localStorage.getItem('accessToken')) {
+      this._apiService.getUserWidgetsKeys(userToken).subscribe((data) => {
       let parsed = data as any;
       parsed.forEach(element => {
         switch (element.label) {
@@ -51,7 +52,8 @@ export class AppComponent implements OnInit {
             break;
         }
       });
-    });
+      });
+    }
   }
 
   onLogOut(event) {
