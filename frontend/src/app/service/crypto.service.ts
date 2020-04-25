@@ -33,4 +33,13 @@ export class CryptoService {
       const url = this.baseUrl + 'rate';
       return this._httpClient.get(url);
   }
+
+  getAllGraph(userToken) {
+    return this._httpClient.get(this.baseUrl + 'all/graph',
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+          .set('Authorization', 'Bearer ' + userToken)
+      });
+  }
 }

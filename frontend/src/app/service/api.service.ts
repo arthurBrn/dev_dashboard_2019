@@ -68,11 +68,5 @@ export class ApiService {
           .set('Authorization', 'Bearer ' + userToken)
       });
   }
-
-  getAllWidgets(userToken){
-    console.log('FROM GET ALL WIDGETS');
-    let data = this.getUserWidgetsKeys(userToken);
-    return data;
-  }
 }
 

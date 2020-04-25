@@ -222,26 +222,22 @@ router.delete('/logout', (req, res) => {
 router.get('/widgets', authenticateToken, (req, res) => {
   pool.getConnection().then((conn) => {
     conn.query(
-        'SELECT * FROM user_widget, widget, services ' +
-        'WHERE user_widget.idWidget = widget.id' +
-        'AND idUser=?',
+        'select * from user_widget, widget, services WHERE user_widget.idWidget = widget.widgetId AND widget.idService = services.serviceId AND user_widget.idUser = ?;',
         [req.user.id]
     ).then((result) => {
-      conn.release();
       if (result) {
         res.status(200).json(result);
       } else {
-        res.status(500).json(result);
+        res.status(200).json(result);
       }
     }).catch((err) => {
-      conn.release();
       console.log('Query error in /widgets : ' + err);
-      res.status(500).json(err);
+      res.status(500).send(err);
     });
   }).catch((err) => {
-    console.log('Connection error in /widgets routes : ' + err);
-    res.status(500).json(err);
-  })
+    console.log('Connection error /widgets : ' + err);
+    res.status(500).send(err);
+  });
 });
 
 module.exports = router;

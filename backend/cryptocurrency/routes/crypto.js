@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
+const jwt = require('jsonwebtoken');
+const pool = require('../src/db');
 
 const router = express.Router();
 router.use(bodyParser.json());
@@ -62,6 +64,30 @@ router.get('/rate', (req, res) => {
   request(options, (error, response) => {
     if (error) throw new Error(error);
     res.json(JSON.parse(response.body));
+  });
+});
+
+router.get('/all/graph', authenticateToken, (req, res) => {
+  pool.getConnection().then((conn) => {
+    conn.query(
+        'SELECT * FROM graph WHERE idUser = ?',
+    [req.user.id]
+    ).then((result) => {
+      if (result) {
+        res.status(200).json(result);
+        conn.release();
+      } else {
+        res.status(404).json(result);
+        conn.release();
+      }
+    }).catch((err) => {
+      console.log('Error querying /all/graph : ' + err);
+      conn.release();
+      res.status(500).send(err);
+    });
+  }).catch((err) => {
+    console.log('Connection error in /all/graph : ' + err);
+    res.status(500).send(err);
   });
 });
 

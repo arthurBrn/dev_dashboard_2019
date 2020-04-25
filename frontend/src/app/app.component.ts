@@ -21,22 +21,13 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.tokenValue = localStorage.getItem('accessToken');
-    /*this._apiService.getUserWidgetsKeys(this.tokenValue).subscribe((data) => {
-      var parsedData = data as any;
-      parsedData.forEach(element => {
-        console.log(element);
-        this.data.push(element);
-      });
-      console.log(this.data);
-    });*/
 
     this._apiService.getUserWidgetsKeys(this.tokenValue).subscribe((data) => {
       let parsed = data as any;
       parsed.forEach(element => {
-        console.log(element);
+        console.log(element.label);
       });
     });
-    // this._router.navigate(['services']);
   }
 
   onLogOut(event) {
