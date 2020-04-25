@@ -8,6 +8,8 @@ import { CryptocurrenciesComponent } from  './widgets/cryptocurrencies/cryptocur
 import { WeatherComponent } from './widgets/weather/weather.component';
 import { WeatherDetailComponent } from './widgets/weather/weather-detail/weather-detail.component';
 import { GmailComponent } from './widgets/gmail/gmail.component';
+import { ConfGraphComponent } from './configure/crypto/conf-graph/conf-graph.component';
+import { ConfRateComponent } from './configure/crypto/conf-rate/conf-rate.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -20,7 +22,9 @@ const routes: Routes = [
     component: WeatherDetailComponent,
     data: {id: 1, title: 'title'}
   },
-  { path: 'gmail', component: GmailComponent}
+  { path: 'gmail', component: GmailComponent},
+  { path: 'configure-graph', component: ConfGraphComponent},
+  { path: 'configure-rate', component: ConfRateComponent}
 ];
 
 @NgModule({

@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../service/api.service';
-
-interface widgetIt {
-    id: number;
-    name: string;
-    label: string;
-}
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-side-bar',
@@ -14,7 +9,10 @@ interface widgetIt {
 })
 export class SideBarComponent implements OnInit {
 
-  constructor(private _apiService: ApiService) { }
+  constructor(
+      private _apiService: ApiService,
+      private _router: Router
+    ) { }
 
   searchWidget;
   widgetList = [];
@@ -39,8 +37,9 @@ export class SideBarComponent implements OnInit {
 
   onWidgetClick(event) {
     var target = event.target || event.srcElement || event.currentTarget;
-    $('li').removeClass('active');
-    $('#' + target.id).addClass('active');
+    $('li').removeClass('active stylish-color');
+    $('#' + target.id).addClass('active stylish-color');
+    this._router.navigate([`configure-${target.id}`]);
     console.log(target.id);
   }
 }

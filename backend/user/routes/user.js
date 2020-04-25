@@ -249,11 +249,10 @@ router.post('/insertToken', (req, res) => {
   });
 });
 
-router.put('/updateToken', authenticateToken, (req, res) => {
-  console.log(req.user.id)
+router.put('/updateToken', (req, res) => {
   pool.getConnection().then((conn) => {
     conn.query('UPDATE tokens SET token = ? where idUser = ? and provider = ?', 
-    [req.body.token, req.user.id, req.body.provider],
+    [req.body.token, req.body.idUser, req.body.provider],
     ).then((result) => {
       res.json(result);
       conn.release();
