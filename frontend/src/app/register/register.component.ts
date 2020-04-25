@@ -57,10 +57,6 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  onRegisterWithFacebook() {
-    console.log('register with facebook');
-  }
-
   onRegisterWithGoogle() {
     console.log('register with google');
   }
@@ -69,9 +65,22 @@ export class RegisterComponent implements OnInit {
     let socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
     this._authService.signIn(socialPlatformProvider).then(
       (userData) => {
-            //this will return user data from facebook. What you need is a user token which you will send it to the server
-            // this.sendToRestApiMethod(userData.token);
-            console.log(userData)
+          let token = userData.authToken;
+          let user = {
+            firstName: userData.firstName,
+            lastName: userData.lastName,
+            mail: userData.email,
+            password: userData.id
+          }
+          this._apiService.register(user).subscribe((data) => {
+              let parseData = data as any;
+              let nb = parseData.insertedId as number
+              this._apiService.insertToken({
+                provider: 'facebook',
+                token: token,
+                idUser: nb
+              }).subscribe((datas) => this._router.navigate(['login']));
+          });
        }
     );
   }

@@ -1,1 +1,4 @@
 /* The sidebar menu */
+li {
+    cursor: pointer;
+}
