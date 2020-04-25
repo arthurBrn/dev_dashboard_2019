@@ -85,7 +85,6 @@ export class LoginComponent implements OnInit {
             } else {
               this._toastr.warning(parsedData.success);
             }
-            // this._apiService.updateOauthToken()
         });
        }
     );
