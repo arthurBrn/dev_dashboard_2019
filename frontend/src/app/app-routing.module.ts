@@ -10,7 +10,7 @@ import { WeatherDetailComponent } from './widgets/weather/weather-detail/weather
 import { GmailComponent } from './widgets/gmail/gmail.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, data: {idUser: 1} },
   { path: 'register', component: RegisterComponent},
   { path: 'home', component: AppComponent },
   { path: 'services', component: DisplayServicesComponent},

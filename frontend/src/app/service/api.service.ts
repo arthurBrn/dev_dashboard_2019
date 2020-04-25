@@ -76,5 +76,18 @@ export class ApiService {
           .set('Content-Type', 'application/x-www-form-urlencoded')
       });
   }
-}
 
+  updateToken(datas) {
+      console.log(datas)
+      const body = new HttpParams()
+      .set('provider', datas.provider)
+      .set('token', datas.token)
+      .set('idUser', datas.idUser)
+    return this._httpClient.post(this.baseUrl + 'updateToken',
+      body.toString(),
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+      });
+  }
+}
