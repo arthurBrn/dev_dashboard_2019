@@ -14,7 +14,6 @@ export class AppComponent implements OnInit {
   title = 'frontend';
   tokenValue: String;
   isAuth = localStorage.getItem('accessToken') ? true : false;
-  userWidgets = [];
 
   constructor(
     private _router: Router,
@@ -35,24 +34,23 @@ export class AppComponent implements OnInit {
       parsed.forEach(element => {
         switch (element.label) {
           case 'crypto':
-            this._cryptoService.cryptoWidgets(this.tokenValue, element.name).subscribe((data) => {
-              let parsedCrypto = data as any;
+            this._cryptoService.getCryptoWidgets(this.tokenValue, element.name).subscribe((cryptoData) => {
+              let parsedCrypto = cryptoData as any;
               parsedCrypto.forEach(cryptoElement => {
                 console.log(cryptoElement);
               });
             });
             break;
           case 'weather':
-
+            this._weatherService.getWeatherWidgets(this.tokenValue, element.name).subscribe((weatherData) => {
+              let parsedWeather = weatherData as any;
+              parsedWeather.forEach(weatherElement => {
+                console.log(weatherElement);
+              });
+            })
             break;
         }
-        this.userWidgets.push({
-          name: element.name,
-          label: element.label,
-        });
-        console.log(element);
       });
-      console.log('usr widget inside : ' + this.userWidgets);
     });
   }
 

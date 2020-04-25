@@ -34,14 +34,14 @@ export class CryptoService {
       return this._httpClient.get(url);
   }
 
-  cryptoWidgets(userToken, tableName) {
+  getCryptoWidgets(userToken, tableName) {
     const body = new HttpParams()
       .set('tableName', tableName);
     return this._httpClient.post(this.baseUrl + 'widgets', body.toString(),
       {
-      headers: new HttpHeaders()
-        .set('Content-Type', 'application/x-www-form-urlencoded')
-        .set('Authorization', 'Bearer ' + userToken)
-    });
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+          .set('Authorization', 'Bearer ' + userToken)
+      });
   }
 }
