@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AirqualitycurrentComponent implements OnInit {
 
+  city: string;
+  country: string;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onValidateNewWidget() {
+    console.log('validation');
   }
 
 }

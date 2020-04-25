@@ -34,6 +34,8 @@ import { ConfGraphComponent } from './configure/crypto/conf-graph/conf-graph.com
 import { ConfRateComponent } from './configure/crypto/conf-rate/conf-rate.component';
 import { AirqualitycurrentComponent } from './configure/weather/airqualitycurrent/airqualitycurrent.component';
 import { WeatherforecastComponent } from './configure/weather/weatherforecast/weatherforecast.component';
+import { AirqualityforecastComponent } from './configure/weather/airqualityforecast/airqualityforecast.component';
+import { WeathercurrentComponent } from './configure/weather/weathercurrent/weathercurrent.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,8 @@ import { WeatherforecastComponent } from './configure/weather/weatherforecast/we
     ConfRateComponent,
     AirqualitycurrentComponent,
     WeatherforecastComponent,
+    AirqualityforecastComponent,
+    WeathercurrentComponent,
 
   ],
   imports: [
