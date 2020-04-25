@@ -65,4 +65,16 @@ router.get('/rate', (req, res) => {
   });
 });
 
+router.get('/insertGraph', (req, res) => {
+  const requestUrl = 'https://api.coincap.io/v2/markets';
+  const options = {
+    method: 'GET',
+    url: requestUrl,
+  };
+  request(options, (error, response) => {
+    if (error) throw new Error(error);
+    res.json(JSON.parse(response.body));
+  });
+});
+
 module.exports = router;

@@ -33,4 +33,29 @@ export class CryptoService {
       const url = this.baseUrl + 'rate';
       return this._httpClient.get(url);
   }
+
+  insertConfGraph(start, end) {
+    const body = new HttpParams()
+      .set('start', start)
+      .set('end', end)
+    return this._httpClient.post(this.baseUrl + 'insertGraph',
+      body.toString(),
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+          .set('Authorization', 'Bearer ' + userToken)
+      });
+  }
+
+  insertConfRate(currency) {
+    const body = new HttpParams()
+      .set('start', start)
+    return this._httpClient.post(this.baseUrl + 'insertRate',
+      body.toString(),
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+          .set('Authorization', 'Bearer ' + userToken)
+      });
+  }
 }
