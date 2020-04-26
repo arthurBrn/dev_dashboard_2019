@@ -24,7 +24,10 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.tokenValue = localStorage.getItem('accessToken');
+    if (localStorage.getItem('accessToken')) {
+      this.tokenValue = localStorage.getItem('accessToken');
+    }
+    this._router.navigate(['services']);
   }
 
   onLogOut(event) {
