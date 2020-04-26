@@ -31,7 +31,6 @@ import { ConfigureGraphComponent } from './widgets/cryptocurrencies/configure-gr
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 import { getAuthServiceConfigs } from './socialloginConfig';
-import { WidgetsService } from './service/widgets.service';
 import { ConfGraphComponent } from './configure/crypto/conf-graph/conf-graph.component';
 import { ConfRateComponent } from './configure/crypto/conf-rate/conf-rate.component';
 import { AirqualitycurrentComponent } from './configure/weather/airqualitycurrent/airqualitycurrent.component';
@@ -92,7 +91,6 @@ import { ForecastWeatherComponent } from './widgets/weather/forecast-weather/for
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },
     { provide: AuthServiceConfig, useFactory: getAuthServiceConfigs },
-    WidgetsService,
    //  { provide: AuthServiceConfig, useFactory: provideConfig }
   ],
   bootstrap: [AppComponent]
