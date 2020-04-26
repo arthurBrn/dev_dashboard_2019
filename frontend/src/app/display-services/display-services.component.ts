@@ -68,7 +68,8 @@ export class DisplayServicesComponent {
                 parsedWeather.forEach(weatherElement => {
                   this.weatherWidgets.push({
                     elementName: element.name,
-                    parmas: weatherElement
+                    params: weatherElement,
+                    widgetId: weatherElement.id,
                   });
                 });
               });

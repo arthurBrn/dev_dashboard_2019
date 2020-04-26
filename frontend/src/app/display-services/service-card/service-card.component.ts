@@ -7,11 +7,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ServiceCardComponent implements OnInit {
 
-
-  /*@Input() image;
-  @Input() title;
-  @Input() id;
-  @Input() widgetsValue;*/
   @Input() cryptoWidget;
   @Input() weatherWidget;
   @Output() serviceSelectionned = new EventEmitter();
@@ -19,13 +14,6 @@ export class ServiceCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(' CRYPTO WIDget ');
-
-    console.log(this.cryptoWidget);
-    console.log(this.cryptoWidget);
-    this.cryptoWidget.forEach(element => {
-      console.log(element.params);
-    });
   }
 
   onCardCLick(event) {

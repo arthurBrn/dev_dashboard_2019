@@ -11,6 +11,7 @@ export class WeatherService {
   ) { }
 
   _baseUrl: string = "http://127.0.0.1:8082/weather/";
+  _baseUrlApi: string = "http://127.0.0.1:8082/weather/api/";
   _apiKey: string = "bf7db86c6d914d98a96c39416c8c595d";
 
   addNewWeatherWidget(data) {
@@ -49,13 +50,14 @@ export class WeatherService {
       });
   }
 
-  alterWeatherWidget(userToken, tableName, city, country) {
+  alterWeatherWidget(userToken, tableName, city, country, widgetId) {
     const body = new HttpParams()
       .set('tableName', tableName)
       .set('city', city)
       .set('country', country)
-      .set('apiKey', this._apiKey);
-    return this._httpClient.post(this._baseUrl + 'alter/widgets', body.toString(),
+      .set('apiKey', this._apiKey)
+      .set('widgetId', widgetId);
+    return this._httpClient.put(this._baseUrl + 'alter/widgets', body.toString(),
       {
         headers: new HttpHeaders()
           .set('Content-Type', 'application/x-www-form-urlencoded')
@@ -72,5 +74,23 @@ export class WeatherService {
           .set('Content-Type', 'application/x-www-form-urlencoded')
           .set('Authorization', 'Bearer ' + userToken)
       });
+  }
+
+  callAirQuality(city, country, type) {
+    const url = this._baseUrlApi + `airquality/${type}`;
+    let params = new HttpParams();
+    params = params.append('city', city);
+    params = params.append('country', country);
+    params = params.append('apiKey', this._apiKey);
+    return this._httpClient.get(url, {params: params});
+  }
+
+  callZeroToSixteenDaysForecast(city, country) {
+    const url = this._baseUrlApi + 'forecast/zeroToSixteenDays';
+    let parameters = new HttpParams();
+    parameters = parameters.append('city', city);
+    parameters = parameters.append('country', country);
+    parameters = parameters.append('apiKey', this._apiKey);
+    return this._httpClient.get(url, {params: parameters});
   }
 }
