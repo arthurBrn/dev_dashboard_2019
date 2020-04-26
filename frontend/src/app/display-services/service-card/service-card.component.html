@@ -17,3 +17,25 @@
     </div>
   </div>
 </div>
+
+<div *ngFor="let ww of weatherWidget">
+  <div *ngIf="ww.elementName === 'weathercurrent'">
+    <div class="col-md-3 col-lg-3">
+      <app-current-weather
+      [city]="ww.params.city"
+      [hours]="ww.params.hours"
+      >
+      </app-current-weather>
+    </div>
+  </div>
+  <div *ngIf="ww.elementName != 'weathercurrent'">
+    <div class="col-md-3 col-lg-3">
+      <app-regular-weather
+        [city]="ww.params.city"
+        [country]="ww.params.country"
+        [elementName]="ww.elementName"
+        >
+      </app-regular-weather>
+    </div>
+  </div>
+</div>

@@ -18,6 +18,7 @@ export class CurrentWeatherComponent implements OnInit {
   ngOnInit(): void {
     console.log('CITY : ' + this.city);
     console.log('HOURS : ' + this.hours);
+
   }
 
 }
