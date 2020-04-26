@@ -1,15 +1,40 @@
 <div class="container-fluid mt-5 center">
     <div class="row">
-        <div class="col-lg-4 col-md-4"></div>
-    <div class="col-lg-4 col-md-4">
-      <h1 class="text-center ">Configure crypto grarateph</h1>
-      <div class="md-form mt-5">
-        <input type="text" id="name" class="form-control" [(ngModel)]="cryptoName">
-        <label for="name">Choose your crypto</label>
-        <owl-date-time #dtStart></owl-date-time>
-      </div>
-      <button type="button" class="btn text-light elegant-color-dark btn-lg btn-block mt-5 mb-2" (click)="onSubmit()">Validate</button>
+    <div class="col-lg-4 col-md-4"></div>
+    <div class="col-lg-4 col-md-4 jumbotron">
+      <h1 class="text-center ">Configure crypto rate</h1>
+      <mat-form-field class="example-full-width" style="width: 100%;">
+    
+        <input type="text" placeholder="Choose your cypto" matInput [formControl]="myControl" [matAutocomplete]="auto">
+        
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+     
+      </mat-form-field>
+
+      <button type="button" class="btn text-light elegant-color-dark btn-lg btn-block mt-5 mb-2" (click)="onSubmit()" style="border-radius: 25px;">Done !</button>
     </div>
     <div class="col-lg-4 col-md-4"></div>
+    </div>
+    <div class="row mt-5">
+        <table class="table text-center">
+            <thead class="black white-text">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Currency</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let crypto of cryptoList">
+                <th scope="row" >{{ crypto.id }}</th>
+                <td>{{ crypto.crypto }}</td>
+                <td><i class="far fa-trash-alt fa-lg" id="{{ crypto.id }}" (click)="onDelete($event)"></i></td>
+              </tr>
+            </tbody>
+        </table>
     </div>
 </div>

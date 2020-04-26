@@ -55,10 +55,22 @@ router.get('/list', (req, res) => {
   });
 });
 
+router.post('/getCryptoRate', (req, res) => {
+  const requestUrl = `https://api.coincap.io/v2/assets/${req.body.crypto}`;
+  const options = {
+    method: 'GET',
+    url: requestUrl,
+  };
+  request(options, (error, response) => {
+    if (error) throw new Error(error);
+    res.json(JSON.parse(response.body));
+  });
+});
+
 router.get('/rate', (req, res) => {
   const requestUrl = 'https://api.coincap.io/v2/markets';
   const options = {
-    method: 'GET',
+    method: 'GET',  
     url: requestUrl,
   };
   request(options, (error, response) => {
@@ -86,6 +98,144 @@ router.post('/widgets', authenticateToken, (req, res) => {
     });
   }).catch((err) => {
     console.log('connection error in /crypto/widgets: ' + err);
+    res.status(500).json(err);
+  });
+});
+
+router.post('/insertGraph', authenticateToken, (req, res) => {
+  pool.getConnection().then((conn) => {
+    conn.query(
+        'INSERT INTO graph (crypto, startGraph, endGrpah, idUser) select ?, ?, ?, ? where not exists (select crypto from graph where crypto = ?)',
+        [req.body.crypto, req.body.start, req.body.end, req.user.id, req.body.crypto]
+    ).then((result) => {
+      if (result) {
+        conn.release();
+        res.status(200).json(result);
+      } else {
+        conn.release();
+        res.status(404).json(result);
+      }
+    }).catch((err) => {
+      console.log('Query error in insert graph : ' + err);
+      res.status(500).json(err);
+    });
+  }).catch((err) => {
+    console.log('connection error in insert graph: ' + err);
+    res.status(500).json(err);
+  });
+});
+
+router.get('/getGraph', authenticateToken, (req, res) => {
+  pool.getConnection().then((conn) => {
+    conn.query(
+        'select * from graph where idUser = ?',
+        [req.user.id]
+    ).then((result) => {
+      if (result) {
+        conn.release();
+        res.status(200).json(result);
+      } else {
+        conn.release();
+        res.status(404).json(result);
+      }
+    }).catch((err) => {
+      console.log('Query error in insert graph : ' + err);
+      res.status(500).json(err);
+    });
+  }).catch((err) => {
+    console.log('connection error in insert graph: ' + err);
+    res.status(500).json(err);
+  });
+});
+
+router.post('/deleteGraph', (req, res) => {
+  pool.getConnection().then((conn) => {
+    conn.query(
+        'delete from graph where id = ?', [req.body.id]
+    ).then((result) => {
+      if (result) {
+        conn.release();
+        res.status(200).json(result);
+      } else {
+        conn.release();
+        res.status(404).json(result);
+      }
+    }).catch((err) => {
+      console.log('Query error in insert graph : ' + err);
+      res.status(500).json(err);
+    });
+  }).catch((err) => {
+    console.log('connection error in insert graph: ' + err);
+    res.status(500).json(err);
+  });
+});
+
+router.post('/insertRate', authenticateToken, (req, res) => {
+  console.log(req.body.crypto)
+  console.log(req.user.id)
+  pool.getConnection().then((conn) => {
+    conn.query(
+        'INSERT INTO rate (crypto, idUser) select ?, ? where not exists (select crypto from rate where crypto = ?)',
+        [req.body.crypto, req.user.id, req.body.crypto]
+    ).then((result) => {
+      if (result) {
+        conn.release();
+        res.status(200).json(result);
+      } else {
+        conn.release();
+        res.status(404).json(result);
+      }
+    }).catch((err) => {
+      console.log('Query error in insert rate : ' + err);
+      res.status(500).json(err);
+    });
+  }).catch((err) => {
+    console.log('connection error in insert rate: ' + err);
+    res.status(500).json(err);
+  });
+});
+
+router.get('/getDbRate', authenticateToken, (req, res) => {
+  pool.getConnection().then((conn) => {
+    conn.query(
+        'select * from rate where idUser = ?',
+        [req.user.id]
+    ).then((result) => {
+      if (result) {
+        conn.release();
+        res.status(200).json(result);
+      } else {
+        conn.release();
+        res.status(404).json(result);
+      }
+    }).catch((err) => {
+      console.log('Query error in insert rate : ' + err);
+      res.status(500).json(err);
+    });
+  }).catch((err) => {
+    console.log('connection error in insert rate: ' + err);
+    res.status(500).json(err);
+  });
+});
+
+router.post('/deleteRate',  authenticateToken, (req, res) => {
+  pool.getConnection().then((conn) => {
+    conn.query(
+        'delete from rate where id = ?', [req.body.id]
+    ).then((result) => {
+      if (result) {
+        conn.release();
+        res.status(200).json(result);
+      } else {
+        conn.release();
+        res.status(404).json(result);
+      }
+    }).catch((err) => {
+      console.log('Query error in insert rate : ' + err);
+      res.status(500).json(err);
+    });
+  }).catch((err) => {
+    console.log('connection error in insert rate: ' + err);
     res.status(500).json(err);
   });
 });

@@ -1,6 +1,8 @@
 /* The sidebar menu */
 li {
     cursor: pointer;
+    border: none;
+    border-radius: 0%;
 }
 
 li:hover {

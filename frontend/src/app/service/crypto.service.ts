@@ -8,7 +8,7 @@ export class CryptoService {
 
   constructor(private _httpClient: HttpClient) { }
 
-  baseUrl: String = 'http://127.0.0.1:8080/crypto/';
+  baseUrl: String = 'http://localhost:8080/crypto/';
 
   getPublicServices() {
     return ('public services');
@@ -44,4 +44,84 @@ export class CryptoService {
           .set('Authorization', 'Bearer ' + userToken)
       });
   }
+
+  insertGraph(graph, token) {
+    const body = new HttpParams()
+      .set('crypto', graph.crypto)
+      .set('start', graph.start)
+      .set('end', graph.end)
+    return this._httpClient.post(this.baseUrl + 'insertGraph',
+    body.toString(),
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+          .set('Authorization', 'Bearer ' + token)
+      });
+  }
+
+  getGraphList() {
+    return this._httpClient.get(this.baseUrl + 'getGraph',
+    {
+        headers: new HttpHeaders()
+        .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'))
+    });
+  }
+
+  deleteGraph(id) {
+    const body = new HttpParams()
+      .set('id', id)
+    return this._httpClient.post(this.baseUrl + 'deleteGraph',
+    body.toString(),
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+          .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'))
+      });
+  }
+
+  getCryptoRate(crypto) {
+    const body = new HttpParams()
+      .set('crypto', crypto)
+    return this._httpClient.post(this.baseUrl + 'getCryptoRate',
+    body.toString(),
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+      });
+  }
+
+  insertRate(crypto) {
+      console.log(crypto)
+    const body = new HttpParams()
+      .set('crypto', crypto)
+    return this._httpClient.post(this.baseUrl + 'insertRate',
+    body.toString(),
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+          .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'))
+      });
+  }
+
+  getDbRateList() {
+    return this._httpClient.get(this.baseUrl + 'getDbRate',
+    {
+        headers: new HttpHeaders()
+        .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'))
+    });
+  }
+
+  deleteRate(id) {
+    const body = new HttpParams()
+      .set('id', id)
+    return this._httpClient.post(this.baseUrl + 'deleteRate',
+    body.toString(),
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+          .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'))
+      });
+  }
+
+  
 }
