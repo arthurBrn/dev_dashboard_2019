@@ -31,6 +31,7 @@ export class ServiceCardComponent implements OnInit {
   onCardCLick(event) {
       var target = event.target || event.srcElement || event.currentTarget;
       this.serviceSelectionned.emit(target.id);
+      
   }
 
 }
