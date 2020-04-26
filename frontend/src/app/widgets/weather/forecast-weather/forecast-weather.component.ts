@@ -13,11 +13,13 @@ export class ForecastWeatherComponent implements OnInit {
   modalRef: BsModalRef;
   @Input() city;
   @Input() country;
+  @Input() widgetId;
   editedCityName:string;
   editedCountryName:string;
   clouds: number;
   temperature: number;
   weather: string;
+  tokenValue: string;
 
   constructor(
     private _toastr: ToastrService,
@@ -26,6 +28,7 @@ export class ForecastWeatherComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.tokenValue = localStorage.getItem('accessToken');
     this.getForecastWeather();
   }
 
@@ -45,6 +48,23 @@ export class ForecastWeatherComponent implements OnInit {
 
   onValidateWidgetEdition() {
     if (this.editedCountryName && this.editedCityName) {
+      console.log(this.widgetId);
+      this._weatherService.alterWeatherWidget(
+        this.tokenValue,
+        'weatherforecast',
+        this.editedCityName,
+        this.editedCountryName,
+        this.widgetId
+      )
+        .subscribe((data) => {
+          let parsedData = data as any;
+          if (parsedData.code === 200) {
+            this._toastr.success(parsedData.success);
+            window.location.reload();
+          } else {
+            this._toastr.warning('Something went wrong');
+          }
+        })
       this._modalService.hide(1);
     } else {
       this._toastr.warning('Fields must be filled.');
