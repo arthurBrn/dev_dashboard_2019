@@ -19,9 +19,6 @@ export class ServiceCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // this.title = this.widgetsValue.name;
-
-
     console.log(' CRYPTO WIDget ');
 
     console.log(this.cryptoWidget);
