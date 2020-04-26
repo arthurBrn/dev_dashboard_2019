@@ -1,13 +1,19 @@
 <div *ngFor="let service of services" class="col-lg-3 col-md-3 my-3" style="display:inline-flex">
   <app-service-card
-    [image]="service.image"
-    [title]="service.title"
-    [id]="service.id"
     (serviceSelectionned)="onServiceSelectionned($event)"
   >
   </app-service-card>
 
+  OAL
   <div *ngFor="let el of elementsName">
-    OLA : {{ el }}
+    OLA : {{ el.name }}
   </div>
+</div>
+
+<div class="row">
+  <app-service-card
+    [cryptoWidget]="cryptoWidgets"
+    [weatherWidget]="weatherWidgets"
+  >
+  </app-service-card>
 </div>

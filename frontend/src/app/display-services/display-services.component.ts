@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import {CryptoService} from "../service/crypto.service";
 import {WeatherService} from "../service/weather.service";
+import { Observable, throwError } from 'rxjs';
+import {UserWidget} from "../Model/userWidget";
 
 @Component({
   selector: 'app-display-services',
@@ -17,6 +19,8 @@ export class DisplayServicesComponent {
   serviceClicked;
   widgets = new Map([]);
   tokenValue: String;
+
+  public allFromUserWidget = [];
 
   cryptoWidgets = [];
   weatherWidgets = [];
@@ -34,8 +38,8 @@ export class DisplayServicesComponent {
     this.tokenValue = localStorage.getItem('accessToken');
     console.log('widgets : ' + this._location.getState()['ourWidgets']);
 
-    this.loadStartWidgets()
-    //this.loadUserWidgets(this.tokenValue);
+    this.loadUserWidgets(this.tokenValue);
+    console.log(this.elementsName);
   }
 
   onServiceSelectionned(event) {
@@ -47,26 +51,11 @@ export class DisplayServicesComponent {
       }
   }
 
-  loadStartWidgets(){
-    if (this.tokenValue) {
-      this._apiService.getUserWidgetsKeys(this.tokenValue).subscribe((data) => {
-        let parsed = data as any;
-        parsed.forEach(element => {
-          console.log(element.name);
-          this.elementsName.push({
-            name: element.name,
-          });
-        });
-      });
-    }
-  }
-
   loadUserWidgets(userToken){
     if (localStorage.getItem('accessToken')) {
       this._apiService.getUserWidgetsKeys(userToken).subscribe((data) => {
         let parsed = data as any;
         parsed.forEach(element => {
-          console.log(element.name);
           this.elementsName.push({
             name: element.name,
           });
@@ -76,9 +65,9 @@ export class DisplayServicesComponent {
                 let parsedCrypto = cryptoData as any;
                 parsedCrypto.forEach(cryptoElement => {
                   this.cryptoWidgets.push({
-
+                    elementName: element.name,
+                    // params: cryptoElement,
                   });
-                  console.log(cryptoElement);
                 });
               });
               break;
@@ -86,10 +75,10 @@ export class DisplayServicesComponent {
               this._weatherService.getWeatherWidgets(this.tokenValue, element.name).subscribe((weatherData) => {
                 let parsedWeather = weatherData as any;
                 parsedWeather.forEach(weatherElement => {
-                  /*this.weatherWidgets.push({
-                    weatherElement
-                  });*/
-                  console.log(weatherElement);
+                  this.weatherWidgets.push({
+                    elementName: element.name,
+                    parmas: weatherElement
+                  });
                 });
               });
               break;

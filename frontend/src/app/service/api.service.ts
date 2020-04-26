@@ -54,6 +54,16 @@ export class ApiService {
       });
   }
 
+  /*
+      getUserWidgetsKeys(userToken): Observable<UserWidget[]> {
+    return this._httpClient.get<UserWidget[]>(this.baseUrl + 'widgets',
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+          .set('Authorization', 'Bearer ' + userToken)
+      });
+  }
+   */
 
   getWWidgetList() {
     return this._httpClient.get(this.baseUrl + 'widgetList');
