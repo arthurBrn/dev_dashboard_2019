@@ -20,7 +20,6 @@ export class SideBarComponent implements OnInit {
 
   ngOnInit(): void {
     this._apiService.getWWidgetList().subscribe((data) => {
-      console.log(data);
       let datas = data as any;
       datas.forEach(element => {
           if (element.public || localStorage.getItem('accessToken')) {

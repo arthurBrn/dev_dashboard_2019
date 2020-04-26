@@ -6,8 +6,8 @@ USE dbcrypto;
 CREATE TABLE IF NOT EXISTS graph (
 	id INT AUTO_INCREMENT,
     crypto text,
-	startGraph datetime,
-    endGrpah datetime,
+	startGraph text,
+    endGrpah text,
     idUser int not null,
 	PRIMARY KEY(id)
 );
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS rate (
 );
 
 INSERT INTO graph (id, crypto, startGraph, endGrpah, idUser)
-VALUES(1, 'bitcoin', '2018-01-01 00:00:00.000', '2020-01-01 00:00:00.000', 1);
+VALUES(1, 'bitcoin', 'Tue Apr 21 2019 01:14:26 GMT 0200 (Central European Summer Time)', 'Tue Apr 21 2020 01:14:26 GMT 0200 (Central European Summer Time)', 1);
 
 INSERT INTO rate (crypto, idUser) 
 VALUES('bitcoin', 1);

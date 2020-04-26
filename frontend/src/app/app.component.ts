@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
             this._cryptoService.getCryptoWidgets(this.tokenValue, element.name).subscribe((cryptoData) => {
               let parsedCrypto = cryptoData as any;
               parsedCrypto.forEach(cryptoElement => {
-                console.log(cryptoElement);
+                // console.log(cryptoElement);
               });
             });
             break;
@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
             this._weatherService.getWeatherWidgets(this.tokenValue, element.name).subscribe((weatherData) => {
               let parsedWeather = weatherData as any;
               parsedWeather.forEach(weatherElement => {
-                console.log(weatherElement);
+                // console.log(weatherElement);
               });
             })
             break;
