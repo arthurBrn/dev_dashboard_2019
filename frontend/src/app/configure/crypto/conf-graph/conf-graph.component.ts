@@ -15,11 +15,8 @@ export class ConfGraphComponent implements OnInit {
 
   start;
   end;
-  crypto;
   token: String;
   createdWiget = [];
-
-  title = 'angular-material-autocomplete';
  
   myControl = new FormControl();
   options: string[] = [];
@@ -53,14 +50,14 @@ export class ConfGraphComponent implements OnInit {
   }
 
   onSubmit() {
-      if (this.options.includes(this.crypto)) {
-        this._cryptoService.insertGraph({
-            crypto: this.crypto,
-            start: this.start,
-            end: this.end
-        }, this.token).subscribe(() => window.location.reload());
-      } 
-     }
+    if (this.options.includes(this.myControl.value)) {
+      this._cryptoService.insertGraph({
+        crypto: this.myControl.value,
+        start: this.start,
+        end: this.end
+      }, this.token).subscribe(() => window.location.reload());
+    } 
+  }
 
    private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();    
