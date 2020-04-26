@@ -1,52 +1,85 @@
 <div class="container-fluid mt-5 center">
-    <div class="row">
-        <div class="col-lg-4 col-md-4"></div>
-    <div class="col-lg-4 col-md-4 pb-0">
-      <h1 class="text-center ">Configure crypto graph</h1>
-      <mat-form-field class="example-full-width mt-5">
-        <input type="text" placeholder="Currency" matInput [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="crypto">
+  <div class="row">
+    <div class="col-lg-4 col-md-4"></div>
+    <div class="col-lg-4 col-md-4 p-4 jumbotron">
+      <h1 class="text-center">Configure crypto graph</h1>
+      <mat-form-field class="example-full-width" style="width: 100%;">
+        <input
+          type="text"
+          placeholder="Currency"
+          matInput
+          class="form-control"
+          [formControl]="myControl"
+          [matAutocomplete]="auto"
+          [(ngModel)]="crypto"
+          style="width: 100%;"/>
         <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-            {{option}}
+          <mat-option
+            *ngFor="let option of filteredOptions | async"
+            [value]="option">
+            {{ option }}
           </mat-option>
         </mat-autocomplete>
-     
       </mat-form-field>
       <div class="md-form mt-2">
-        <input type="text" id="start" class="form-control" [owlDateTime]="dtStart" [owlDateTimeTrigger]="dtStart" [(ngModel)]="start">
+        <input
+          type="text"
+          id="start"
+          class="form-control"
+          [owlDateTime]="dtStart"
+          [owlDateTimeTrigger]="dtStart"
+          [(ngModel)]="start"/>
         <label for="start">Graph start date time</label>
         <owl-date-time #dtStart></owl-date-time>
       </div>
       <div class="md-form my-5">
-        <input type="text" id="end" class="form-control" [owlDateTime]="dtEnd" [owlDateTimeTrigger]="dtEnd" [(ngModel)]="end">
+        <input
+          type="text"
+          id="end"
+          class="form-control"
+          [owlDateTime]="dtEnd"
+          [owlDateTimeTrigger]="dtEnd"
+          [(ngModel)]="end"/>
         <label for="end">Graph end date time</label>
         <owl-date-time #dtEnd></owl-date-time>
       </div>
-      <button type="button" class="btn text-light elegant-color-dark btn-lg btn-block mt-5 mb-2" (click)="onSubmit()">Validate</button>
+      <button
+        type="button"
+        class="btn text-light elegant-color-dark btn-lg btn-block mt-5 mb-2"
+        style="border-radius:25px;"
+        (click)="onSubmit()">
+        Done !
+      </button>
     </div>
     <div class="col-lg-4 col-md-4"></div>
-    </div>
-    <h1 class="text-center my-5">Existing widgets </h1>
-    <div class="row">
-        <table class="table text-center">
-            <thead class="black white-text">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Currency</th>
-                <th scope="col">Start Date</th>
-                <th scope="col">End Date</th>
-                <th scope="col">Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let widget of createdWiget">
-                <th scope="row" >{{ widget.id }}</th>
-                <td>{{ widget.crypto }}</td>
-                <td>{{ widget.start }}</td>
-                <td>{{ widget.end }}</td>
-                <td><i class="far fa-trash-alt fa-lg" id="{{ widget.id }}" (click)="onDelete($event)"></i></td>
-              </tr>
-            </tbody>
-        </table>
-    </div>
+  </div>
+  <h1 class="text-center my-5">Existing widgets</h1>
+  <div class="row">
+    <table class="table text-center">
+      <thead class="black white-text">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Currency</th>
+          <th scope="col">Start Date</th>
+          <th scope="col">End Date</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let widget of createdWiget">
+          <th scope="row">{{ widget.id }}</th>
+          <td>{{ widget.crypto }}</td>
+          <td>{{ widget.start }}</td>
+          <td>{{ widget.end }}</td>
+          <td>
+            <i
+              class="far fa-trash-alt fa-lg"
+              id="{{ widget.id }}"
+              (click)="onDelete($event)"
+            ></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
