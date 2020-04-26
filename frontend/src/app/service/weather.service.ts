@@ -93,13 +93,4 @@ export class WeatherService {
     parameters = parameters.append('apiKey', this._apiKey);
     return this._httpClient.get(url, {params: parameters});
   }
-
-  callForecastHours(city, hours) {
-    const url = this._baseUrlApi + 'forecast/hours';
-    let parameters = new HttpParams();
-    parameters = parameters.append('city', city);
-    parameters = parameters.append('apiKey', this._apiKey);
-    parameters = parameters.append('hours', hours);
-    return this._httpClient.get(url, {params: parameters});
-  }
 }
