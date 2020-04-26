@@ -18,55 +18,38 @@ export class HistoryChartComponent implements OnInit {
   @Input() startDateTime;
   @Input() endDateTime;
 
-  title = 'Price evolution';
+   title;
    type = 'AreaChart';
    data = [];
    options = {   
-      chartArea: {'width': '90%', 'height': '70%'},
+      chartArea: {'width': '90%', 'height': '80%'},
       legend: 'none',
+      hAxis: {
+        textPosition: 'none'
+      },
+      vAxis:{
+         // title: 'Price'
+      },
+
    };
    width;
    height;
 
    
   ngOnInit(): void {
-    let end = new Date().getTime();
-    let start = new Date();
-    start.setMonth(start.getMonth() - 1);
-    let startDate = start.getTime();
-    this.displayGraph(end, startDate);
-  }
-
-  ngOnChanges(changes: SimpleChange) {
-    for (let propName in changes) {
-      let change = changes[propName];
-      if (propName == 'crypto') {
-        let end = new Date().getTime();
-        let start = new Date();
-        start.setMonth(start.getMonth() - 1);
-        let startDate = start.getTime();
-        this.displayGraph(end, startDate);
-      }
-      if (propName == 'startDateTime') {
-        if(this.startDateTime) {
-            this.displayGraph(this.endDateTime.getTime(), this.startDateTime.getTime());
-        }
-      }
-      if (propName == 'endDateTime') {
-        if (this.endDateTime) {
-            this.displayGraph(this.endDateTime.getTime(), this.startDateTime.getTime());
-        }
-      }
-    }
-    
-
+    this.title = `Price evolution of ${this.crypto}`;
+    const start = new Date(this.startDateTime);
+    const end = new Date(this.endDateTime);
+    const startNb = start.getTime();
+    const endNb = end.getTime()
+    console.log(startNb, ' ' , endNb)
+     this.displayGraph(endNb, startNb);
   }
 
   displayGraph(endDateTime, startDateTime) {
     this.width = $('#graphContainer').width();
     this.height = $('#graphContainer').height();
     this.data = [];
-    
     let values = {
         start: startDateTime,
         end: endDateTime,

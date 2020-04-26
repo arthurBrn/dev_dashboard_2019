@@ -41,16 +41,7 @@ export class DisplayServicesComponent {
     this.loadUserWidgets(this.tokenValue);
     console.log(this.elementsName);
   }
-
-  onServiceSelectionned(event) {
-      const widget = this.widgets.get(event);
-      if(widget != 'comming soon') {
-          this._router.navigate([ widget ]);
-      } else {
-          console.log('not implemented yet');
-      }
-  }
-
+  
   loadUserWidgets(userToken){
     if (localStorage.getItem('accessToken')) {
       this._apiService.getUserWidgetsKeys(userToken).subscribe((data) => {

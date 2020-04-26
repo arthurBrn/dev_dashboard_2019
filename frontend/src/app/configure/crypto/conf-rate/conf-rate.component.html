@@ -4,17 +4,13 @@
     <div class="col-lg-4 col-md-4 jumbotron">
       <h1 class="text-center ">Configure crypto rate</h1>
       <mat-form-field class="example-full-width" style="width: 100%;">
-    
         <input type="text" placeholder="Choose your cypto" matInput [formControl]="myControl" [matAutocomplete]="auto">
-        
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
             {{option}}
           </mat-option>
         </mat-autocomplete>
-     
       </mat-form-field>
-
       <button type="button" class="btn text-light elegant-color-dark btn-lg btn-block mt-5 mb-2" (click)="onSubmit()" style="border-radius: 25px;">Done !</button>
     </div>
     <div class="col-lg-4 col-md-4"></div>
