@@ -50,13 +50,14 @@ export class WeatherService {
       });
   }
 
-  alterWeatherWidget(userToken, tableName, city, country) {
+  alterWeatherWidget(userToken, tableName, city, country, widgetId) {
     const body = new HttpParams()
       .set('tableName', tableName)
       .set('city', city)
       .set('country', country)
-      .set('apiKey', this._apiKey);
-    return this._httpClient.post(this._baseUrl + 'alter/widgets', body.toString(),
+      .set('apiKey', this._apiKey)
+      .set('widgetId', widgetId);
+    return this._httpClient.put(this._baseUrl + 'alter/widgets', body.toString(),
       {
         headers: new HttpHeaders()
           .set('Content-Type', 'application/x-www-form-urlencoded')

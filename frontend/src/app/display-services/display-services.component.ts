@@ -77,7 +77,8 @@ export class DisplayServicesComponent {
                 parsedWeather.forEach(weatherElement => {
                   this.weatherWidgets.push({
                     elementName: element.name,
-                    params: weatherElement
+                    params: weatherElement,
+                    widgetId: weatherElement.id,
                   });
                 });
               });

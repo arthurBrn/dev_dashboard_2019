@@ -33,27 +33,27 @@ export class AppComponent implements OnInit {
   loadUserWidgets(userToken){
     if (localStorage.getItem('accessToken')) {
       this._apiService.getUserWidgetsKeys(userToken).subscribe((data) => {
-      let parsed = data as any;
-      parsed.forEach(element => {
-        switch (element.label) {
-          case 'crypto':
-            this._cryptoService.getCryptoWidgets(this.tokenValue, element.name).subscribe((cryptoData) => {
-              let parsedCrypto = cryptoData as any;
-              parsedCrypto.forEach(cryptoElement => {
-                // console.log(cryptoElement);
+        let parsed = data as any;
+        parsed.forEach(element => {
+          switch (element.label) {
+            case 'crypto':
+              this._cryptoService.getCryptoWidgets(this.tokenValue, element.name).subscribe((cryptoData) => {
+                let parsedCrypto = cryptoData as any;
+                parsedCrypto.forEach(cryptoElement => {
+                  // console.log(cryptoElement);
+                });
               });
-            });
-            break;
-          case 'weather':
-            this._weatherService.getWeatherWidgets(this.tokenValue, element.name).subscribe((weatherData) => {
-              let parsedWeather = weatherData as any;
-              parsedWeather.forEach(weatherElement => {
-                // console.log(weatherElement);
-              });
-            })
-            break;
-        }
-      });
+              break;
+            case 'weather':
+              this._weatherService.getWeatherWidgets(this.tokenValue, element.name).subscribe((weatherData) => {
+                let parsedWeather = weatherData as any;
+                parsedWeather.forEach(weatherElement => {
+                  // console.log(weatherElement);
+                });
+              })
+              break;
+          }
+        });
       });
     }
   }

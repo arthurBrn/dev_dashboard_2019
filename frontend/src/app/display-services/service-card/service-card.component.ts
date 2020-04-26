@@ -14,15 +14,6 @@ export class ServiceCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(' CRYPTO WIDget ');
-
-    console.log(this.cryptoWidget);
-    console.log(this.cryptoWidget);
-    this.cryptoWidget.forEach(element => {
-      console.log(element.params);
-    });
-    console.log('WEATHER WIDGET');
-    console.log(this.weatherWidget);
   }
 
   onCardCLick(event) {
