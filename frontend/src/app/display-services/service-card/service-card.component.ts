@@ -23,22 +23,12 @@ export class ServiceCardComponent implements OnInit {
 
 
     console.log(' CRYPTO WIDget ');
-    // this.cryptoWidget.forEach(element => console.log('element namen :' + element));
 
     console.log(this.cryptoWidget);
-    console.log(this.cryptoWidget[0]);
+    console.log(this.cryptoWidget);
     this.cryptoWidget.forEach(element => {
-      console.log(element);
+      console.log(element.params);
     });
-    // console.log(this.cryptoWidget[1][0].elementName);
-    // console.log(this.cryptoWidget[0].params);
-    // console.log(this.cryptoWidget[0].elementName);
-    //console.log(this.cryptoWidget[0].elementName);
-    // console.log(this.cryptoWidget[0].params);
-    /*console.log('WEATHE RWIDET');
-    console.log(this.weatherWidget[0]);
-    console.log(this.weatherWidget[0].elementName);
-    console.log(this.weatherWidget[0].params);*/
   }
 
   onCardCLick(event) {

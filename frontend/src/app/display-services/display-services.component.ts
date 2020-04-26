@@ -66,7 +66,7 @@ export class DisplayServicesComponent {
                 parsedCrypto.forEach(cryptoElement => {
                   this.cryptoWidgets.push({
                     elementName: element.name,
-                    // params: cryptoElement,
+                    params: cryptoElement,
                   });
                 });
               });
