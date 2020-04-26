@@ -26,18 +26,19 @@ import { CryptoListComponent } from './widgets/cryptocurrencies/crypto-list/cryp
 registerLocaleData(localeFr);
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { RateExchangeComponent } from './widgets/cryptocurrencies/rate-exchange/rate-exchange.component';
-import { WeatherCardComponent } from './widgets/weather/weather-card/weather-card.component';
 import { ConfigureGraphComponent } from './widgets/cryptocurrencies/configure-graph/configure-graph.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 import { getAuthServiceConfigs } from './socialloginConfig';
-import { WidgetsService } from './service/widgets.service';
 import { ConfGraphComponent } from './configure/crypto/conf-graph/conf-graph.component';
 import { ConfRateComponent } from './configure/crypto/conf-rate/conf-rate.component';
 import { AirqualitycurrentComponent } from './configure/weather/airqualitycurrent/airqualitycurrent.component';
 import { WeatherforecastComponent } from './configure/weather/weatherforecast/weatherforecast.component';
 import { AirqualityforecastComponent } from './configure/weather/airqualityforecast/airqualityforecast.component';
 import { WeathercurrentComponent } from './configure/weather/weathercurrent/weathercurrent.component';
+import { ForecastAirQualityComponent } from './widgets/weather/forecast-air-quality/forecast-air-quality.component';
+import { CurrentAirQualityComponent } from './widgets/weather/current-air-quality/current-air-quality.component';
+import { ForecastWeatherComponent } from './widgets/weather/forecast-weather/forecast-weather.component'
 
 @NgModule({
   declarations: [
@@ -48,7 +49,6 @@ import { WeathercurrentComponent } from './configure/weather/weathercurrent/weat
     DisplayServicesComponent,
     CryptocurrenciesComponent,
     WeatherComponent,
-    WeatherCardComponent,
     LineChartComponent,
     HistoryChartComponent,
     CryptoListComponent,
@@ -60,7 +60,9 @@ import { WeathercurrentComponent } from './configure/weather/weathercurrent/weat
     WeatherforecastComponent,
     AirqualityforecastComponent,
     WeathercurrentComponent,
-
+    ForecastAirQualityComponent,
+    CurrentAirQualityComponent,
+    ForecastWeatherComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +87,6 @@ import { WeathercurrentComponent } from './configure/weather/weathercurrent/weat
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },
     { provide: AuthServiceConfig, useFactory: getAuthServiceConfigs },
-    WidgetsService,
    //  { provide: AuthServiceConfig, useFactory: provideConfig }
   ],
   bootstrap: [AppComponent]

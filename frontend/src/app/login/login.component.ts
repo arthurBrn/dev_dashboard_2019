@@ -76,8 +76,6 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem('accessToken', parsedData.accessToken);
                 localStorage.setItem('refreshToken', parsedData.refreshToken);
                 this._apiService.updateToken({ provider: 'facebook', token: userData.authToken, idUser: parsedData.userId }).subscribe((data) => console.log(data));
-                console.log(localStorage.getItem('accessToken'));
-                console.log(localStorage.getItem('refreshToken'));
                 window.location.reload();
                 this._location.replaceState('/');
                 this._router.navigate(['services']);

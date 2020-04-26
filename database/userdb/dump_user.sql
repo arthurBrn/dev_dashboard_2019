@@ -54,8 +54,7 @@ INSERT INTO widget (name, public, idService) VALUES
 ('rate', true, 1),
 ('airqualityforecast', true, 2),
 ('airqualitycurrent', true, 2),
-('weatherforecast', true, 2),
-('weathercurrent', true, 2);
+('weatherforecast', true, 2);
 
 CREATE TABLE IF NOT EXISTS user_widget (
     idWidget int not null,
@@ -66,4 +65,5 @@ CREATE TABLE IF NOT EXISTS user_widget (
 
 INSERT INTO user_widget (idWidget, idUser) VALUES
 (1, 1),
-(2, 1);
+(2, 1),
+(3, 1);
