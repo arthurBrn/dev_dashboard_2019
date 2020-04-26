@@ -37,7 +37,6 @@ import { AirqualitycurrentComponent } from './configure/weather/airqualitycurren
 import { WeatherforecastComponent } from './configure/weather/weatherforecast/weatherforecast.component';
 import { AirqualityforecastComponent } from './configure/weather/airqualityforecast/airqualityforecast.component';
 import { WeathercurrentComponent } from './configure/weather/weathercurrent/weathercurrent.component';
-import { CurrentWeatherComponent } from './widgets/weather/current-weather/current-weather.component';
 import { ForecastAirQualityComponent } from './widgets/weather/forecast-air-quality/forecast-air-quality.component';
 import { CurrentAirQualityComponent } from './widgets/weather/current-air-quality/current-air-quality.component';
 import { ForecastWeatherComponent } from './widgets/weather/forecast-weather/forecast-weather.component'
@@ -63,7 +62,6 @@ import { ForecastWeatherComponent } from './widgets/weather/forecast-weather/for
     WeatherforecastComponent,
     AirqualityforecastComponent,
     WeathercurrentComponent,
-    CurrentWeatherComponent,
     ForecastAirQualityComponent,
     CurrentAirQualityComponent,
     ForecastWeatherComponent
