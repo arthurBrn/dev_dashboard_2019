@@ -10,9 +10,7 @@
           matInput
           class="form-control"
           [formControl]="myControl"
-          [matAutocomplete]="auto"
-          [(ngModel)]="crypto"
-          style="width: 100%;"/>
+          [matAutocomplete]="auto"/>
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option
             *ngFor="let option of filteredOptions | async"
