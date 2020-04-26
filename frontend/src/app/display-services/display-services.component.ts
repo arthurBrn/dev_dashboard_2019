@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../service/api.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import {CryptoService} from "../service/crypto.service";
+import {WeatherService} from "../service/weather.service";
+import { Observable, throwError } from 'rxjs';
+import {UserWidget} from "../Model/userWidget";
 
 @Component({
   selector: 'app-display-services',
@@ -14,30 +18,28 @@ export class DisplayServicesComponent {
   services = [];
   serviceClicked;
   widgets = new Map([]);
+  tokenValue: String;
 
+  public allFromUserWidget = [];
+
+  cryptoWidgets = [];
+  weatherWidgets = [];
+  elementsName = [];
 
   constructor(
-    private _apiService: ApiService,
     private _router: Router,
     private _location: Location,
+    private _apiService: ApiService,
+    private _cryptoService: CryptoService,
+    private _weatherService: WeatherService,
   ) { }
 
   ngOnInit(): void {
-    // this._apiService.getPublicServices().subscribe((data) => {
-    //     let parsedData = data as any;
-    //     for (let i = 0; i < parsedData.length; i++) {
-    //         if (parsedData[i].public == 1 || localStorage.getItem('accessToken')) {
-    //             this.widgets.set(parsedData[i].id.toString(), parsedData[i].name);
-    //                 this.services.push({
-    //                 title: parsedData[i].name,
-    //                 image: parsedData[i].picture,
-    //                 id: parsedData[i].id
-    //             });
-    //         }
-    //     }
-    // });
-
+    this.tokenValue = localStorage.getItem('accessToken');
     console.log('widgets : ' + this._location.getState()['ourWidgets']);
+
+    this.loadUserWidgets(this.tokenValue);
+    console.log(this.elementsName);
   }
 
   onServiceSelectionned(event) {
@@ -47,6 +49,42 @@ export class DisplayServicesComponent {
       } else {
           console.log('not implemented yet');
       }
+  }
 
+  loadUserWidgets(userToken){
+    if (localStorage.getItem('accessToken')) {
+      this._apiService.getUserWidgetsKeys(userToken).subscribe((data) => {
+        let parsed = data as any;
+        parsed.forEach(element => {
+          this.elementsName.push({
+            name: element.name,
+          });
+          switch (element.label) {
+            case 'crypto':
+              this._cryptoService.getCryptoWidgets(this.tokenValue, element.name).subscribe((cryptoData) => {
+                let parsedCrypto = cryptoData as any;
+                parsedCrypto.forEach(cryptoElement => {
+                  this.cryptoWidgets.push({
+                    elementName: element.name,
+                    params: cryptoElement,
+                  });
+                });
+              });
+              break;
+            case 'weather':
+              this._weatherService.getWeatherWidgets(this.tokenValue, element.name).subscribe((weatherData) => {
+                let parsedWeather = weatherData as any;
+                parsedWeather.forEach(weatherElement => {
+                  this.weatherWidgets.push({
+                    elementName: element.name,
+                    parmas: weatherElement
+                  });
+                });
+              });
+              break;
+          }
+        });
+      });
+    }
   }
 }

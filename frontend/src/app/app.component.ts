@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   tokenValue: String;
   isAuth = localStorage.getItem('accessToken') ? true : false;
 
+
   constructor(
     private _router: Router,
     private _apiService: ApiService,
@@ -23,6 +24,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    tokenValue: String;
     this.tokenValue = localStorage.getItem('accessToken');
 
     this.loadUserWidgets(this.tokenValue);
