@@ -27,20 +27,10 @@ export class RateExchangeComponent implements OnInit {
   }
 
   getPrice() {
-      this.rate = '';
-      this._cryptoService.rate().subscribe((data) => {
-        let parsedData = data as any;
-        parsedData.data.forEach(element => {
-            if (this.crypto === element.baseId) {
-                this.rate = parseFloat(element.priceUsd);
-                this.symbol = element.baseSymbol;
-                this.displayRate = `1 ${this.symbol} = ${this.rate} USD`;
-            };
-        });
-        if (!this.rate) {
-            this.displayRate = 'No datas provided';
-        }
-    });
+      this._cryptoService.getCryptoRate(this.crypto).subscribe((data) => {
+          let datas = data as any;
+          this.rate = datas.data.priceUsd;
+      });
   }
 
   onChangeDollarValue(value) {
