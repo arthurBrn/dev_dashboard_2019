@@ -8,7 +8,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class ConfigureGraphComponent implements OnInit {
 
   constructor() { }
-
+  
+  crypto
   start;
   end;
 

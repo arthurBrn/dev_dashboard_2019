@@ -3,7 +3,7 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 import { AppRoutingModule, routingArrayOfComponent } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -19,6 +19,9 @@ import { GoogleChartsModule } from 'angular-google-charts';
 import { LineChartComponent } from './widgets/cryptocurrencies/line-chart/line-chart.component';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { HistoryChartComponent } from './widgets/cryptocurrencies/history-chart/history-chart.component';
 import { CryptoListComponent } from './widgets/cryptocurrencies/crypto-list/crypto-list.component';
 registerLocaleData(localeFr);
@@ -62,6 +65,7 @@ import { WeatherforecastComponent } from './configure/weather/weatherforecast/we
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     ToastrModule.forRoot(),
     ModalModule.forRoot(),
     HttpClientModule,
@@ -71,7 +75,10 @@ import { WeatherforecastComponent } from './configure/weather/weatherforecast/we
     Ng2SearchPipeModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    SocialLoginModule
+    SocialLoginModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
+    MatInputModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },
