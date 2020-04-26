@@ -1,6 +1,25 @@
-<div class="row ml-4">
-  <app-service-card
-    [cryptoWidget]="cryptoWidgets"
-    [weatherWidget]="weatherWidgets">
-  </app-service-card>
-</div>
+
+<mat-grid-list cols="3" md-gutter="1em" rowHeight="30vh">
+    <mat-grid-tile
+        *ngFor="let cw of cryptoWidgets"
+        [colspan]="1"
+        [rowspan]="1"
+        class="my-grid-tile">
+        <div *ngIf="cw.elementName === 'graph'">
+            <div class="p-3 z-depth-2 center">
+                <app-history-chart
+                [startDateTime]="cw.params.startGraph"
+                [endDateTime]="cw.params.endGrpah"
+                [crypto]="cw.params.crypto">
+              </app-history-chart>
+            </div>
+          </div>
+          <div *ngIf="cw.elementName === 'rate'">
+            <div class="p-3 z-depth-2 center">
+              <app-rate-exchange
+                [crypto]="cw.params.crypto"
+              ></app-rate-exchange>
+            </div>
+          </div>
+    </mat-grid-tile>
+  </mat-grid-list>

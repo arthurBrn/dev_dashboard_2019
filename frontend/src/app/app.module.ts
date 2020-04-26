@@ -9,7 +9,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { DisplayServicesComponent } from './display-services/display-services.component';
-import { ServiceCardComponent } from './display-services/service-card/service-card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CryptocurrenciesComponent } from './widgets/cryptocurrencies/cryptocurrencies.component';
 import { WeatherComponent } from './widgets/weather/weather.component';
@@ -47,7 +46,6 @@ import { WeathercurrentComponent } from './configure/weather/weathercurrent/weat
     NavbarComponent,
     SideBarComponent,
     DisplayServicesComponent,
-    ServiceCardComponent,
     CryptocurrenciesComponent,
     WeatherComponent,
     WeatherCardComponent,
