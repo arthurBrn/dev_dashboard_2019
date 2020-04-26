@@ -19,8 +19,37 @@
 </div>
 
 <div *ngFor="let ww of weatherWidget">
+  <div *ngIf="ww.elementName === 'airqualitycurrent'">
+    <div class="col-md-3 col-lg-3">
+      <app-current-air-quality
+        [city]="ww.params.city"
+        [country]="ww.params.country"
+      >
+      </app-current-air-quality>
+    </div>
+  </div>
+  <div *ngIf="ww.elementName === 'airqualityforecast'">
+    <div class="col-md-3 col-lg-3">
+      <app-forecast-air-quality
+      [city]="ww.params.city"
+      [country]="ww.params.country"
+      >
+      </app-forecast-air-quality>
+    </div>
+  </div>
+  <div *ngIf="ww.elementName != 'weatherforecast'">
+    <div class="col-md-3 col-lg-3">
+      <app-forecast-weather
+        [city]="ww.params.city"
+        [country]="ww.params.country"
+      >
+      </app-forecast-weather>
+    </div>
+  </div>
+  <!--
   <div *ngIf="ww.elementName === 'weathercurrent'">
     <div class="col-md-3 col-lg-3">
+
       <app-current-weather
       [city]="ww.params.city"
       [hours]="ww.params.hours"
@@ -28,14 +57,6 @@
       </app-current-weather>
     </div>
   </div>
-  <div *ngIf="ww.elementName != 'weathercurrent'">
-    <div class="col-md-3 col-lg-3">
-      <app-regular-weather
-        [city]="ww.params.city"
-        [country]="ww.params.country"
-        [elementName]="ww.elementName"
-        >
-      </app-regular-weather>
-    </div>
-  </div>
+
+  -->
 </div>

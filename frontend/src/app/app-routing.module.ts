@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { DisplayServicesComponent } from './display-services/display-services.component';
 import { CryptocurrenciesComponent } from  './widgets/cryptocurrencies/cryptocurrencies.component';
 import { WeatherComponent } from './widgets/weather/weather.component';
-import { WeatherDetailComponent } from './widgets/weather/weather-detail/weather-detail.component';
 import { GmailComponent } from './widgets/gmail/gmail.component';
 import { ConfGraphComponent } from './configure/crypto/conf-graph/conf-graph.component';
 import { ConfRateComponent } from './configure/crypto/conf-rate/conf-rate.component';
@@ -22,10 +21,6 @@ const routes: Routes = [
   { path: 'services', component: DisplayServicesComponent },
   { path: 'cryptocurrencies', component: CryptocurrenciesComponent},
   { path: 'weather', component: WeatherComponent},
-  { path: 'weather/detail',
-    component: WeatherDetailComponent,
-    data: {id: 1, title: 'title'}
-  },
   { path: 'gmail', component: GmailComponent},
   { path: 'configure-graph', component: ConfGraphComponent},
   { path: 'configure-rate', component: ConfRateComponent},
@@ -47,5 +42,4 @@ export const routingArrayOfComponent = [
   DisplayServicesComponent,
   CryptocurrenciesComponent,
   WeatherComponent,
-  WeatherDetailComponent,
 ];

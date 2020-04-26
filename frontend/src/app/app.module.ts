@@ -27,7 +27,6 @@ import { CryptoListComponent } from './widgets/cryptocurrencies/crypto-list/cryp
 registerLocaleData(localeFr);
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { RateExchangeComponent } from './widgets/cryptocurrencies/rate-exchange/rate-exchange.component';
-import { WeatherCardComponent } from './widgets/weather/weather-card/weather-card.component';
 import { ConfigureGraphComponent } from './widgets/cryptocurrencies/configure-graph/configure-graph.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
@@ -40,7 +39,9 @@ import { WeatherforecastComponent } from './configure/weather/weatherforecast/we
 import { AirqualityforecastComponent } from './configure/weather/airqualityforecast/airqualityforecast.component';
 import { WeathercurrentComponent } from './configure/weather/weathercurrent/weathercurrent.component';
 import { CurrentWeatherComponent } from './widgets/weather/current-weather/current-weather.component';
-import { RegularWeatherComponent } from './widgets/weather/regular-weather/regular-weather.component';
+import { ForecastAirQualityComponent } from './widgets/weather/forecast-air-quality/forecast-air-quality.component';
+import { CurrentAirQualityComponent } from './widgets/weather/current-air-quality/current-air-quality.component';
+import { ForecastWeatherComponent } from './widgets/weather/forecast-weather/forecast-weather.component'
 
 @NgModule({
   declarations: [
@@ -52,7 +53,6 @@ import { RegularWeatherComponent } from './widgets/weather/regular-weather/regul
     ServiceCardComponent,
     CryptocurrenciesComponent,
     WeatherComponent,
-    WeatherCardComponent,
     LineChartComponent,
     HistoryChartComponent,
     CryptoListComponent,
@@ -65,7 +65,9 @@ import { RegularWeatherComponent } from './widgets/weather/regular-weather/regul
     AirqualityforecastComponent,
     WeathercurrentComponent,
     CurrentWeatherComponent,
-    RegularWeatherComponent,
+    ForecastAirQualityComponent,
+    CurrentAirQualityComponent,
+    ForecastWeatherComponent
   ],
   imports: [
     BrowserModule,

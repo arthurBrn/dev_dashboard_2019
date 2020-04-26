@@ -1,0 +1,35 @@
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{ city }} - {{ country }}</h5>
+    <p href="#" class="card-text">Air quality : <b></b></p>
+    <p href="#" class="card-text">Carbon monoxyde levels : <b> </b></p>
+  </div>
+  <div class="card-footer bg-transparent border-success">
+    <button class="btn btn-success" (click)="onEditWidget(editForecastAirQualityWidget)" style="border-radius:24px;">
+      Edit
+    </button>
+    <button class="btn btn-danger" (click)="onRemoveWidget()" style="border-radius:24px;">
+      Delete
+    </button>
+  </div>
+</div>
+
+<ng-template #editForecastAirQualityWidget>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="modal-title text-center">Your widget</h1>
+    </div>
+    <div class="modal-body">
+      <input type="text" id="cityname" class="form-control mt-3" placeholder="City name" [(ngModel)]="editedCityName"  />
+      <input type="text" id="countryname" class="form-control mt-3" placeholder="City name" [(ngModel)]="editedCountryName"  />
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-elegant btn-block p-btn-rounded"
+              (click)="onValidateWidgetEdition()"
+              style="border-radius:18px;"
+      >
+        Validate
+      </button>
+    </div>
+  </div>
+</ng-template>
