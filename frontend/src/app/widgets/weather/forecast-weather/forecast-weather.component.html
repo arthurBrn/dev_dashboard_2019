@@ -1,8 +1,9 @@
 <div class="card" style="width: 18rem;">
   <div class="card-body">
-    <h5 class="card-title">{{ city }} - {{ country }}</h5>
-    <p href="#" class="card-text">Air quality : <b></b></p>
-    <p href="#" class="card-text">Carbon monoxyde levels : <b> </b></p>
+    <h5 class="card-title">Weather forecast in {{ city }} - {{ country }}</h5>
+    <p href="#" class="card-text">Clouds : <b>{{ clouds }} % </b></p>
+    <p href="#" class="card-text">Temperature : <b> {{ temperature }}  </b></p>
+    <p href="#" class="card-text">weather : <b> {{ weather }} </b></p>
   </div>
   <div class="card-footer bg-transparent border-success">
     <button class="btn btn-success" (click)="onEditWidget(editForecastAirQualityWidget)" style="border-radius:24px;">

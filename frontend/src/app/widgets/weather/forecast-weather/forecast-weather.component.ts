@@ -15,9 +15,8 @@ export class ForecastWeatherComponent implements OnInit {
   @Input() country;
   editedCityName:string;
   editedCountryName:string;
-  windSpeed: number;
+  clouds: number;
   temperature: number;
-  ressenti: number;
   weather: string;
 
   constructor(
@@ -27,17 +26,15 @@ export class ForecastWeatherComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getForecastWeather();
   }
 
   getForecastWeather(){
     this._weatherService.callZeroToSixteenDaysForecast(this.city, this.country).subscribe((data) => {
       let parsed = data as any;
-      console.log(parsed);
-      /*console.log(parsed.city_name);
-      console.log(parsed.data[0].aqi);
-      console.log(parsed.data[0].co);*/
-      //this.airQuality = parsed.data[0].aqi;
-      //this.carbonMonoxyde = parsed.data[0].co;
+      this.clouds = parsed.data[0].clouds;
+      this.temperature = parsed.data[0].temp;
+      this.weather = parsed.data[0].weather.description;
       this.city = parsed.city_name;
     })
   }

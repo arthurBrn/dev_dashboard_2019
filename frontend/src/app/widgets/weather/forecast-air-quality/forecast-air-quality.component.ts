@@ -25,19 +25,12 @@ export class ForecastAirQualityComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('Air Quality Forecast');
-    console.log(this.city);
-    console.log(this.country);
     this.getForecastAirQuality();
   }
 
   getForecastAirQuality(){
     this._weatherService.callAirQuality(this.city, this.country, 'forecast').subscribe((data) => {
       let parsed = data as any;
-      console.log(parsed);
-      console.log(parsed.city_name);
-      console.log(parsed.data[0].aqi);
-      console.log(parsed.data[0].co);
       this.airQuality = parsed.data[0].aqi;
       this.carbonMonoxyde = parsed.data[0].co;
       this.city = parsed.city_name;
