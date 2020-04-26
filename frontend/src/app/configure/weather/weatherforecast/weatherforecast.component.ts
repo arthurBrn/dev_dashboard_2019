@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {WeatherService} from "../../../service/weather.service";
 import {ApiService} from "../../../service/api.service";
 import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-weatherforecast',
@@ -19,6 +20,7 @@ export class WeatherforecastComponent implements OnInit {
     private _weatherService: WeatherService,
     private _userService: ApiService,
     private _toastr: ToastrService,
+    private _router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +36,7 @@ export class WeatherforecastComponent implements OnInit {
             let dataFromSetWidget = dataFromSet as any;
             if (dataFromSetWidget === 200) {
               console.log('User and widget id added to user_widget');
+              this._router.navigate(['/services']);
             } else {
               this._toastr.warning('Error in the process.');
             }

@@ -41,7 +41,7 @@ export class DisplayServicesComponent {
     this.loadUserWidgets(this.tokenValue);
     console.log(this.elementsName);
   }
-  
+
   loadUserWidgets(userToken){
     if (localStorage.getItem('accessToken')) {
       this._apiService.getUserWidgetsKeys(userToken).subscribe((data) => {
@@ -54,6 +54,7 @@ export class DisplayServicesComponent {
             case 'crypto':
               this._cryptoService.getCryptoWidgets(this.tokenValue, element.name).subscribe((cryptoData) => {
                 let parsedCrypto = cryptoData as any;
+                // this.cryptoWidgets = [];
                 parsedCrypto.forEach(cryptoElement => {
                   this.cryptoWidgets.push({
                     elementName: element.name,
@@ -65,6 +66,7 @@ export class DisplayServicesComponent {
             case 'weather':
               this._weatherService.getWeatherWidgets(this.tokenValue, element.name).subscribe((weatherData) => {
                 let parsedWeather = weatherData as any;
+                this.weatherWidgets = [];
                 parsedWeather.forEach(weatherElement => {
                   this.weatherWidgets.push({
                     elementName: element.name,
@@ -72,6 +74,8 @@ export class DisplayServicesComponent {
                     widgetId: weatherElement.id,
                   });
                 });
+                console.log('WW LENGHT');
+                console.log(this.weatherWidgets.length);
               });
               break;
           }

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from '../../../service/weather.service';
 import {ToastrService} from "ngx-toastr";
-import {ApiService} from "../../../service/api.service";
+import {ApiService} from '../../../service/api.service';
 import { FormsModule } from '@angular/forms';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-airqualitycurrent',
@@ -20,6 +21,7 @@ export class AirqualitycurrentComponent implements OnInit {
     private _weatherService: WeatherService,
     private _userService: ApiService,
     private _toastr: ToastrService,
+    private _router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -43,6 +45,7 @@ export class AirqualitycurrentComponent implements OnInit {
             let parsedData = dataWeatherWidget as any;
             if (parsedData.code === 200) {
               console.log('New widget added in weatherdb');
+              this._router.navigate(['/services']);
             } else {
               this._toastr.warning('Error while creating widget.');
             }

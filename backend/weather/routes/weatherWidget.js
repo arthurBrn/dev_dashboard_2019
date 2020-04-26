@@ -113,7 +113,7 @@ router.put('/alter/widgets', authenticateToken, (req, res) => {
     });
 });
 
-router.delete('/delete/widgets', (req,res) => {
+router.post('/delete/widgets', (req,res) => {
     pool.getConnection().then((conn) => {
         conn.query(
             `DELETE FROM ${req.body.tableName} WHERE id=?;`,

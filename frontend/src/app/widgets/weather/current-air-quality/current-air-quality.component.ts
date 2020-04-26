@@ -70,6 +70,14 @@ export class CurrentAirQualityComponent implements OnInit {
   }
 
   onRemoveWidget(){
-
+    this._weatherService.deleteWeatherWidget(this.tokenValue, 'airqualitycurrent', this.widgetId).subscribe((data) => {
+      let parsed = data as any;
+      if (parsed.code === 200) {
+        this._toastr.success('Widget deleted');
+        window.location.reload();
+      } else {
+        this._toastr.warning('Error in the process');
+      }
+    });
   }
 }

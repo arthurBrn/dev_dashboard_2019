@@ -65,9 +65,10 @@ export class WeatherService {
       });
   }
 
-  deleteWeatherWidget(userToken, tableName) {
+  deleteWeatherWidget(userToken, tableName, widgetId) {
     const body = new HttpParams()
-      .set('tableName', tableName);
+      .set('tableName', tableName)
+      .set('widgetId', widgetId);
     return this._httpClient.post(this._baseUrl + 'delete/widgets', body.toString(),
       {
         headers: new HttpHeaders()
